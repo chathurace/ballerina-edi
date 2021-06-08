@@ -8,7 +8,7 @@ EDI module provides functionality to read EDI files and map those to Ballerina r
 
 |                                   | Version               |
 |:---------------------------------:|:---------------------:|
-| Ballerina Language                | Swan Lake Alpha 5     |
+| Ballerina Language                | Swan Lake Beta 1      |
 | Java Development Kit (JDK)        | 11                    |
 
 ## Example code
