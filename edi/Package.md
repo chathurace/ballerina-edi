@@ -101,8 +101,25 @@ The json value resulting from the 'json|error doc = edi:readEDIAsJson(ediText, m
   ]
 }
 ````
+Furthermore, it is also possible to access parsed EDI documents as Ballerina records. Using this method, it is possible to change values of EDI document as below:
 
-It is also possible to process more complex EDI documents containing composite elements (i.e. elements with subelements) and repeating elements. Below is a sample EDI mapping file containing such composite elements and repeating elements. This has three segment types. 
+````ballerina
+edi:EDIDoc|error doc = edi:readEDI(ediText, mapping);
+if (doc is edi:EDIDoc) {
+
+    // Change quantity of item "D-10" to 12
+    edi:EDISegment|edi:EDISegment[]? records = doc["items"];
+    if (records is edi:EDISegment[]) {
+        foreach edi:EDISegment r in records {
+            if (r["item"] == "D-10") {
+                r["quantity"] = 12;
+            }
+        }
+    }
+}
+````
+
+In addition to segments and basic elements, EDI documents can contain composite elements (i.e. elements with subelements) and repeating elements. Below is a sample EDI mapping file containing such composite elements and repeating elements. This has three segment types. 
 
 1. HDR segment with two elements named "order-id" and "date"
 2. ORG segment with four elements named "partner-code", "name", "address" and "contact". Among those, "address" is a composite element containing three subelements named "street-address", "city" and "state". "contact" is repeating element, which can contain multiple values.
@@ -229,6 +246,3 @@ Same Ballerina code used in the previous example, can be used to parse this EDI 
   ]
 }
 ````
-
-
-
