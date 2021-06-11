@@ -11,14 +11,19 @@ public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|e
 
 public function readEDI(string ediText, EDIMapping mapping) returns EDIDoc|error {
     EDIDoc doc = {};
+    // Some EDI docs are very large.
     string[] segmentsDesc = regex:split(ediText, mapping.segmentDelimeter);
     foreach string sDesc in segmentsDesc {
         string segmentDesc = regex:replaceAll(sDesc, "\n", "");
         segmentDesc = prepareToSplit(segmentDesc, mapping.oElementDelimeter);
         string[] elements = regex:split(segmentDesc, mapping.elementDelimeter);
+        // I like pulling the mapping by tag, in some cases certain segmets that follow a parent segment would belong together. 
         EDISegMapping? segMapping = mapping.segmentMappings[elements[0].trim()];
         if (segMapping is EDISegMapping) {
             if (segMapping.elements.length() + 1 != elements.length()) {
+                // This is where I saw the most disregard for the edi spec. Being able to parse Partial segments as much as possible would be a benefit to a business. 
+                // Marking the missing elements as null and pulling out what data is there would help in a lot of cases
+                // The primary reason companies shortened lines is that they were charged by the Kb for EDI transmission. 
                 log:printError("Segment mapping's element count does not match segment: " + elements[0]);
                 continue;
             }
@@ -61,6 +66,7 @@ public function readEDI(string ediText, EDIMapping mapping) returns EDIDoc|error
             }
                    
         } else {
+            // When trying to parse a generic EDI spec from differents sources unmapped segments would be a normality
             log:printError("Segment mapping not found for the segment: " + elements[0]);
         }
     }

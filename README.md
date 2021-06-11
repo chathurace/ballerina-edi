@@ -15,6 +15,8 @@ EDI module provides functionality to read EDI files and map those to Ballerina r
 
 A simple EDI mapping file is shown below:
 
+## This is a very cool format. I can already think of how this can make EDI manager's lives easier, and they are always hard. Even putting a seprate no code builder on top of this format could mean a company chosing WSO2.
+
 ````json
 {
     "delimiters" : {"segment" : "~", "element" : "*"},
@@ -45,6 +47,8 @@ ITM*T-46*28
 ````
 Using the EDI module, Ballerina programs can read EDI documents into json types and access them similar to accessing any json variable.
 
+## Ignoring lines and only pulling relevant data would be helpful
+
 ````ballerina
 import ballerina/io;
 import chathurace/edi;
@@ -69,6 +73,8 @@ public function main() {
 }
 ````
 The json value resulting from the 'json|error doc = edi:readEDIAsJson(ediText, mapping)' statement would look like the following:
+
+## error handling inside the document could be useful. Recording an error to send with the parsed json object could give the consuming app more info to make a decision. Edi frequently has small issues which only need to be communicated or fixed manually.
 
 ````json
 {
@@ -102,6 +108,8 @@ The json value resulting from the 'json|error doc = edi:readEDIAsJson(ediText, m
 }
 ````
 Furthermore, it is also possible to access parsed EDI documents as Ballerina records. Using this method, it is possible to change values of EDI document as below:
+
+## This is a cool feature
 
 ````ballerina
 edi:EDIDoc|error doc = edi:readEDI(ediText, mapping);
@@ -154,6 +162,8 @@ In addition to segments and basic elements, EDI documents can contain composite 
     ]
 }
 ````
+
+## I remember EDI specs with Parent and children segments. Meaning a set of 3 segment codes in a row was a single Business location, which could also repeat.
 
 Below is a sample EDI file that can be parsed using the above EDI mapping:
 
