@@ -1,0 +1,25 @@
+{
+    "delimiters" : {"segment" : "~", "element" : "*", "subelement" : ":", "repetition" : "^"},
+    "segments" : { 
+        "HDR": {
+            "tag" : "header",
+            "elements" : [{"tag" : "orderId"}, {"tag" : "date"}]
+        },
+        "ORG": {
+            "tag" : "organization",
+            "elements" : [
+                {"tag" : "partnerCode"}, 
+                {"tag" : "name"}, 
+                {"tag" : "address", "subelements" : [{"tag" : "streetAddress"}, {"tag" : "city"}, {"tag" : "country"}]}, 
+                {"tag" : "contact", "repeat" : true}]
+        },
+        "ITM": {
+            "tag" : "items",
+            "maxOccurances" : -1,
+            "elements" : [
+                {"tag" : "item"}, 
+                {"tag" : "quantity", "dataType" : "int"}, 
+                {"tag" : "comments", "repeat" : true, "dataType" : "composite", "subelements" : [{"tag" : "author"}, {"tag" : "text"}]}]
+        }
+    }
+}

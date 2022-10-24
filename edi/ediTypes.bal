@@ -4,17 +4,11 @@ type SimpleArray string[]|int[]|float[];
 type SimpleType string|int|float;
 
 public enum EDIDataType {
-    STRING, INT, FLOAT, COMPOSITE
+    STRING = "string", INT = "int", FLOAT = "float", COMPOSITE = "composite"
 }
 
-public type EDIDoc record {|        
-    EDISegment|EDISegment[]...;
-|};
+public type EDIDoc map<EDISegment|EDISegment[]?>;
 
-public type EDISegment record {|
-    EDIComposite|EDIComposite[]|SimpleType|SimpleArray...;
-|};
+public type EDISegment map<EDIComposite|EDIComposite[]|SimpleType|SimpleArray?>;
 
-public type EDIComposite record {|
-    SimpleType|SimpleArray...;
-|};
+public type EDIComposite map<SimpleType|SimpleArray>;

@@ -1,5 +1,3 @@
-EDI processing capability for Ballerina.
-
 ## Module Overview
 
 EDI module provides functionality to read EDI files and map those to Ballerina records or 'json' type. Mapping for the EDI file has to be provided in json format. Once the mapping is provided, EDI module can read EDI files (in text format) in to Ballerina records or json value, which can be accessed from Ballerina code.
@@ -8,7 +6,7 @@ EDI module provides functionality to read EDI files and map those to Ballerina r
 
 |                                   | Version               |
 |:---------------------------------:|:---------------------:|
-| Ballerina Language                | Swan Lake Beta 1      |
+| Ballerina Language                | 2201.2.2              |
 | Java Development Kit (JDK)        | 11                    |
 
 ## Example code
@@ -18,22 +16,20 @@ A simple EDI mapping file is shown below:
 ````json
 {
     "delimiters" : {"segment" : "~", "element" : "*"},
-    "segments" : [
-        {
-            "code" : "HDR", 
+    "segments" : {
+        "HDR": {
             "tag" : "header",
-            "elements" : [{"tag" : "order-id"}, {"tag" : "organization"}, {"tag" : "date"}]
+            "elements" : [{"tag" : "orderId"}, {"tag" : "organization"}, {"tag" : "date"}]
         },
-        {
-            "code" : "ITM",
+        "ITM": {
             "tag" : "items",
-            "max" : -1,
+            "maxOccurances" : -1,
             "elements" : [{"tag" : "item"}, {"tag" : "quantity", "dataType" : "int"}]
         }
-    ]
+    }
 }
 ````
-Above mapping can be used to parse EDI documents with one HDR segment (mapped to "header") and any number of ITM segments (mapped to "items"). HDR segment contains three elements, which are mapped to "order-id", "organization" and "date". Each ITM segment contains two elements mapped to "item" and "quantity". Below is a sample EDI document that can be parsed using the above mapping:
+Above mapping can be used to parse EDI documents with one HDR segment (mapped to "header") and any number of ITM segments (mapped to "items"). HDR segment contains three elements, which are mapped to "orderId", "organization" and "date". Each ITM segment contains two elements mapped to "item" and "quantity". Below is a sample EDI document that can be parsed using the above mapping:
 
 ````edi
 HDR*ORDER_1201*ABC_Store*2008-01-01~
@@ -43,37 +39,28 @@ ITM*D-10*58
 ITM*K-80*250
 ITM*T-46*28
 ````
-Using the EDI module, Ballerina programs can read EDI documents into json types and access them similar to accessing any json variable.
+Using the EDI module, Ballerina programs can read EDI documents into json types (or user defined types) and access them similar to any other json or record variable.
 
 ````ballerina
 import ballerina/io;
 import chathurace/edi;
 
-public function main() {
-    
-    // Read EDI mapping
-    edi:EDIMapping|error mapping = edi:loadMappingFromFile("edi-mapping1.json");
-    if (mapping is edi:EDIMapping) {
+public function main() returns error? {
+    json mappingJson = check io:fileReadJson("resources/edi-mapping1.json");
+    edi:EDIMapping mapping = check mappingJson.cloneWithType(edi:EDIMapping);
 
-        // Read EDI as Ballerina record structure
-        string|error ediText = io:fileReadString("edi-sample1.edi");
-        if (ediText is string) {
-            json|error doc = edi:readEDIAsJson(ediText, mapping);
-            if (doc is json) {
+    string ediText = check io:fileReadString("resources/edi-sample1.edi");
+    json output = check edi:readEDIAsJson(ediText, mapping);
 
-                // Print organization name in the header segment
-                io:println(doc.header.organization);
-            }
-        }
-    }
+    io:println(output.toJsonString());
 }
 ````
-The json value resulting from the 'json|error doc = edi:readEDIAsJson(ediText, mapping)' statement would look like the following:
+Above code will read the EDI document "edi-sample1.edi" and generates a json according to the mapping "edi-mapping1.json". Output json will be as follows:
 
 ````json
 {
   "header": {
-    "order-id": "ORDER_1201",
+    "orderId": "ORDER_1201",
     "organization": "ABC_Store",
     "date": "2008-01-01"
   },
@@ -101,57 +88,51 @@ The json value resulting from the 'json|error doc = edi:readEDIAsJson(ediText, m
   ]
 }
 ````
-Furthermore, it is also possible to access parsed EDI documents as Ballerina records. Using this method, it is possible to change values of EDI document as below:
+It is also possible to convert generated json output to user defined types in Ballerina. Using this method, it is possible to access and change values of EDI documents as below:
 
 ````ballerina
-edi:EDIDoc|error doc = edi:readEDI(ediText, mapping);
-if (doc is edi:EDIDoc) {
+json mappingText = check io:fileReadJson("resources/edi-mapping2.json");
+edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
 
-    // Change quantity of item "D-10" to 12
-    edi:EDISegment|edi:EDISegment[]? records = doc["items"];
-    if (records is edi:EDISegment[]) {
-        foreach edi:EDISegment r in records {
-            if (r["item"] == "D-10") {
-                r["quantity"] = 12;
-            }
-        }
-    }
-}
+string ediText = check io:fileReadString("resources/edi-sample2.edi");
+json output = check edi:readEDIAsJson(ediText, mapping);
+io:println(output.toJsonString());
+
+OrderDetails orderDetails = check output.cloneWithType(OrderDetails);
+io:println("Customer's city: " + orderDetails.organization.address.city);
 ````
 
 In addition to segments and basic elements, EDI documents can contain composite elements (i.e. elements with subelements) and repeating elements. Below is a sample EDI mapping file containing such composite elements and repeating elements. This has three segment types. 
 
-1. HDR segment with two elements named "order-id" and "date"
-2. ORG segment with four elements named "partner-code", "name", "address" and "contact". Among those, "address" is a composite element containing three subelements named "street-address", "city" and "state". "contact" is repeating element, which can contain multiple values.
+1. HDR segment with two elements named "orderId" and "date"
+2. ORG segment with four elements named "partnerCode", "name", "address" and "contact". Among those, "address" is a composite element containing three subelements named "streetAddress", "city" and "state". "contact" is repeating element, which can contain multiple values.
 3. ITM segment with three elements. Among those, "comments" is a both a repeating and composite element. Therefore, there can be multiple comments each having two subelements named "author" and "text".
 
 ````json
 {
     "delimiters" : {"segment" : "~", "element" : "*", "subelement" : ":", "repetition" : "^"},
-    "segments" : [
-        {
-            "code" : "HDR", 
+    "segments" : { 
+        "HDR": {
             "tag" : "header",
-            "elements" : [{"tag" : "order-id"}, {"tag" : "date"}]
+            "elements" : [{"tag" : "orderId"}, {"tag" : "date"}]
         },
-        {
-            "code" : "ORG", 
+        "ORG": {
             "tag" : "organization",
-            "elements" : [{"tag" : "partner-code"}, 
+            "elements" : [
+                {"tag" : "partnerCode"}, 
                 {"tag" : "name"}, 
-                {"tag" : "address", "subs" : [{"tag" : "street-address"}, {"tag" : "city"}, {"tag" : "state"}]}, 
+                {"tag" : "address", "subelements" : [{"tag" : "streetAddress"}, {"tag" : "city"}, {"tag" : "country"}]}, 
                 {"tag" : "contact", "repeat" : true}]
         },
-        {
-            "code" : "ITM",
+        "ITM": {
             "tag" : "items",
-            "max" : -1,
+            "maxOccurances" : -1,
             "elements" : [
                 {"tag" : "item"}, 
                 {"tag" : "quantity", "dataType" : "int"}, 
-                {"tag" : "comments", "repeat" : true, "subs" : [{"tag" : "author"}, {"tag" : "text"}]}]
+                {"tag" : "comments", "repeat" : true, "dataType" : "composite", "subelements" : [{"tag" : "author"}, {"tag" : "text"}]}]
         }
-    ]
+    }
 }
 ````
 
@@ -159,7 +140,7 @@ Below is a sample EDI file that can be parsed using the above EDI mapping:
 
 ```` edi
 HDR*1201*2008-01-01~
-ORG*P120*ABC Store*67, Park road:Colombo 7:Sri Lanka*01 678 8908^04 732 3721^04 783 6702~
+ORG*P120*ABC Store*67, Park road:Colombo:Sri Lanka*01 678 8908^04 732 3721^04 783 6702~
 ITM*A-250*12*N/A~
 ITM*A-45*100*Kevin:Urgent~
 ITM*D-10*58*Smith:REF 10053^Steven:Pre orders~
@@ -170,79 +151,74 @@ Same Ballerina code used in the previous example, can be used to parse this EDI 
 
 ````json
 {
-  "header": {
-    "order-id": "1201",
-    "date": "2008-01-01"
-  },
-  "organization": {
-    "partner-code": "P120",
-    "name": "ABC Store",
-    "address": {
-      "street-address": "67, Park road",
-      "city": "Colombo 7",
-      "state": "Sri Lanka"
+    "header": {
+      "orderId": "1201",
+      "date": "2008-01-01"
     },
-    "contact": [
-      "01 678 8908",
-      "04 732 3721",
-      "04 783 6702"
+    "organization": {
+      "partnerCode": "P120",
+      "name": "ABC Store",
+      "address": {
+        "streetAddress": "67, Park road",
+        "city": "Colombo",
+        "country": "Sri Lanka"
+      },
+      "contact": [
+        "01 678 8908",
+        "04 732 3721",
+        "04 783 6702"
+      ]
+    },
+    "items": [
+      {
+        "item": "A-250",
+        "quantity": 12,
+        "comments": []
+      },
+      {
+        "item": "A-45",
+        "quantity": 100,
+        "comments": [
+          {
+            "author": "Kevin",
+            "text": "Urgent"
+          }
+        ]
+      },
+      {
+        "item": "D-10",
+        "quantity": 58,
+        "comments": [
+          {
+            "author": "Smith",
+            "text": "REF 10053"
+          },
+          {
+            "author": "Steven",
+            "text": "Pre orders"
+          }
+        ]
+      },
+      {
+        "item": "K-80",
+        "quantity": 250,
+        "comments": [
+          {
+            "author": "Steven",
+            "text": "Before December"
+          }
+        ]
+      },
+      {
+        "item": "T-46",
+        "quantity": 28,
+        "comments": [
+          {
+            "author": "Smith",
+            "text": "Discount code AA1200"
+          }
+        ]
+      }
     ]
-  },
-  "items": [
-    {
-      "item": "A-250",
-      "quantity": 12,
-      "comments": [
-        {
-          "author": "Mike",
-          "text": "Notify if not available"
-        }
-      ]
-    },
-    {
-      "item": "A-45",
-      "quantity": 100,
-      "comments": [
-        {
-          "author": "Kevin",
-          "text": "Urgent"
-        }
-      ]
-    },
-    {
-      "item": "D-10",
-      "quantity": 58,
-      "comments": [
-        {
-          "author": "Smith",
-          "text": "REF 10053"
-        },
-        {
-          "author": "Steven",
-          "text": "Pre orders"
-        }
-      ]
-    },
-    {
-      "item": "K-80",
-      "quantity": 250,
-      "comments": [
-        {
-          "author": "Steven",
-          "text": "Before December"
-        }
-      ]
-    },
-    {
-      "item": "T-46",
-      "quantity": 28,
-      "comments": [
-        {
-          "author": "Smith",
-          "text": "Discount code AA1200"
-        }
-      ]
-    }
-  ]
 }
 ````

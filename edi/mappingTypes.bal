@@ -1,6 +1,21 @@
-public type EDISubelementMapping record {|
+
+public type EDIMapping record {|
+    record {|
+        string segment;
+        string element;
+        string subelement = ":";
+        string repetition = "^";
+    |} delimiters;
+
+    map<EDISegMapping> segments = {};
+|};
+
+
+public type EDISegMapping record {|
+    // string code;
     string tag;
-    EDIDataType dataType = STRING;
+    int maxOccurances = 1;
+    EDIElementMapping[] elements = [];
 |};
 
 public type EDIElementMapping record {|
@@ -10,22 +25,7 @@ public type EDIElementMapping record {|
     EDISubelementMapping[] subelements = [];
 |};
 
-public type EDIMapping record {|
-    string segmentDelimeter;
-    string oSegmentDelimeter;
-    string elementDelimeter;    
-    string oElementDelimeter;    
-    string compositeDelimiter = ":";
-    string oCompositeDelimiter = ":";
-    string repeatDelimeter = "\\^";
-    string oRepeatDelimeter = "^";
-    map<EDISegMapping> segmentMappings = {};
-|};
-
-
-public type EDISegMapping record {|
-    string segCode;
+public type EDISubelementMapping record {|
     string tag;
-    int maxOccurances = 1;
-    EDIElementMapping[] elements = [];
+    EDIDataType dataType = STRING;
 |};

@@ -1,3 +1,4 @@
+import ballerina/regex;
 
 function convertToType(string value, EDIDataType dataType) returns SimpleType|error {
     match dataType {
@@ -34,7 +35,18 @@ function getDataType(string typeString) returns EDIDataType {
     return STRING;
 }
 
-function validateDelimeter(string delimeter) returns string {
+function split(string text, string delimiter) returns string[] {
+    string preparedText = prepareToSplit(text, delimiter);
+    string validatedDelimiter = validateDelimiter(delimiter);
+    return regex:split(preparedText, validatedDelimiter);
+}
+
+function splitAndIgnoreLastEmptyItem(string text, string delimiter) returns string[] {
+    string validatedDelimiter = validateDelimiter(delimiter);
+    return regex:split(text, validatedDelimiter);
+}
+
+function validateDelimiter(string delimeter) returns string {
     match delimeter {
         "*" => {return "\\*";}
         "^" => {return "\\^";}
