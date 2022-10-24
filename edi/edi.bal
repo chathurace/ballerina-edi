@@ -2,11 +2,8 @@ import ballerina/regex;
 import ballerina/log;
 
 public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|error {
-    EDIDoc|error ediDoc = readEDI(ediText, mapping);
-    if (ediDoc is EDIDoc) {
-        return ediDoc.toJson();
-    }
-    return ediDoc;
+    EDIDoc ediDoc = check readEDI(ediText, mapping);
+    return ediDoc.toJson();
 }
 
 public function readEDI(string ediText, EDIMapping mapping) returns EDIDoc|error {
