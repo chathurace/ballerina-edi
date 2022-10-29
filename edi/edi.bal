@@ -45,7 +45,7 @@ public function readEDI(string ediText, EDIMapping mapping) returns EDIDoc|error
                         ediRecord[tag] = value;
                     } else {
                         string errMsg = string `EDI field: ${elementText} cannot be converted to type: ${elementMapping.dataType}.
-                        Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}|n${value.message()}`;
+                        Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}\nCaused by: ${value.message()}`;
                         return error(errMsg);
                     }
                 }
