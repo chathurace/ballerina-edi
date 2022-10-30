@@ -1,0 +1,63 @@
+{
+    "delimiters": {
+        "segment": "~",
+        "element": "*"
+    },
+    "segments": [
+        {
+            "code": "HDR",
+            "tag": "header",
+            "elements": [
+                {"tag": "orderId"},
+                {"tag": "organization"},
+                {"tag": "date"}
+            ]
+        },
+        {
+            "tag": "items",
+            "minOccurances": 1,
+            "maxOccurances": -1,
+            "segments": [
+                {
+                    "code": "ITM",
+                    "tag": "items",
+                    "elements": [
+                        {"tag": "item"},
+                        {"tag": "quantity", "dataType": "int"}
+                    ]
+                },
+                {
+                    "tag": "deliveries",
+                    "minOccurances": 0,
+                    "maxOccurances": 3,
+                    "segments": [
+                        {
+                            "code": "DES",
+                            "tag": "destination",
+                            "elements": [
+                                {"tag": "addressCode"},
+                                {"tag": "contact"}
+                            ]
+                        },
+                        {
+                            "code": "QTY",
+                            "tag": "destinationQuantity",
+                            "elements": [
+                                {"tag":"quantity", "dataType": "int"},
+                                {"tag":"deliverBy"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "code": "SUP",
+                    "tag": "supplier",
+                    "minOccurances": 0,
+                    "elements": [
+                        {"tag": "supplierCode"}, {"tag": "promotionCode"}
+                    ]
+                }                
+            ]
+        }
+    ]
+}
