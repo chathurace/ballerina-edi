@@ -2,72 +2,140 @@ import ballerina/regex;
 import ballerina/log;
 
 public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|error {
-    EDIDoc ediDoc = check readEDI(ediText, mapping);
+    EDISegmentGroup ediDoc = check readEDI(ediText, mapping);
     return ediDoc.toJson();
 }
 
-public function readEDI(string ediText, EDIMapping mapping) returns EDIDoc|error {
-    EDIDoc doc = {};
-    string[] segmentsDesc = splitAndIgnoreLastEmptyItem(ediText, mapping.delimiters.segment);
-    foreach string sDesc in segmentsDesc {
+public function readEDI(string ediText, EDIMapping ediMapping) returns EDISegmentGroup|error {
+    EDIUnitMapping[] currentMapping = ediMapping.segments;
+    string preparedEDIText = regex:replaceAll(ediText, "\n", "");
+    string[] segmentsDesc = splitAndIgnoreLastEmptyItem(preparedEDIText, ediMapping.delimiters.segment);
+    var [rootGroup, _] = check readEDISegmentGroup(currentMapping, segmentsDesc, 0, ediMapping);
+    return rootGroup;
+}
+
+function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegments, int rawIndex, EDIMapping ediMapping) returns [EDISegmentGroup, int]|error {
+    int mappingIndex = 0;
+    int currentRawIndex = rawIndex;
+    EDISegmentGroup currentGroup = {};
+    while currentRawIndex < rawSegments.length() {
+        string sDesc = rawSegments[currentRawIndex];
         string segmentDesc = regex:replaceAll(sDesc, "\n", "");
-        string[] elements = split(segmentDesc, mapping.delimiters.element);
-        EDISegMapping? segMapping = mapping.segments[elements[0].trim()];
-        if (segMapping is EDISegMapping) {
-            if (segMapping.elements.length() + 1 != elements.length()) {
-                string errMsg = string `Segment mapping's element count does not match segment ${elements[0]}. 
-                Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}`;
-                return error(errMsg);
-            }
-            EDISegment ediRecord = {};
-            int elementNumber = 0;
-            while (elementNumber < elements.length() - 1) {
-                EDIElementMapping elementMapping = segMapping.elements[elementNumber];
-                string tag = elementMapping.tag;
+        string[] elements = split(segmentDesc, ediMapping.delimiters.element);
 
-                // EDI segment starts with the segment name. So we have to skip the first element.
-                string elementText = elements[elementNumber + 1];
-                if (elementMapping.repeat) {
-                    // this is a repeating element (i.e. array). can be a repeat of composites as well.
-                    ediRecord[tag] = check readEDIRepeat(elementText, mapping.delimiters.repetition, mapping, elementMapping);
-                } else if (elementMapping.subelements.length() > 0) {
-                    // this is a composite element (but not a repeat)
-                    EDIComposite? composite = check readEDIComposite(elementText, mapping, elementMapping.subelements);
-                    if (composite is EDIComposite) {
-                        ediRecord[tag] = composite;
-                    } else {
-                        log:printWarn(string `Value for "${tag} is not provided in ${segmentDesc}`);
+        boolean segmentMapped = false;
+        while mappingIndex < currentMapping.length() && !segmentMapped {
+            EDIUnitMapping? segMapping = currentMapping[mappingIndex];
+            if (segMapping is EDISegMapping) {
+                if segMapping.code != elements[0] {
+                    if segMapping.minOccurances > 0 {
+                        return error(string `Mandatory segment ${segMapping.code} could not be found.`);
                     }
+                    mappingIndex += 1;
+                    continue;
+                }
+                currentRawIndex += 1;
+                EDISegment ediRecord = check readEDISegment(segMapping, elements, ediMapping, segmentDesc);
+                if (segMapping.maxOccurances == 1) {
+                    mappingIndex += 1;
+                    currentGroup[segMapping.tag] = ediRecord;
                 } else {
-                    // this is a simple type element
-                    SimpleType|error value = convertToType(elementText, elementMapping.dataType);
-                    if (value is SimpleType) {
-                        ediRecord[tag] = value;
+                    var segments = currentGroup[segMapping.tag];
+                    if (segments is EDISegment[]) {
+                        segments.push(ediRecord);
+                    } else if segments is null {
+                        segments = [ediRecord];
+                        currentGroup[segMapping.tag] = segments;
                     } else {
-                        string errMsg = string `EDI field: ${elementText} cannot be converted to type: ${elementMapping.dataType}.
-                        Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}|n${value.message()}`;
-                        return error(errMsg);
+                        return error(string `${segMapping.code} must be a segment array.`);
                     }
                 }
-                elementNumber = elementNumber + 1;
-            }
-            if (segMapping.maxOccurances == 1) {
-                doc[segMapping.tag] = ediRecord;
-            } else {
-                EDISegment|EDISegment[]? segments = doc[segMapping.tag];
-                if (segments is EDISegment[]) {
-                    segments.push(ediRecord);
-                } else {
-                    segments = [ediRecord];
-                    doc[segMapping.tag] = segments;
+                segmentMapped = true;
+
+            } else if segMapping is EDISegGroupMapping {
+                EDIUnitMapping firstSegMapping = segMapping.segments[0];
+                if firstSegMapping is EDISegGroupMapping {
+                    return error("First item of group must be a segment.");
+                }
+                if firstSegMapping.code != elements[0] {
+                    if segMapping.minOccurances > 0 {
+                        return error(string `Mandatory segment group starting with ${firstSegMapping.code} could not be found.`);
+                    }
+                    mappingIndex += 1;
+                    continue;
+                }
+                segmentMapped = true;
+                var [segmentGroup, newRawIndex] = check readEDISegmentGroup(segMapping.segments, rawSegments, currentRawIndex, ediMapping);
+                currentRawIndex = newRawIndex;
+                if segmentGroup.length() > 0 {
+                    if segMapping.maxOccurances == 1 {
+                        mappingIndex += 1;
+                        currentGroup[segMapping.tag] = segmentGroup;
+                    } else {
+                        var segmentGroups = currentGroup[segMapping.tag];
+                        if segmentGroups is EDISegmentGroup[] {
+                            segmentGroups.push(segmentGroup);
+                        } else if segmentGroups is null {
+                            segmentGroups = [segmentGroup];
+                            currentGroup[segMapping.tag] = segmentGroups;
+                        } else {
+                            return error(string `${segMapping.tag} must be a segment group array.`);
+                        }
+                        
+                    }
                 }
             }
-
-        } else {
-            return error("Segment mapping not found for the segment: " + elements[0]);
+            if currentRawIndex == rawSegments.length() {
+                break;
+            }
+        }
+        if mappingIndex == currentMapping.length() {
+            break;
         }
     }
-    return doc;
+    return [currentGroup, currentRawIndex];
+}
+
+function readEDISegment(EDISegMapping segMapping, string[] elements, EDIMapping mapping, string segmentDesc)
+    returns EDISegment|error {
+    if (segMapping.elements.length() + 1 != elements.length()) {
+        string errMsg = string `Segment mapping's element count does not match segment ${elements[0]}. 
+                Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}`;
+        return error(errMsg);
+    }
+    EDISegment ediRecord = {};
+    int elementNumber = 0;
+    while (elementNumber < elements.length() - 1) {
+        EDIElementMapping elementMapping = segMapping.elements[elementNumber];
+        string tag = elementMapping.tag;
+
+        // EDI segment starts with the segment name. So we have to skip the first element.
+        string elementText = elements[elementNumber + 1];
+        if (elementMapping.repeat) {
+            // this is a repeating element (i.e. array). can be a repeat of composites as well.
+            ediRecord[tag] = check readEDIRepeat(elementText, mapping.delimiters.repetition, mapping, elementMapping);
+        } else if (elementMapping.subelements.length() > 0) {
+            // this is a composite element (but not a repeat)
+            EDIComposite? composite = check readEDIComposite(elementText, mapping, elementMapping.subelements);
+            if (composite is EDIComposite) {
+                ediRecord[tag] = composite;
+            } else {
+                log:printWarn(string `Value for "${tag} is not provided in ${segmentDesc}`);
+            }
+        } else {
+            // this is a simple type element
+            SimpleType|error value = convertToType(elementText, elementMapping.dataType);
+            if (value is SimpleType) {
+                ediRecord[tag] = value;
+            } else {
+                string errMsg = string `EDI field: ${elementText} cannot be converted to type: ${elementMapping.dataType}.
+                        Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}|n${value.message()}`;
+                return error(errMsg);
+            }
+        }
+        elementNumber = elementNumber + 1;
+    }
+    return ediRecord;
 }
 
 function readEDIComposite(string compositeText, EDIMapping mapping, EDISubelementMapping[] subMappings)

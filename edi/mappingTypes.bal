@@ -1,4 +1,6 @@
 
+public type EDIUnitMapping EDISegMapping|EDISegGroupMapping;
+
 public type EDIMapping record {|
     record {|
         string segment;
@@ -7,13 +9,20 @@ public type EDIMapping record {|
         string repetition = "^";
     |} delimiters;
 
-    map<EDISegMapping> segments = {};
+    EDIUnitMapping[] segments = [];
 |};
 
+public type EDISegGroupMapping record {|
+    string tag;
+    int minOccurances = 1;
+    int maxOccurances = 1;
+    EDIUnitMapping[] segments = [];
+|};
 
 public type EDISegMapping record {|
-    // string code;
+    string code;
     string tag;
+    int minOccurances = 1;
     int maxOccurances = 1;
     EDIElementMapping[] elements = [];
 |};

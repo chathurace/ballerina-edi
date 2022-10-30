@@ -1,14 +1,16 @@
 {
     "delimiters" : {"segment" : "~", "element" : "*"},
-    "segments" : {
-        "HDR": {
+    "segments" : [
+        {
+            "code": "HDR",
             "tag" : "header",
             "elements" : [{"tag" : "orderId"}, {"tag" : "organization"}, {"tag" : "date"}]
         },
-        "ITM": {
+        {
+            "code": "ITM",
             "tag" : "items",
             "maxOccurances" : -1,
             "elements" : [{"tag" : "item"}, {"tag" : "quantity", "dataType" : "int"}]
         }
-    }
+    ]
 }

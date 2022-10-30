@@ -9,6 +9,10 @@ public enum EDIDataType {
 
 public type EDIDoc map<EDISegment|EDISegment[]?>;
 
+public type EDISegmentGroup record {|
+    EDISegment|EDISegment[]|EDISegmentGroup|EDISegmentGroup[]...;
+|}; 
+
 public type EDISegment map<EDIComposite|EDIComposite[]|SimpleType|SimpleArray?>;
 
 public type EDIComposite map<SimpleType|SimpleArray>;
