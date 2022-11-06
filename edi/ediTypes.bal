@@ -15,4 +15,4 @@ public type EDISegmentGroup record {|
 
 public type EDISegment map<EDIComposite|EDIComposite[]|SimpleType|SimpleArray?>;
 
-public type EDIComposite map<SimpleType|SimpleArray>;
+public type EDIComposite map<SimpleType|SimpleArray?>;

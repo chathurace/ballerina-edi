@@ -1,5 +1,6 @@
 {
     "delimiters" : {"segment" : "~", "element" : "*", "subelement" : ":", "repetition" : "^"},
+    "preserveEmptyFields": true,
     "segments" : [ 
         {
             "code": "HDR",

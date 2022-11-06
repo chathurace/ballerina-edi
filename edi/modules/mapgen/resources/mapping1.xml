@@ -1,0 +1,12 @@
+<mapping>
+    <segments>
+        <seg>
+            <name>ORG</name>
+            <elements>some orgs</elements>
+        </seg>
+        <seg>
+            <name>ITM</name>
+            <elements>some itmes</elements>
+        </seg>
+    </segments>
+</mapping>

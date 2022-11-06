@@ -1,7 +1,9 @@
 {
     "delimiters": {
         "segment": "~",
-        "element": "*"
+        "element": "*", 
+        "subelement": ":", 
+        "repetition": "^"
     },
     "segments": [
         {
