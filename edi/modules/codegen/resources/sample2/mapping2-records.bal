@@ -1,9 +1,9 @@
-type Header_Type record {|
+type Header_SType record {|
    string orderId?;
    string date?;
 |};
 
-type Organization_Type record {|
+type Organization_SType record {|
    string partnerCode?;
    string name?;
    string address?;
@@ -15,15 +15,15 @@ type Comments_Type record {|
    string text?;
 |};
 
-type Items_Type record {|
+type Items_SType record {|
    string item?;
    int quantity?;
    Comments_Type[] comments?;
 |};
 
 type PartnerOrder record {|
-   Header_Type header;
-   Organization_Type organization;
-   Items_Type[] items;
+   Header_SType header;
+   Organization_SType organization;
+   Items_SType[] items;
 |};
 

@@ -1,4 +1,5 @@
 {
+    "name": "Sample3",
     "delimiters": {
         "segment": "~",
         "element": "*", 

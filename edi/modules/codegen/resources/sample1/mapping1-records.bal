@@ -1,16 +1,16 @@
-type Header_Type record {|
+type Header_SType record {|
    string orderId?;
    string organization?;
    string date?;
 |};
 
-type Items_Type record {|
+type Items_SType record {|
    string item?;
    int quantity?;
 |};
 
 type SimpleOrder record {|
-   Header_Type header;
-   Items_Type[] items;
+   Header_SType header;
+   Items_SType[] items;
 |};
 

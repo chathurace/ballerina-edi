@@ -5,7 +5,7 @@ type DOCUMENT_MESSAGE_NAME_Type record {|
    string Document_message_name?;
 |};
 
-type Beginning_of_message_Type record {|
+type Beginning_of_message_SType record {|
    DOCUMENT_MESSAGE_NAME_Type DOCUMENT_MESSAGE_NAME?;
    string Document_message_number?;
    string Message_function__coded?;
@@ -18,7 +18,7 @@ type DATE_TIME_PERIOD_Type record {|
    string Date_time_period_format_qualifier?;
 |};
 
-type Date_time_period_Type record {|
+type Date_time_period_SType record {|
    DATE_TIME_PERIOD_Type DATE_TIME_PERIOD?;
 |};
 
@@ -31,11 +31,11 @@ type PAYMENT_INSTRUCTION_DETAILS_Type record {|
    string Payment_channel__coded?;
 |};
 
-type Payment_instructions_Type record {|
+type Payment_instructions_SType record {|
    PAYMENT_INSTRUCTION_DETAILS_Type PAYMENT_INSTRUCTION_DETAILS?;
 |};
 
-type Additional_information_Type record {|
+type Additional_information_SType record {|
    string Country_of_origin__coded?;
    string Type_of_duty_regime__coded?;
    string Special_conditions__coded?;
@@ -53,7 +53,7 @@ type ITEM_DESCRIPTION_Type record {|
    string Item_description_1?;
 |};
 
-type Item_description_Type record {|
+type Item_description_SType record {|
    string Item_description_type__coded?;
    string Item_characteristic__coded?;
    ITEM_DESCRIPTION_Type ITEM_DESCRIPTION?;
@@ -74,7 +74,7 @@ type TEXT_LITERAL_Type record {|
    string Free_text_4?;
 |};
 
-type Free_text_Type record {|
+type Free_text_SType record {|
    string Text_subject_qualifier?;
    string Text_function__coded?;
    TEXT_REFERENCE_Type TEXT_REFERENCE?;
@@ -89,13 +89,13 @@ type REFERENCE_Type record {|
    string Reference_version_number?;
 |};
 
-type Reference_Type record {|
+type Reference_SType record {|
    REFERENCE_Type REFERENCE?;
 |};
 
 type Segment_Group_1_Type record {|
-   Reference_Type Reference;
-   Date_time_period_Type[] Date_time_period?;
+   Reference_SType Reference;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type PARTY_IDENTIFICATION_DETAILS_Type record {|
@@ -127,7 +127,7 @@ type STREET_Type record {|
    string Street_and_number_P_O__Box_2?;
 |};
 
-type Name_and_address_Type record {|
+type Name_and_address_SType record {|
    string Party_qualifier?;
    PARTY_IDENTIFICATION_DETAILS_Type PARTY_IDENTIFICATION_DETAILS?;
    NAME_AND_ADDRESS_Type NAME_AND_ADDRESS?;
@@ -160,7 +160,7 @@ type RELATED_LOCATION_TWO_IDENTIFICATION_Type record {|
    string Related_place_location_two?;
 |};
 
-type Place_location_identification_Type record {|
+type Place_location_identification_SType record {|
    string Place_location_qualifier?;
    LOCATION_IDENTIFICATION_Type LOCATION_IDENTIFICATION?;
    RELATED_LOCATION_ONE_IDENTIFICATION_Type RELATED_LOCATION_ONE_IDENTIFICATION?;
@@ -186,7 +186,7 @@ type INSTITUTION_IDENTIFICATION_Type record {|
    string Institution_branch_place?;
 |};
 
-type Financial_institution_information_Type record {|
+type Financial_institution_information_SType record {|
    string Party_qualifier?;
    ACCOUNT_IDENTIFICATION_Type ACCOUNT_IDENTIFICATION?;
    INSTITUTION_IDENTIFICATION_Type INSTITUTION_IDENTIFICATION?;
@@ -194,8 +194,8 @@ type Financial_institution_information_Type record {|
 |};
 
 type Segment_Group_3_Type record {|
-   Reference_Type Reference;
-   Date_time_period_Type[] Date_time_period?;
+   Reference_SType Reference;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type DOCUMENT_MESSAGE_NAME2_Type record {|
@@ -212,7 +212,7 @@ type DOCUMENT_MESSAGE_DETAILS_Type record {|
    string Language__coded?;
 |};
 
-type Document_message_details_Type record {|
+type Document_message_details_SType record {|
    DOCUMENT_MESSAGE_NAME2_Type DOCUMENT_MESSAGE_NAME?;
    DOCUMENT_MESSAGE_DETAILS_Type DOCUMENT_MESSAGE_DETAILS?;
    string Communication_channel_identifier__coded?;
@@ -221,8 +221,8 @@ type Document_message_details_Type record {|
 |};
 
 type Segment_Group_4_Type record {|
-   Document_message_details_Type Document_message_details;
-   Date_time_period_Type[] Date_time_period?;
+   Document_message_details_SType Document_message_details;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type DEPARTMENT_OR_EMPLOYEE_DETAILS_Type record {|
@@ -230,7 +230,7 @@ type DEPARTMENT_OR_EMPLOYEE_DETAILS_Type record {|
    string Department_or_employee?;
 |};
 
-type Contact_information_Type record {|
+type Contact_information_SType record {|
    string Contact_function__coded?;
    DEPARTMENT_OR_EMPLOYEE_DETAILS_Type DEPARTMENT_OR_EMPLOYEE_DETAILS?;
 |};
@@ -240,19 +240,19 @@ type COMMUNICATION_CONTACT_Type record {|
    string Communication_channel_qualifier?;
 |};
 
-type Communication_contact_Type record {|
+type Communication_contact_SType record {|
    COMMUNICATION_CONTACT_Type COMMUNICATION_CONTACT?;
 |};
 
 type Segment_Group_5_Type record {|
-   Contact_information_Type Contact_information;
-   Communication_contact_Type[] Communication_contact?;
+   Contact_information_SType Contact_information;
+   Communication_contact_SType[] Communication_contact?;
 |};
 
 type Segment_Group_2_Type record {|
-   Name_and_address_Type Name_and_address;
-   Place_location_identification_Type[] Place_location_identification?;
-   Financial_institution_information_Type[] Financial_institution_information?;
+   Name_and_address_SType Name_and_address;
+   Place_location_identification_SType[] Place_location_identification?;
+   Financial_institution_information_SType[] Financial_institution_information?;
    Segment_Group_3_Type[] Segment_Group_3?;
    Segment_Group_4_Type[] Segment_Group_4?;
    Segment_Group_5_Type[] Segment_Group_5?;
@@ -281,7 +281,7 @@ type DUTY_TAX_FEE_DETAIL_Type record {|
    string Code_list_responsible_agency__coded_1?;
 |};
 
-type Duty_tax_fee_details_Type record {|
+type Duty_tax_fee_details_SType record {|
    string Duty_tax_fee_function_qualifier?;
    DUTY_TAX_FEE_TYPE_Type DUTY_TAX_FEE_TYPE?;
    DUTY_TAX_FEE_ACCOUNT_DETAIL_Type DUTY_TAX_FEE_ACCOUNT_DETAIL?;
@@ -299,14 +299,14 @@ type MONETARY_AMOUNT_Type record {|
    string Status__coded?;
 |};
 
-type Monetary_amount_Type record {|
+type Monetary_amount_SType record {|
    MONETARY_AMOUNT_Type MONETARY_AMOUNT?;
 |};
 
 type Segment_Group_6_Type record {|
-   Duty_tax_fee_details_Type Duty_tax_fee_details;
-   Monetary_amount_Type Monetary_amount?;
-   Place_location_identification_Type[] Place_location_identification?;
+   Duty_tax_fee_details_SType Duty_tax_fee_details;
+   Monetary_amount_SType Monetary_amount?;
+   Place_location_identification_SType[] Place_location_identification?;
 |};
 
 type CURRENCY_DETAILS_Type record {|
@@ -323,7 +323,7 @@ type CURRENCY_DETAILS_1_Type record {|
    string Currency_rate_base?;
 |};
 
-type Currencies_Type record {|
+type Currencies_SType record {|
    CURRENCY_DETAILS_Type CURRENCY_DETAILS?;
    CURRENCY_DETAILS_1_Type CURRENCY_DETAILS_1?;
    string Rate_of_exchange?;
@@ -331,8 +331,8 @@ type Currencies_Type record {|
 |};
 
 type Segment_Group_7_Type record {|
-   Currencies_Type Currencies;
-   Date_time_period_Type[] Date_time_period?;
+   Currencies_SType Currencies;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type PAYMENT_TERMS_Type record {|
@@ -350,7 +350,7 @@ type TERMS_TIME_INFORMATION_Type record {|
    string Number_of_periods?;
 |};
 
-type Payment_terms_basis_Type record {|
+type Payment_terms_basis_SType record {|
    string Payment_terms_type_qualifier?;
    PAYMENT_TERMS_Type PAYMENT_TERMS?;
    TERMS_TIME_INFORMATION_Type TERMS_TIME_INFORMATION?;
@@ -364,15 +364,15 @@ type PERCENTAGE_DETAILS_Type record {|
    string Code_list_responsible_agency__coded?;
 |};
 
-type Percentage_details_Type record {|
+type Percentage_details_SType record {|
    PERCENTAGE_DETAILS_Type PERCENTAGE_DETAILS?;
 |};
 
 type Segment_Group_8_Type record {|
-   Payment_terms_basis_Type Payment_terms_basis;
-   Date_time_period_Type[] Date_time_period?;
-   Percentage_details_Type Percentage_details?;
-   Monetary_amount_Type Monetary_amount?;
+   Payment_terms_basis_SType Payment_terms_basis;
+   Date_time_period_SType[] Date_time_period?;
+   Percentage_details_SType Percentage_details?;
+   Monetary_amount_SType Monetary_amount?;
 |};
 
 type MODE_OF_TRANSPORT_Type record {|
@@ -406,7 +406,7 @@ type TRANSPORT_IDENTIFICATION_Type record {|
    string Nationality_of_means_of_transport__coded?;
 |};
 
-type Details_of_transport_Type record {|
+type Details_of_transport_SType record {|
    string Transport_stage_qualifier?;
    string Conveyance_reference_number?;
    MODE_OF_TRANSPORT_Type MODE_OF_TRANSPORT?;
@@ -418,12 +418,12 @@ type Details_of_transport_Type record {|
 |};
 
 type Segment_Group_10_Type record {|
-   Place_location_identification_Type Place_location_identification;
-   Date_time_period_Type[] Date_time_period?;
+   Place_location_identification_SType Place_location_identification;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_9_Type record {|
-   Details_of_transport_Type Details_of_transport;
+   Details_of_transport_SType Details_of_transport;
    Segment_Group_10_Type[] Segment_Group_10?;
 |};
 
@@ -435,15 +435,15 @@ type TERMS_OF_DELIVERY_Type record {|
    string Terms_of_delivery_1?;
 |};
 
-type Terms_of_delivery_Type record {|
+type Terms_of_delivery_SType record {|
    string Terms_of_delivery_function__coded?;
    string Transport_charges_method_of_payment__coded?;
    TERMS_OF_DELIVERY_Type TERMS_OF_DELIVERY?;
 |};
 
 type Segment_Group_11_Type record {|
-   Terms_of_delivery_Type Terms_of_delivery;
-   Place_location_identification_Type[] Place_location_identification?;
+   Terms_of_delivery_SType Terms_of_delivery;
+   Place_location_identification_SType[] Place_location_identification?;
 |};
 
 type PACKAGING_DETAILS_Type record {|
@@ -472,7 +472,7 @@ type RETURNABLE_PACKAGE_DETAILS_Type record {|
    string Returnable_package_load_contents__coded?;
 |};
 
-type Package_Type record {|
+type Package_SType record {|
    string Number_of_packages?;
    PACKAGING_DETAILS_Type PACKAGING_DETAILS?;
    PACKAGE_TYPE_Type PACKAGE_TYPE?;
@@ -493,7 +493,7 @@ type VALUE_RANGE_Type record {|
    string Range_maximum?;
 |};
 
-type Measurements_Type record {|
+type Measurements_SType record {|
    string Measurement_application_qualifier?;
    MEASUREMENT_DETAILS_Type MEASUREMENT_DETAILS?;
    VALUE_RANGE_Type VALUE_RANGE?;
@@ -513,7 +513,7 @@ type MARKS___LABELS_Type record {|
    string Shipping_marks_9?;
 |};
 
-type Package_identification_Type record {|
+type Package_identification_SType record {|
    string Marking_instructions__coded?;
    MARKS___LABELS_Type MARKS___LABELS?;
    string Container_package_status__coded?;
@@ -544,7 +544,7 @@ type IDENTITY_NUMBER_RANGE_4_Type record {|
    string Identity_number_1?;
 |};
 
-type Goods_identity_number_Type record {|
+type Goods_identity_number_SType record {|
    string Identity_number_qualifier?;
    IDENTITY_NUMBER_RANGE_Type IDENTITY_NUMBER_RANGE?;
    IDENTITY_NUMBER_RANGE_1_Type IDENTITY_NUMBER_RANGE_1?;
@@ -554,15 +554,15 @@ type Goods_identity_number_Type record {|
 |};
 
 type Segment_Group_13_Type record {|
-   Package_identification_Type Package_identification;
-   Reference_Type Reference?;
-   Date_time_period_Type[] Date_time_period?;
-   Goods_identity_number_Type[] Goods_identity_number?;
+   Package_identification_SType Package_identification;
+   Reference_SType Reference?;
+   Date_time_period_SType[] Date_time_period?;
+   Goods_identity_number_SType[] Goods_identity_number?;
 |};
 
 type Segment_Group_12_Type record {|
-   Package_Type Package;
-   Measurements_Type[] Measurements?;
+   Package_SType Package;
+   Measurements_SType[] Measurements?;
    Segment_Group_13_Type[] Segment_Group_13?;
 |};
 
@@ -578,7 +578,7 @@ type SPECIAL_SERVICES_IDENTIFICATION_Type record {|
    string Special_service?;
 |};
 
-type Allowance_or_charge_Type record {|
+type Allowance_or_charge_SType record {|
    string Allowance_or_charge_qualifier?;
    ALLOWANCE_CHARGE_INFORMATION_Type ALLOWANCE_CHARGE_INFORMATION?;
    string Settlement__coded?;
@@ -587,8 +587,8 @@ type Allowance_or_charge_Type record {|
 |};
 
 type Segment_Group_15_Type record {|
-   Reference_Type Reference;
-   Date_time_period_Type[] Date_time_period?;
+   Reference_SType Reference;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type QUANTITY_DETAILS_Type record {|
@@ -597,7 +597,7 @@ type QUANTITY_DETAILS_Type record {|
    string Measure_unit_qualifier?;
 |};
 
-type Quantity_Type record {|
+type Quantity_SType record {|
    QUANTITY_DETAILS_Type QUANTITY_DETAILS?;
 |};
 
@@ -607,24 +607,24 @@ type RANGE_Type record {|
    string Range_maximum?;
 |};
 
-type Range_details_Type record {|
+type Range_details_SType record {|
    string Range_type_qualifier?;
    RANGE_Type RANGE?;
 |};
 
 type Segment_Group_16_Type record {|
-   Quantity_Type Quantity;
-   Range_details_Type Range_details?;
+   Quantity_SType Quantity;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_17_Type record {|
-   Percentage_details_Type Percentage_details;
-   Range_details_Type Range_details?;
+   Percentage_details_SType Percentage_details;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_18_Type record {|
-   Monetary_amount_Type Monetary_amount;
-   Range_details_Type Range_details?;
+   Monetary_amount_SType Monetary_amount;
+   Range_details_SType Range_details?;
 |};
 
 type RATE_DETAILS_Type record {|
@@ -634,23 +634,23 @@ type RATE_DETAILS_Type record {|
    string Measure_unit_qualifier?;
 |};
 
-type Rate_details_Type record {|
+type Rate_details_SType record {|
    RATE_DETAILS_Type RATE_DETAILS?;
 |};
 
 type Segment_Group_19_Type record {|
-   Rate_details_Type Rate_details;
-   Range_details_Type Range_details?;
+   Rate_details_SType Rate_details;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_20_Type record {|
-   Duty_tax_fee_details_Type Duty_tax_fee_details;
-   Monetary_amount_Type Monetary_amount?;
+   Duty_tax_fee_details_SType Duty_tax_fee_details;
+   Monetary_amount_SType Monetary_amount?;
 |};
 
 type Segment_Group_14_Type record {|
-   Allowance_or_charge_Type Allowance_or_charge;
-   Additional_information_Type[] Additional_information?;
+   Allowance_or_charge_SType Allowance_or_charge;
+   Additional_information_SType[] Additional_information?;
    Segment_Group_15_Type[] Segment_Group_15?;
    Segment_Group_16_Type Segment_Group_16?;
    Segment_Group_17_Type Segment_Group_17?;
@@ -665,17 +665,17 @@ type REQUIREMENT_CONDITION_IDENTIFICATION_Type record {|
    string Code_list_responsible_agency__coded?;
 |};
 
-type Requirements_and_conditions_Type record {|
+type Requirements_and_conditions_SType record {|
    string Sector_subject_identification_qualifier?;
    REQUIREMENT_CONDITION_IDENTIFICATION_Type REQUIREMENT_CONDITION_IDENTIFICATION?;
    string Action_request_notification__coded?;
 |};
 
 type Segment_Group_21_Type record {|
-   Requirements_and_conditions_Type Requirements_and_conditions;
-   Reference_Type[] Reference?;
-   Date_time_period_Type[] Date_time_period?;
-   Free_text_Type[] Free_text?;
+   Requirements_and_conditions_SType Requirements_and_conditions;
+   Reference_SType[] Reference?;
+   Date_time_period_SType[] Date_time_period?;
+   Free_text_SType[] Free_text?;
 |};
 
 type ITEM_NUMBER_IDENTIFICATION_Type record {|
@@ -685,7 +685,7 @@ type ITEM_NUMBER_IDENTIFICATION_Type record {|
    string Code_list_responsible_agency__coded?;
 |};
 
-type Line_item_Type record {|
+type Line_item_SType record {|
    string Line_item_number?;
    string Action_request_notification__coded?;
    ITEM_NUMBER_IDENTIFICATION_Type ITEM_NUMBER_IDENTIFICATION?;
@@ -729,7 +729,7 @@ type ITEM_NUMBER_IDENTIFICATION_4_Type record {|
    string Code_list_responsible_agency__coded?;
 |};
 
-type Additional_product_id_Type record {|
+type Additional_product_id_SType record {|
    string Product_id_function_qualifier?;
    ITEM_NUMBER_IDENTIFICATION2_Type ITEM_NUMBER_IDENTIFICATION?;
    ITEM_NUMBER_IDENTIFICATION_1_Type ITEM_NUMBER_IDENTIFICATION_1?;
@@ -763,7 +763,7 @@ type IDENTIFICATION_NUMBER_4_Type record {|
    string Identity_number_qualifier?;
 |};
 
-type Related_identification_numbers_Type record {|
+type Related_identification_numbers_SType record {|
    string Set_identification_qualifier?;
    IDENTIFICATION_NUMBER_Type IDENTIFICATION_NUMBER?;
    IDENTIFICATION_NUMBER_1_Type IDENTIFICATION_NUMBER_1?;
@@ -782,22 +782,22 @@ type REASON_FOR_CHANGE_Type record {|
    string Change_reason?;
 |};
 
-type Quantity_variances_Type record {|
+type Quantity_variances_SType record {|
    QUANTITY_DIFFERENCE_INFORMATION_Type QUANTITY_DIFFERENCE_INFORMATION?;
    string Discrepancy__coded?;
    REASON_FOR_CHANGE_Type REASON_FOR_CHANGE?;
 |};
 
 type Segment_Group_23_Type record {|
-   Monetary_amount_Type Monetary_amount;
-   Currencies_Type Currencies?;
+   Monetary_amount_SType Monetary_amount;
+   Currencies_SType Currencies?;
 |};
 
 type Segment_Group_24_Type record {|
-   Payment_terms_basis_Type Payment_terms_basis;
-   Date_time_period_Type[] Date_time_period?;
-   Percentage_details_Type Percentage_details?;
-   Monetary_amount_Type Monetary_amount?;
+   Payment_terms_basis_SType Payment_terms_basis;
+   Date_time_period_SType[] Date_time_period?;
+   Percentage_details_SType Percentage_details?;
+   Monetary_amount_SType Monetary_amount?;
 |};
 
 type PRICE_INFORMATION_Type record {|
@@ -809,7 +809,7 @@ type PRICE_INFORMATION_Type record {|
    string Measure_unit_qualifier?;
 |};
 
-type Price_details_Type record {|
+type Price_details_SType record {|
    PRICE_INFORMATION_Type PRICE_INFORMATION?;
    string Sub_line_price_change__coded?;
 |};
@@ -824,100 +824,100 @@ type REASON_FOR_CHANGE2_Type record {|
    string Change_reason?;
 |};
 
-type Additional_price_information_Type record {|
+type Additional_price_information_SType record {|
    string Class_of_trade__coded?;
    PRICE_MULTIPLIER_INFORMATION_Type PRICE_MULTIPLIER_INFORMATION?;
    REASON_FOR_CHANGE2_Type REASON_FOR_CHANGE?;
 |};
 
 type Segment_Group_25_Type record {|
-   Price_details_Type Price_details;
-   Additional_price_information_Type Additional_price_information?;
-   Range_details_Type Range_details?;
-   Date_time_period_Type[] Date_time_period?;
+   Price_details_SType Price_details;
+   Additional_price_information_SType Additional_price_information?;
+   Range_details_SType Range_details?;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_26_Type record {|
-   Reference_Type Reference;
-   Date_time_period_Type[] Date_time_period?;
+   Reference_SType Reference;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_28_Type record {|
-   Package_identification_Type Package_identification;
-   Reference_Type Reference?;
-   Date_time_period_Type[] Date_time_period?;
-   Goods_identity_number_Type[] Goods_identity_number?;
+   Package_identification_SType Package_identification;
+   Reference_SType Reference?;
+   Date_time_period_SType[] Date_time_period?;
+   Goods_identity_number_SType[] Goods_identity_number?;
 |};
 
 type Segment_Group_27_Type record {|
-   Package_Type Package;
-   Measurements_Type[] Measurements?;
+   Package_SType Package;
+   Measurements_SType[] Measurements?;
    Segment_Group_28_Type[] Segment_Group_28?;
 |};
 
 type Segment_Group_29_Type record {|
-   Place_location_identification_Type Place_location_identification;
-   Quantity_Type Quantity?;
-   Date_time_period_Type[] Date_time_period?;
+   Place_location_identification_SType Place_location_identification;
+   Quantity_SType Quantity?;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_30_Type record {|
-   Duty_tax_fee_details_Type Duty_tax_fee_details;
-   Monetary_amount_Type Monetary_amount?;
-   Place_location_identification_Type[] Place_location_identification?;
+   Duty_tax_fee_details_SType Duty_tax_fee_details;
+   Monetary_amount_SType Monetary_amount?;
+   Place_location_identification_SType[] Place_location_identification?;
 |};
 
 type Segment_Group_32_Type record {|
-   Reference_Type Reference;
-   Date_time_period_Type[] Date_time_period?;
+   Reference_SType Reference;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_33_Type record {|
-   Document_message_details_Type Document_message_details;
-   Date_time_period_Type[] Date_time_period?;
+   Document_message_details_SType Document_message_details;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_34_Type record {|
-   Contact_information_Type Contact_information;
-   Communication_contact_Type[] Communication_contact?;
+   Contact_information_SType Contact_information;
+   Communication_contact_SType[] Communication_contact?;
 |};
 
 type Segment_Group_31_Type record {|
-   Name_and_address_Type Name_and_address;
-   Place_location_identification_Type[] Place_location_identification?;
+   Name_and_address_SType Name_and_address;
+   Place_location_identification_SType[] Place_location_identification?;
    Segment_Group_32_Type[] Segment_Group_32?;
    Segment_Group_33_Type[] Segment_Group_33?;
    Segment_Group_34_Type[] Segment_Group_34?;
 |};
 
 type Segment_Group_36_Type record {|
-   Quantity_Type Quantity;
-   Range_details_Type Range_details?;
+   Quantity_SType Quantity;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_37_Type record {|
-   Percentage_details_Type Percentage_details;
-   Range_details_Type Range_details?;
+   Percentage_details_SType Percentage_details;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_38_Type record {|
-   Monetary_amount_Type Monetary_amount;
-   Range_details_Type Range_details?;
+   Monetary_amount_SType Monetary_amount;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_39_Type record {|
-   Rate_details_Type Rate_details;
-   Range_details_Type Range_details?;
+   Rate_details_SType Rate_details;
+   Range_details_SType Range_details?;
 |};
 
 type Segment_Group_40_Type record {|
-   Duty_tax_fee_details_Type Duty_tax_fee_details;
-   Monetary_amount_Type Monetary_amount?;
+   Duty_tax_fee_details_SType Duty_tax_fee_details;
+   Monetary_amount_SType Monetary_amount?;
 |};
 
 type Segment_Group_35_Type record {|
-   Allowance_or_charge_Type Allowance_or_charge;
-   Additional_information_Type[] Additional_information?;
+   Allowance_or_charge_SType Allowance_or_charge;
+   Additional_information_SType[] Additional_information?;
    Segment_Group_36_Type Segment_Group_36?;
    Segment_Group_37_Type Segment_Group_37?;
    Segment_Group_38_Type[] Segment_Group_38?;
@@ -926,40 +926,40 @@ type Segment_Group_35_Type record {|
 |};
 
 type Segment_Group_42_Type record {|
-   Place_location_identification_Type Place_location_identification;
-   Date_time_period_Type[] Date_time_period?;
+   Place_location_identification_SType Place_location_identification;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_41_Type record {|
-   Details_of_transport_Type Details_of_transport;
+   Details_of_transport_SType Details_of_transport;
    Segment_Group_42_Type[] Segment_Group_42?;
 |};
 
 type Segment_Group_43_Type record {|
-   Terms_of_delivery_Type Terms_of_delivery;
-   Place_location_identification_Type[] Place_location_identification?;
+   Terms_of_delivery_SType Terms_of_delivery;
+   Place_location_identification_SType[] Place_location_identification?;
 |};
 
 type Segment_Group_44_Type record {|
-   Requirements_and_conditions_Type Requirements_and_conditions;
-   Reference_Type[] Reference?;
-   Date_time_period_Type[] Date_time_period?;
-   Free_text_Type[] Free_text?;
+   Requirements_and_conditions_SType Requirements_and_conditions;
+   Reference_SType[] Reference?;
+   Date_time_period_SType[] Date_time_period?;
+   Free_text_SType[] Free_text?;
 |};
 
 type Segment_Group_22_Type record {|
-   Line_item_Type Line_item;
-   Additional_product_id_Type[] Additional_product_id?;
-   Item_description_Type[] Item_description?;
-   Measurements_Type[] Measurements?;
-   Quantity_Type[] Quantity?;
-   Percentage_details_Type Percentage_details?;
-   Additional_information_Type[] Additional_information?;
-   Date_time_period_Type[] Date_time_period?;
-   Goods_identity_number_Type[] Goods_identity_number?;
-   Related_identification_numbers_Type[] Related_identification_numbers?;
-   Quantity_variances_Type Quantity_variances?;
-   Free_text_Type[] Free_text?;
+   Line_item_SType Line_item;
+   Additional_product_id_SType[] Additional_product_id?;
+   Item_description_SType[] Item_description?;
+   Measurements_SType[] Measurements?;
+   Quantity_SType[] Quantity?;
+   Percentage_details_SType Percentage_details?;
+   Additional_information_SType[] Additional_information?;
+   Date_time_period_SType[] Date_time_period?;
+   Goods_identity_number_SType[] Goods_identity_number?;
+   Related_identification_numbers_SType[] Related_identification_numbers?;
+   Quantity_variances_SType Quantity_variances?;
+   Free_text_SType[] Free_text?;
    Segment_Group_23_Type[] Segment_Group_23?;
    Segment_Group_24_Type[] Segment_Group_24?;
    Segment_Group_25_Type[] Segment_Group_25?;
@@ -974,7 +974,7 @@ type Segment_Group_22_Type record {|
    Segment_Group_44_Type[] Segment_Group_44?;
 |};
 
-type Section_control_Type record {|
+type Section_control_SType record {|
    string SECTION_IDENTIFICATION?;
 |};
 
@@ -984,38 +984,38 @@ type CONTROL_Type record {|
    string Measure_unit_qualifier?;
 |};
 
-type Control_total_Type record {|
+type Control_total_SType record {|
    CONTROL_Type CONTROL?;
 |};
 
 type Segment_Group_46_Type record {|
-   Reference_Type Reference;
-   Date_time_period_Type[] Date_time_period?;
+   Reference_SType Reference;
+   Date_time_period_SType[] Date_time_period?;
 |};
 
 type Segment_Group_45_Type record {|
-   Monetary_amount_Type Monetary_amount;
+   Monetary_amount_SType Monetary_amount;
    Segment_Group_46_Type Segment_Group_46?;
 |};
 
 type Segment_Group_47_Type record {|
-   Duty_tax_fee_details_Type Duty_tax_fee_details;
-   Monetary_amount_Type[] Monetary_amount?;
+   Duty_tax_fee_details_SType Duty_tax_fee_details;
+   Monetary_amount_SType[] Monetary_amount?;
 |};
 
 type Segment_Group_48_Type record {|
-   Allowance_or_charge_Type Allowance_or_charge;
-   Additional_information_Type Additional_information?;
-   Monetary_amount_Type[] Monetary_amount?;
+   Allowance_or_charge_SType Allowance_or_charge;
+   Additional_information_SType Additional_information?;
+   Monetary_amount_SType[] Monetary_amount?;
 |};
 
 type INVOIC record {|
-   Beginning_of_message_Type Beginning_of_message;
-   Date_time_period_Type[] Date_time_period;
-   Payment_instructions_Type Payment_instructions?;
-   Additional_information_Type[] Additional_information?;
-   Item_description_Type Item_description?;
-   Free_text_Type[] Free_text?;
+   Beginning_of_message_SType Beginning_of_message;
+   Date_time_period_SType[] Date_time_period;
+   Payment_instructions_SType Payment_instructions?;
+   Additional_information_SType[] Additional_information?;
+   Item_description_SType Item_description?;
+   Free_text_SType[] Free_text?;
    Segment_Group_1_Type[] Segment_Group_1?;
    Segment_Group_2_Type[] Segment_Group_2?;
    Segment_Group_6_Type[] Segment_Group_6?;
@@ -1027,8 +1027,8 @@ type INVOIC record {|
    Segment_Group_14_Type[] Segment_Group_14?;
    Segment_Group_21_Type[] Segment_Group_21?;
    Segment_Group_22_Type[] Segment_Group_22?;
-   Section_control_Type Section_control;
-   Control_total_Type[] Control_total?;
+   Section_control_SType Section_control;
+   Control_total_SType[] Control_total?;
    Segment_Group_45_Type[] Segment_Group_45;
    Segment_Group_47_Type[] Segment_Group_47?;
    Segment_Group_48_Type[] Segment_Group_48?;
