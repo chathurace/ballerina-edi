@@ -2,6 +2,8 @@
 public type EDIUnitMapping EDISegMapping|EDISegGroupMapping;
 
 public type EDIMapping record {|
+    string name;
+
     record {|
         string segment;
         string element;

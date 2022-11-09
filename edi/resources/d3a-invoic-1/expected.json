@@ -51,7 +51,7 @@
             "Party_name": "Seller"
           },
           "STREET": {
-            "Street_and_number_P.O._Box": "Street 1"
+            "Street_and_number_P_O__Box": "Street 1"
           },
           "City_name": "Town",
           "Postcode_identification": "ZipCode"
@@ -119,10 +119,11 @@
             "Code_list_responsible_agency__coded": "9"
           },
           "PARTY_NAME": {
-            "Party_name": "Department"
+            "Party_name": "Buyer",
+            "Party_name_1": "Department"
           },
           "STREET": {
-            "Street_and_number_P.O._Box": "PostBox 1"
+            "Street_and_number_P_O__Box": "PostBox 1"
           },
           "City_name": "Town",
           "Postcode_identification": "ZipCode"
@@ -154,10 +155,12 @@
             "Code_list_responsible_agency__coded": "ZZZ"
           },
           "PARTY_NAME": {
-            "Party_name": "Department"
+            "Party_name": "Buyer",
+            "Party_name_1": "Department"
           },
           "STREET": {
-            "Street_and_number_P.O._Box": "InvoiceDepartment"
+            "Street_and_number_P_O__Box": "Street 23",
+            "Street_and_number_P_O__Box_1": "InvoiceDepartment"
           },
           "City_name": "Town",
           "Postcode_identification": "ZipCode"

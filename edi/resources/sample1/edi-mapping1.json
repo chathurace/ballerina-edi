@@ -1,4 +1,5 @@
 {
+    "name": "SimpleOrder",
     "delimiters" : {"segment" : "~", "element" : "*", "subelement": ":", "repetition": "^"},
     "segments" : [
         {

@@ -12,16 +12,13 @@ function beforeSuiteFunc() {
 
 @test:Config {}
 function testFunction() returns error? {
-    check processMapping("resources/d3a-invoic-1/mapping.xml", 
-        "resources/d3a-invoic-1/mapping.json");
+    check processMapping("modules/mapgen/resources/d3a-invoic-1/mapping.xml", 
+        "modules/mapgen/resources/d3a-invoic-1/mapping.json");
+    json generatedMapping = check io:fileReadJson("modules/mapgen/resources/d3a-invoic-1/mapping.json");
+    json expectedMapping = check io:fileReadJson("modules/mapgen/resources/d3a-invoic-1/expected-mapping.json");
+    test:assertEquals(generatedMapping, expectedMapping);
 }
 
-// Negative Test function
-
-@test:Config {}
-function negativeTestFunction() {
-    
-}
 
 // After Suite Function
 

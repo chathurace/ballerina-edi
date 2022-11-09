@@ -1,7 +1,7 @@
 <medi:edimap
 	xmlns:medi="http://www.milyn.org/schema/edi-message-mapping-1.5.xsd">
 	<medi:description name="INVOIC" namespace="urn:org.smooks.edi.unedifact:un:d93a:invoic" version="D:93A:UN"/>
-	<medi:delimiters component=":" escape="?" field="+" segment="'!$" sub-component="~"/>
+	<medi:delimiters component=":" escape="?" field="+" segment="'" sub-component="~"/>
 	<medi:segments xmltag="INVOIC">
 		<medi:segment ignoreUnmappedFields="false" maxOccurs="1" minOccurs="1" name="Beginning of message" nodeTypeRef="UN:BGM" segcode="BGM" truncatable="true" xmltag="Beginning_of_message">
 			<medi:documentation>BGM,
