@@ -1,11 +1,11 @@
 
-type SimpleArray string[]|int[]|float[];
-
-type SimpleType string|int|float;
-
 public enum EDIDataType {
     STRING = "string", INT = "int", FLOAT = "float", COMPOSITE = "composite"
 }
+
+type SimpleType string|int|float;
+
+type SimpleArray string[]|int[]|float[];
 
 public type EDIDoc map<EDISegment|EDISegment[]?>;
 

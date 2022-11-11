@@ -85,6 +85,18 @@ function testCodeGenForD3A_Invoic_Mapping() returns error? {
 }
 
 @test:Config {}
+function testSample5_Codegen() returns error? {
+    json mappingText = check io:fileReadJson("modules/codegen/resources/sample5/edi-mapping5.json");
+    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
+    
+    string ediText = check io:fileReadString("modules/codegen/resources/sample5/edi-sample5.edi");
+    json output = check edi:readEDIAsJson(ediText, mapping);
+
+    DetailedOrder detailedOrder = check output.cloneWithType(DetailedOrder);
+    test:assertEquals(detailedOrder.items[0].supplier?.supplierCode, "S-10");
+}
+
+@test:Config {}
 function testINVOIC_D93a_Codegen() returns error? {
     json mappingText = check io:fileReadJson("modules/codegen/resources/d3a-invoic-1/mapping.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
