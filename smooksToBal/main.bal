@@ -75,7 +75,7 @@ function readSegmentMapping(xml seg) returns edi:EDISegMapping|error {
         map<int> subelementTagCounts = {};
         foreach xml component in components {
             edi:EDISubelementMapping submap = 
-                {tag: deriveTag(subelementTagCounts, check component.xmltag), dataType: edi:getDataType(check component.dataType)};   
+                {tag: deriveTag(subelementTagCounts, check component.xmltag), dataType: getDataTypeForSmooksType(check component.dataType)};   
             emap.subelements.push(submap); 
         } 
 
@@ -83,11 +83,11 @@ function readSegmentMapping(xml seg) returns edi:EDISegMapping|error {
         if emap.subelements.length() == 0 {
             var dataType = f.dataType;
             if dataType is string {
-                emap.dataType = edi:getDataType(dataType);   
+                emap.dataType = getDataTypeForSmooksType(dataType);   
             } else {
                 log:printWarn(string `Data type not provided for ${emap.tag} in ${segmap.code} Mapping it as a string type... 
                 XML mapping ${seg.toString()}`);   
-                emap.dataType = edi:getDataType("string");   
+                emap.dataType = getDataTypeForSmooksType("string");   
             }
         } else {
             emap.dataType = edi:COMPOSITE;

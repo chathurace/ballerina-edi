@@ -1,4 +1,3 @@
-// import ballerina/xmldata;
 import edi;
 import ballerina/log;
 import ballerina/regex;
