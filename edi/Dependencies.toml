@@ -88,7 +88,7 @@ modules = [
 [[package]]
 org = "chathurace"
 name = "edi"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "log"},
@@ -97,8 +97,7 @@ dependencies = [
 ]
 modules = [
 	{org = "chathurace", packageName = "edi", moduleName = "edi"},
-	{org = "chathurace", packageName = "edi", moduleName = "edi.codegen"},
-	{org = "chathurace", packageName = "edi", moduleName = "edi.mapgen"}
+	{org = "chathurace", packageName = "edi", moduleName = "edi.codegen"}
 ]
 
 
