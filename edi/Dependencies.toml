@@ -96,7 +96,9 @@ dependencies = [
 	{org = "ballerina", name = "test"}
 ]
 modules = [
-	{org = "chathurace", packageName = "edi", moduleName = "edi"}
+	{org = "chathurace", packageName = "edi", moduleName = "edi"},
+	{org = "chathurace", packageName = "edi", moduleName = "edi.codegen"},
+	{org = "chathurace", packageName = "edi", moduleName = "edi.mapgen"}
 ]
 
 
