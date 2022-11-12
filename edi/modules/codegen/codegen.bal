@@ -1,5 +1,5 @@
 import ballerina/io;
-import chathurace/edi;
+import edi;
 
 map<BalType> ediToBalTypes = {
     "string": BSTRING,

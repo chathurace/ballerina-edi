@@ -1,7 +1,7 @@
 import ballerina/io;
 import ballerina/test;
 import ballerina/regex;
-import chathurace/edi;
+import edi;
 
 // Before Suite Function
 
@@ -58,38 +58,38 @@ function testComplexRecordGeneration() {
 
 @test:Config {}
 function testCodeGenForMapping1() returns error? {
-    json mappingText = check io:fileReadJson("resources/sample1/edi-mapping1.json");
+    json mappingText = check io:fileReadJson("modules/codegen/resources/sample1/edi-mapping1.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
-    check generateCodeToFile(mapping, "resources/sample1/mapping1-records.bal");
+    check generateCodeToFile(mapping, "sample1/mapping1-records.bal");
 }
 
 @test:Config {}
 function testCodeGenForMapping2() returns error? {
-    json mappingText = check io:fileReadJson("resources/sample2/edi-mapping2.json");
+    json mappingText = check io:fileReadJson("modules/codegen/resources/sample2/edi-mapping2.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
-    check generateCodeToFile(mapping, "resources/sample2/mapping2-records.bal");
+    check generateCodeToFile(mapping, "modules/codegen/resources/sample2/mapping2-records.bal");
 }
 
 @test:Config {}
 function testCodeGenForMapping5() returns error? {
-    json mappingText = check io:fileReadJson("resources/sample5/edi-mapping5.json");
+    json mappingText = check io:fileReadJson("modules/codegen/resources/sample5/edi-mapping5.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
-    check generateCodeToFile(mapping, "resources/sample5/mapping5-records.bal");
+    check generateCodeToFile(mapping, "modules/codegen/resources/sample5/mapping5-records.bal");
 }
 
 @test:Config {}
 function testCodeGenForD3A_Invoic_Mapping() returns error? {
-    json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
+    json mappingText = check io:fileReadJson("modules/codegen/resources/d3a-invoic-1/mapping.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
-    check generateCodeToFile(mapping, "tests/d3a-invoic-1-mapping-records.bal");
+    check generateCodeToFile(mapping, "modules/codegen/tests/d3a-invoic-1-mapping-records.bal");
 }
 
 @test:Config {}
 function testSample5_Codegen() returns error? {
-    json mappingText = check io:fileReadJson("resources/sample5/edi-mapping5.json");
+    json mappingText = check io:fileReadJson("modules/codegen/resources/sample5/edi-mapping5.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
     
-    string ediText = check io:fileReadString("resources/sample5/edi-sample5.edi");
+    string ediText = check io:fileReadString("modules/codegen/resources/sample5/edi-sample5.edi");
     json output = check edi:readEDIAsJson(ediText, mapping);
 
     DetailedOrder detailedOrder = check output.cloneWithType(DetailedOrder);
@@ -98,10 +98,10 @@ function testSample5_Codegen() returns error? {
 
 @test:Config {}
 function testINVOIC_D93a_Codegen() returns error? {
-    json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
+    json mappingText = check io:fileReadJson("modules/codegen/resources/d3a-invoic-1/mapping.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
     
-    string ediText = check io:fileReadString("resources/d3a-invoic-1/input.edi");
+    string ediText = check io:fileReadString("modules/codegen/resources/d3a-invoic-1/input.edi");
     json outputJson = check edi:readEDIAsJson(ediText, mapping);
 
     INVOIC invoice = check outputJson.cloneWithType(INVOIC);
