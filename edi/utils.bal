@@ -7,10 +7,10 @@ function convertToType(string value, EDIDataType dataType, string? decimalSepara
             return value;
         }
         INT => {
-            return int:fromString(decimalSeparator != null? regex:replaceFirst(value, decimalSeparator, ".") : value);
+            return int:fromString(decimalSeparator != null? regex:replace(value, decimalSeparator, ".") : value);
         }
         FLOAT => {
-            return float:fromString(decimalSeparator != null? regex:replaceFirst(value, decimalSeparator, ".") : value);
+            return float:fromString(decimalSeparator != null? regex:replace(value, decimalSeparator, ".") : value);
         }
     }
     return error("Undefined type for value:" + value);
@@ -85,12 +85,25 @@ function printSegGroupMap(EDISegGroupMapping sgmap) returns string {
 }
 
 
-public function main() returns error? {
-    json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
-    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+public function main(string[] args) returns error? {
+
+    string usage = string `Usage:
+        Ballerina code generation for edi mapping: java -jar edi.jar codegen <mapping json path> <output bal file path>
+        Smooks to json mapping conversion: java -jar edi.jar smooksToBal <smooks mapping xml path> <mapping json path>`;
     
-    string ediText = check io:fileReadString("resources/d3a-invoic-1/input.edi");
-    json output = check readEDIAsJson(ediText, mapping);
-    io:println(output);
-    // check io:fileWriteJson("resources/d3a-invoic-1/expected.json", output);
+    if args.length() != 3 {
+        io:println(usage);
+        return;
+    }
+
+    string mode = args[0].trim();
+    if mode == "codegen" {
+        json mappingText = check io:fileReadJson(args[1].trim());
+        EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);  
+        check generateCodeToFile(mapping, args[2].trim());    
+    } else if mode == "smooksToBal" {
+        check processMapping(args[1].trim(), args[2].trim()); 
+    } else {
+        io:println(usage);
+    }
 }
