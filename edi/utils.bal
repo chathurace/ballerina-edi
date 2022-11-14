@@ -1,16 +1,16 @@
 import ballerina/regex;
 import ballerina/io;
 
-function convertToType(string value, EDIDataType dataType) returns SimpleType|error {
+function convertToType(string value, EDIDataType dataType, string? decimalSeparator) returns SimpleType|error {
     match dataType {
         STRING => {
             return value;
         }
         INT => {
-            return int:fromString(value);
+            return int:fromString(decimalSeparator != null? regex:replaceFirst(value, decimalSeparator, ".") : value);
         }
         FLOAT => {
-            return float:fromString(value);
+            return float:fromString(decimalSeparator != null? regex:replaceFirst(value, decimalSeparator, ".") : value);
         }
     }
     return error("Undefined type for value:" + value);

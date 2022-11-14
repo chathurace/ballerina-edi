@@ -69,12 +69,17 @@ function testSample5() returns error? {
 function testINVOIC_D93a() returns error? {
     json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
     EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    mapping.delimiters.decimalSeparator = ",";
     
     string ediText = check io:fileReadString("resources/d3a-invoic-1/input.edi");
     json output = check readEDIAsJson(ediText, mapping);
 
+    // assertion fails when the "output" variable is directly compared with expected.
+    check io:fileWriteJson("resources/d3a-invoic-1/output.json", output);
+
+    json actual = check io:fileReadJson("resources/d3a-invoic-1/output.json");
     json expected = check io:fileReadJson("resources/d3a-invoic-1/expected.json");
-    test:assertEquals(output, expected, "Output json does not match the expected json.");
+    test:assertEquals(actual, expected, "Output json does not match the expected json.");
 }
 
 

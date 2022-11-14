@@ -9,6 +9,7 @@ public type EDIMapping record {|
         string element;
         string subelement;
         string repetition;
+        string decimalSeparator?;
     |} delimiters;
 
     boolean preserveEmptyFields = false;

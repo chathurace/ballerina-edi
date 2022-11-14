@@ -1,6 +1,13 @@
 import ballerina/regex;
 import ballerina/log;
 
+type ParseConext record {|
+    EDIMapping mapping;
+    string ediText;
+    int rawIndex;
+    string segmentText = "";
+|};
+
 public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|error {
     log:printDebug(string `Reading ${ediText.substring(0,30)} ...`);
     EDISegmentGroup ediDoc = check readEDI(ediText, mapping);
@@ -189,7 +196,7 @@ function readEDISegment(EDISegMapping segMapping, string[] elements, EDIMapping 
             } 
         } else {
             // this is a simple type element
-            SimpleType|error value = convertToType(elementText, elementMapping.dataType);
+            SimpleType|error value = convertToType(elementText, elementMapping.dataType, mapping.delimiters.decimalSeparator);
             if value is SimpleType {
                 ediRecord[tag] = value;
             } else {
@@ -241,12 +248,13 @@ function readEDIComposite(string compositeText, EDIMapping mapping, EDIElementMa
                 continue;
             }
         }
-        SimpleType|error value = convertToType(subelement, subMapping.dataType);
+        SimpleType|error value = convertToType(subelement, subMapping.dataType, mapping.delimiters.decimalSeparator);
         if value is SimpleType? {
             composite[subMapping.tag] = value;
         } else {
             string errMsg = string `EDI field: ${subelement} cannot be converted to type: ${subMapping.dataType}.
-                        Composite mapping: ${subMapping.toJsonString()} | Composite text: ${compositeText}\n${value.message()}`;
+                        Composite mapping: ${subMapping.toJsonString()} | Composite text: ${compositeText}
+                        Error: ${value.message()}`;
             return error(errMsg);
         }
         subelementNumber = subelementNumber + 1;
@@ -277,7 +285,7 @@ function readEDIRepeat(string repeatText, string repeatDelimiter, EDIMapping map
             if element.trim().length() == 0 {
                 continue;
             }
-            SimpleType|error value = convertToType(element, elementMapping.dataType);
+            SimpleType|error value = convertToType(element, elementMapping.dataType, mapping.delimiters.decimalSeparator);
             if (value is SimpleType) {
                 repeatValues.push(value);
             } else {

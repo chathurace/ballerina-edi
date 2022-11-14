@@ -1003,7 +1003,7 @@
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
-                    "dataType": "string",
+                    "dataType": "float",
                     "subelements": []
                   },
                   {
@@ -1011,7 +1011,7 @@
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
-                    "dataType": "string",
+                    "dataType": "float",
                     "subelements": []
                   }
                 ]
@@ -1289,7 +1289,7 @@
                   {
                     "tag": "Monetary_amount",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Currency__coded",
@@ -1461,7 +1461,7 @@
                   {
                     "tag": "Currency_rate_base",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   }
                 ]
               },
@@ -1490,7 +1490,7 @@
                   {
                     "tag": "Currency_rate_base",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   }
                 ]
               },
@@ -1499,7 +1499,7 @@
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
-                "dataType": "string",
+                "dataType": "float",
                 "subelements": []
               },
               {
@@ -1626,7 +1626,7 @@
                   {
                     "tag": "Number_of_periods",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   }
                 ]
               }
@@ -1687,7 +1687,7 @@
                   {
                     "tag": "Percentage",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Percentage_basis__coded",
@@ -1730,7 +1730,7 @@
                   {
                     "tag": "Monetary_amount",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Currency__coded",
@@ -2265,7 +2265,7 @@
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
-                "dataType": "string",
+                "dataType": "float",
                 "subelements": []
               },
               {
@@ -2430,17 +2430,17 @@
                   {
                     "tag": "Measurement_value",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Range_minimum",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Range_maximum",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   }
                 ]
               },
@@ -2986,7 +2986,7 @@
                       {
                         "tag": "Quantity",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Measure_unit_qualifier",
@@ -3027,12 +3027,12 @@
                       {
                         "tag": "Range_minimum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_maximum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   }
@@ -3067,7 +3067,7 @@
                       {
                         "tag": "Percentage",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Percentage_basis__coded",
@@ -3118,12 +3118,12 @@
                       {
                         "tag": "Range_minimum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_maximum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   }
@@ -3158,7 +3158,7 @@
                       {
                         "tag": "Monetary_amount",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Currency__coded",
@@ -3209,12 +3209,12 @@
                       {
                         "tag": "Range_minimum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_maximum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   }
@@ -3249,12 +3249,12 @@
                       {
                         "tag": "Rate_per_unit",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Unit_price_basis",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Measure_unit_qualifier",
@@ -3295,12 +3295,12 @@
                       {
                         "tag": "Range_minimum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_maximum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   }
@@ -3473,7 +3473,7 @@
                       {
                         "tag": "Monetary_amount",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Currency__coded",
@@ -3733,7 +3733,7 @@
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
-                "dataType": "string",
+                "dataType": "float",
                 "subelements": []
               },
               {
@@ -3786,7 +3786,7 @@
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
-                "dataType": "string",
+                "dataType": "float",
                 "subelements": []
               },
               {
@@ -4082,17 +4082,17 @@
                   {
                     "tag": "Measurement_value",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Range_minimum",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Range_maximum",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   }
                 ]
               },
@@ -4128,7 +4128,7 @@
                   {
                     "tag": "Quantity",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Measure_unit_qualifier",
@@ -4161,7 +4161,7 @@
                   {
                     "tag": "Percentage",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Percentage_basis__coded",
@@ -4521,7 +4521,7 @@
                   {
                     "tag": "Quantity_difference",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Quantity_qualifier",
@@ -4677,7 +4677,7 @@
                       {
                         "tag": "Monetary_amount",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Currency__coded",
@@ -4730,7 +4730,7 @@
                       {
                         "tag": "Currency_rate_base",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   },
@@ -4759,7 +4759,7 @@
                       {
                         "tag": "Currency_rate_base",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   },
@@ -4768,7 +4768,7 @@
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
-                    "dataType": "string",
+                    "dataType": "float",
                     "subelements": []
                   },
                   {
@@ -4862,7 +4862,7 @@
                       {
                         "tag": "Number_of_periods",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   }
@@ -4923,7 +4923,7 @@
                       {
                         "tag": "Percentage",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Percentage_basis__coded",
@@ -4966,7 +4966,7 @@
                       {
                         "tag": "Monetary_amount",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Currency__coded",
@@ -5016,7 +5016,7 @@
                       {
                         "tag": "Price",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Price_type__coded",
@@ -5031,7 +5031,7 @@
                       {
                         "tag": "Unit_price_basis",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Measure_unit_qualifier",
@@ -5075,7 +5075,7 @@
                       {
                         "tag": "Price_multiplier",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Price_multiplier_qualifier",
@@ -5135,12 +5135,12 @@
                       {
                         "tag": "Range_minimum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_maximum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   }
@@ -5276,7 +5276,7 @@
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
-                    "dataType": "string",
+                    "dataType": "float",
                     "subelements": []
                   },
                   {
@@ -5441,17 +5441,17 @@
                       {
                         "tag": "Measurement_value",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_minimum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Range_maximum",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       }
                     ]
                   },
@@ -5880,7 +5880,7 @@
                       {
                         "tag": "Quantity",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Measure_unit_qualifier",
@@ -6091,7 +6091,7 @@
                       {
                         "tag": "Monetary_amount",
                         "required": false,
-                        "dataType": "string"
+                        "dataType": "float"
                       },
                       {
                         "tag": "Currency__coded",
@@ -6674,7 +6674,7 @@
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
-                        "dataType": "string",
+                        "dataType": "float",
                         "subelements": []
                       },
                       {
@@ -6682,7 +6682,7 @@
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
-                        "dataType": "string",
+                        "dataType": "float",
                         "subelements": []
                       }
                     ]
@@ -6973,7 +6973,7 @@
                           {
                             "tag": "Quantity",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Measure_unit_qualifier",
@@ -7014,12 +7014,12 @@
                           {
                             "tag": "Range_minimum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Range_maximum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           }
                         ]
                       }
@@ -7054,7 +7054,7 @@
                           {
                             "tag": "Percentage",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Percentage_basis__coded",
@@ -7105,12 +7105,12 @@
                           {
                             "tag": "Range_minimum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Range_maximum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           }
                         ]
                       }
@@ -7145,7 +7145,7 @@
                           {
                             "tag": "Monetary_amount",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Currency__coded",
@@ -7196,12 +7196,12 @@
                           {
                             "tag": "Range_minimum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Range_maximum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           }
                         ]
                       }
@@ -7236,12 +7236,12 @@
                           {
                             "tag": "Rate_per_unit",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Unit_price_basis",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Measure_unit_qualifier",
@@ -7282,12 +7282,12 @@
                           {
                             "tag": "Range_minimum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Range_maximum",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           }
                         ]
                       }
@@ -7460,7 +7460,7 @@
                           {
                             "tag": "Monetary_amount",
                             "required": false,
-                            "dataType": "string"
+                            "dataType": "float"
                           },
                           {
                             "tag": "Currency__coded",
@@ -8239,7 +8239,7 @@
               {
                 "tag": "Control_value",
                 "required": false,
-                "dataType": "string"
+                "dataType": "float"
               },
               {
                 "tag": "Measure_unit_qualifier",
@@ -8277,7 +8277,7 @@
                   {
                     "tag": "Monetary_amount",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Currency__coded",
@@ -8543,7 +8543,7 @@
                   {
                     "tag": "Monetary_amount",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Currency__coded",
@@ -8739,7 +8739,7 @@
                   {
                     "tag": "Monetary_amount",
                     "required": false,
-                    "dataType": "string"
+                    "dataType": "float"
                   },
                   {
                     "tag": "Currency__coded",
