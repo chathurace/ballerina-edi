@@ -60,7 +60,7 @@ function testComplexRecordGeneration() {
 function testCodeGenForMapping1() returns error? {
     json mappingText = check io:fileReadJson("modules/codegen/resources/sample1/edi-mapping1.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
-    check generateCodeToFile(mapping, "sample1/mapping1-records.bal");
+    check generateCodeToFile(mapping, "modules/codegen/resources/sample1/mapping1-records.bal");
 }
 
 @test:Config {}
