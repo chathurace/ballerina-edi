@@ -20,8 +20,8 @@ type DestinationQuantity_SType record {|
 |};
 
 type Deliveries_Type record {|
-   Destination_SType destination;
-   DestinationQuantity_SType destinationQuantity;
+   Destination_SType destination?;
+   DestinationQuantity_SType destinationQuantity?;
 |};
 
 type Supplier_SType record {|
@@ -30,13 +30,13 @@ type Supplier_SType record {|
 |};
 
 type Items_Type record {|
-   Items_SType items;
+   Items_SType items?;
    Deliveries_Type[] deliveries?;
    Supplier_SType supplier?;
 |};
 
 type DetailedOrder record {|
-   Header_SType header;
+   Header_SType header?;
    Items_Type[] items;
 |};
 

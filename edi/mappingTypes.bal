@@ -12,6 +12,8 @@ public type EDIMapping record {|
         string decimalSeparator?;
     |} delimiters;
 
+    string[] ignoreSegments = [];
+
     boolean preserveEmptyFields = false;
 
     EDIUnitMapping[] segments = [];
@@ -19,7 +21,7 @@ public type EDIMapping record {|
 
 public type EDISegGroupMapping record {|
     string tag;
-    int minOccurances = 1;
+    int minOccurances = 0;
     int maxOccurances = 1;
     EDIUnitMapping[] segments = [];
 |};
@@ -28,7 +30,7 @@ public type EDISegMapping record {|
     string code;
     string tag;
     boolean truncatable = true;
-    int minOccurances = 1;
+    int minOccurances = 0;
     int maxOccurances = 1;
     EDIElementMapping[] elements = [];
 |};

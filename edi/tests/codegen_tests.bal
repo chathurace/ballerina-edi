@@ -6,7 +6,7 @@ import ballerina/regex;
 
 @test:BeforeSuite
 function beforeSuiteFunc() {
-    io:println("Starting codegen tests...");
+    
 }
 
 // Test function
@@ -111,5 +111,5 @@ function testINVOIC_D93a_Codegen() returns error? {
 
 @test:AfterSuite
 function afterSuiteFunc() {
-    io:println("Completed codegen tests.");
+    
 }

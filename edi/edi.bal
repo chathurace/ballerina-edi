@@ -16,7 +16,8 @@ public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|e
 
 public function readEDI(string ediText, EDIMapping ediMapping) returns EDISegmentGroup|error {
     EDIUnitMapping[] currentMapping = ediMapping.segments;
-    string preparedEDIText = regex:replaceAll(ediText, "\n", "");
+    // string preparedEDIText = regex:replaceAll(ediText, "\n", "");
+    string preparedEDIText = ediText;
     string[] segmentsDesc = splitAndIgnoreLastEmptyItem(preparedEDIText, ediMapping.delimiters.segment);
     var [rootGroup, _] = check readEDISegmentGroup(currentMapping, segmentsDesc, 0, ediMapping);
     return rootGroup;
@@ -35,6 +36,10 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegmen
         string sDesc = rawSegments[currentRawIndex];
         string segmentDesc = regex:replaceAll(sDesc, "\n", "");
         string[] elements = split(segmentDesc, ediMapping.delimiters.element);
+        if ediMapping.ignoreSegments.indexOf(elements[0], 0) != null {
+            currentRawIndex += 1;
+            continue;
+        }
 
         boolean segmentMapped = false;
         while mappingIndex < currentMapping.length() && !segmentMapped {

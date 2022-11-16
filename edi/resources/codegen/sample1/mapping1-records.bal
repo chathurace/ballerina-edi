@@ -10,7 +10,7 @@ type Items_SType record {|
 |};
 
 type SimpleOrder record {|
-   Header_SType header;
-   Items_SType[] items;
+   Header_SType header?;
+   Items_SType[] items?;
 |};
 

@@ -22,8 +22,8 @@ type Items_SType record {|
 |};
 
 type PartnerOrder record {|
-   Header_SType header;
-   Organization_SType organization;
-   Items_SType[] items;
+   Header_SType header?;
+   Organization_SType organization?;
+   Items_SType[] items?;
 |};
 

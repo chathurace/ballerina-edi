@@ -20,7 +20,7 @@ public function processMapping(string xmlMappingPath, string jsonOutputPath) ret
 
 public function transformEDIMapping(xml xmlMapping) returns EDIMapping|error {
     xml rootSeg = xmlMapping/<s:segments>;
-    string name = check rootSeg.xmltag;
+    string name = deriveTag(null, check rootSeg.xmltag);
     xml delimiters = xmlMapping/<s:delimiters>;
     EDIMapping mapping = {name: name, delimiters: {segment: check delimiters.segment, element: check delimiters.'field, subelement: check delimiters.component, repetition: "^"}};
     xml segments = xmlMapping/<s:segments>/*;
@@ -38,23 +38,28 @@ public function transformEDIMapping(xml xmlMapping) returns EDIMapping|error {
     return mapping;
 }
 
-function deriveTag(map<int> tagCounts, string tag) returns string {
-    int? count = tagCounts[tag];
-    string newTag = "";
-    if count is int {
-        int newCount = count + 1;
-        tagCounts[tag] = newCount;
-        newTag = string `${tag}_${newCount}`;
-    } else {
-        tagCounts[tag] = 0;
-        newTag = tag;
+function deriveTag(map<int>? tagCounts, string tag) returns string {
+    string newTag = tag;
+    if tagCounts is map<int> {
+        int? count = tagCounts[tag];
+        if count is int {
+            int newCount = count + 1;
+            tagCounts[tag] = newCount;
+            newTag = string `${tag}_${newCount}`;
+        } else {
+            tagCounts[tag] = 0;
+            newTag = tag;
+        }
     }
+
+    // make the tag name compatible with Ballerina field names. this is required for code generation.
     newTag = regex:replaceAll(newTag, "\\.", "_");
+    newTag = regex:replaceAll(newTag, "\\-", "_");
     return newTag;
 }
 
 function readSegmentMapping(xml seg) returns EDISegMapping|error {
-    EDISegMapping segmap = {code: check seg.segcode, tag: check seg.xmltag};
+    EDISegMapping segmap = {code: check seg.segcode, tag: deriveTag(null, check seg.xmltag)};
     string|error minOccurs = seg.minOccurs;
     if minOccurs is string {
         segmap.minOccurances = check int:fromString(minOccurs);
@@ -98,7 +103,7 @@ function readSegmentMapping(xml seg) returns EDISegMapping|error {
 }
 
 function readSegmentGroupMapping(xml seg) returns EDISegGroupMapping|error {
-    EDISegGroupMapping groupmap = {tag: check seg.xmltag};
+    EDISegGroupMapping groupmap = {tag: deriveTag(null, check seg.xmltag)};
     string|error minOccurs = seg.minOccurs;
     if minOccurs is string {
         groupmap.minOccurances = check int:fromString(minOccurs);

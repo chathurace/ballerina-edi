@@ -6,6 +6,7 @@
     "subelement": ":",
     "repetition": "^"
   },
+  "ignoreSegments": [],
   "preserveEmptyFields": false,
   "segments": [
     {
