@@ -49,9 +49,6 @@ dependencies = [
 	{org = "ballerina", name = "lang.value"},
 	{org = "ballerina", name = "observe"}
 ]
-modules = [
-	{org = "ballerina", packageName = "log", moduleName = "log"}
-]
 
 [[package]]
 org = "ballerina"
@@ -69,20 +66,30 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.string"}
 ]
+
+[[package]]
+org = "ballerinai"
+name = "observe"
+version = "0.0.0"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "observe"}
+]
 modules = [
-	{org = "ballerina", packageName = "regex", moduleName = "regex"}
+	{org = "ballerinai", packageName = "observe", moduleName = "observe"}
 ]
 
 [[package]]
-org = "ballerina"
-name = "test"
-version = "0.0.0"
-scope = "testOnly"
+org = "chathura"
+name = "simpleEDI"
+version = "0.1.0"
 dependencies = [
-	{org = "ballerina", name = "jballerina.java"}
+	{org = "ballerina", name = "io"},
+	{org = "ballerinai", name = "observe"},
+	{org = "chathurace", name = "edi"}
 ]
 modules = [
-	{org = "ballerina", packageName = "test", moduleName = "test"}
+	{org = "chathura", packageName = "simpleEDI", moduleName = "simpleEDI"}
 ]
 
 [[package]]
@@ -92,8 +99,7 @@ version = "0.3.1"
 dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "log"},
-	{org = "ballerina", name = "regex"},
-	{org = "ballerina", name = "test"}
+	{org = "ballerina", name = "regex"}
 ]
 modules = [
 	{org = "chathurace", packageName = "edi", moduleName = "edi"}
