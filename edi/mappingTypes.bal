@@ -8,7 +8,8 @@ public type EDIMapping record {|
         string segment;
         string element;
         string subelement;
-        string repetition;
+        string subcomponent = "NOT_USED";
+        string repetition = "NOT_USED";
         string decimalSeparator?;
     |} delimiters;
 
@@ -45,6 +46,14 @@ public type EDIElementMapping record {|
 |};
 
 public type EDISubelementMapping record {|
+    string tag;
+    boolean required = false;
+    boolean truncatable = true;
+    EDIDataType dataType = STRING;
+    SubcomponentMapping[] subcomponents = [];
+|};
+
+public type SubcomponentMapping record {|
     string tag;
     boolean required = false;
     EDIDataType dataType = STRING;

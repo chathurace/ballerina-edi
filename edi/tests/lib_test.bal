@@ -66,6 +66,18 @@ function testSample5() returns error? {
 }
 
 @test:Config {}
+function testSample6() returns error? {
+    json mappingText = check io:fileReadJson("resources/sample6/edi-mapping6.json");
+    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    
+    string ediText = check io:fileReadString("resources/sample6/edi-sample6.edi");
+    json output = check readEDIAsJson(ediText, mapping);
+
+    json expected = check io:fileReadJson("resources/sample6/expected-6.json");
+    test:assertEquals(output, expected, "Output json does not match the expected json.");
+}
+
+@test:Config {}
 function testINVOIC_D93a() returns error? {
     json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
     EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
@@ -80,6 +92,17 @@ function testINVOIC_D93a() returns error? {
     json actual = check io:fileReadJson("resources/d3a-invoic-1/output.json");
     json expected = check io:fileReadJson("resources/d3a-invoic-1/expected.json");
     test:assertEquals(actual, expected, "Output json does not match the expected json.");
+}
+
+@test:Config
+function testEDI837() returns error? {
+    EDIMapping mapping = check readMappingFromFile("resources/edi-837/837-mapping.json");
+    mapping.delimiters.repetition = "!";
+    string ediText = check io:fileReadString("resources/edi-837/837-message1.edi");
+    json output = check readEDIAsJson(ediText, mapping);
+
+    check io:fileWriteJson("resources/edi-837/837-message1.json", output);
+    
 }
 
 

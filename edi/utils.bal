@@ -85,6 +85,13 @@ function printSegGroupMap(EDISegGroupMapping sgmap) returns string {
     return string `[Segment group: ${sgcode} ]`;
 }
 
+function getString(any|error option1, string option2) returns string {
+    if option1 is string {
+        return option1;
+    }
+    return option2;
+}
+
 
 public function main(string[] args) returns error? {
 
@@ -108,3 +115,5 @@ public function main(string[] args) returns error? {
         io:println(usage);
     }
 }
+
+

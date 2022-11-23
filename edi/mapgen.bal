@@ -4,14 +4,6 @@ import ballerina/io;
 
 xmlns "http://www.milyn.org/schema/edi-message-mapping-1.5.xsd" as s;
 
-// public function main(string... args) returns error? {
-//     if args.length() != 2 {
-//         io:println("Usage: java -jar smooksToBal.jar <smooks mapping path> <output path>");
-//         return;
-//     }
-//     check processMapping(args[0], args[1]);
-// }
-
 public function processMapping(string xmlMappingPath, string jsonOutputPath) returns error? {
     xml xmap = check io:fileReadXml(xmlMappingPath);
     EDIMapping edimap = check transformEDIMapping(xmap);
@@ -19,10 +11,11 @@ public function processMapping(string xmlMappingPath, string jsonOutputPath) ret
 }
 
 public function transformEDIMapping(xml xmlMapping) returns EDIMapping|error {
+    log:printInfo("*** Note: Mapping for sub-components are not currently supported. ***");
     xml rootSeg = xmlMapping/<s:segments>;
-    string name = deriveTag(null, check rootSeg.xmltag);
+    string name = deriveTag(null, getString(rootSeg.xmltag, "Mapping"));
     xml delimiters = xmlMapping/<s:delimiters>;
-    EDIMapping mapping = {name: name, delimiters: {segment: check delimiters.segment, element: check delimiters.'field, subelement: check delimiters.component, repetition: "^"}};
+    EDIMapping mapping = {name: name, delimiters: {segment: check delimiters.segment, element: check delimiters.'field, subelement: check delimiters.component, subcomponent: getString(delimiters.subcomponent, "NOT_USED"), repetition: getString(delimiters.repetition, "NOT_USED")}};
     xml segments = xmlMapping/<s:segments>/*;
     foreach xml seg in segments {
         if seg is xml:Element {
@@ -103,7 +96,12 @@ function readSegmentMapping(xml seg) returns EDISegMapping|error {
 }
 
 function readSegmentGroupMapping(xml seg) returns EDISegGroupMapping|error {
-    EDISegGroupMapping groupmap = {tag: deriveTag(null, check seg.xmltag)};
+    string sgTag = "SegmentGroup";
+    string|error groupTag = seg.xmltag;
+    if groupTag is string {
+        sgTag = groupTag;
+    }
+    EDISegGroupMapping groupmap = {tag: deriveTag(null, sgTag)};
     string|error minOccurs = seg.minOccurs;
     if minOccurs is string {
         groupmap.minOccurances = check int:fromString(minOccurs);

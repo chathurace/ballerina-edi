@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<medi:edimap xmlns:medi="http://www.milyn.org/schema/edi-message-mapping-1.5.xsd">
+
+	<medi:description name="Some X12 Message Definition"
+		version="1.0" />
+
+	<medi:delimiters segment="&#10;" field="*" component="^"
+		subcomponent="~" />
+
+	<medi:segments xmltag="Segments">
+	
+		<medi:segment minOccurs="0" maxOccurs="1" segcode="GS"
+			xmltag="FunctionalGroupHeader">
+			<medi:field xmltag="GS01__FunctionalIdentifierCode" />
+			<medi:field xmltag="GS02__ApplicationSendersCode" />
+			<medi:field xmltag="GS03__ApplicationReceiversCode" />
+			<medi:field xmltag="GS04__Date" />
+			<medi:field xmltag="GS05__Time" />
+			<medi:field xmltag="GS06__GroupControlNumber" />
+			<medi:field xmltag="GS07__ResponsibleAgencyCode" />
+			<medi:field xmltag="GS08__VersionReleaseIndustryIdentifierCode" />
+		</medi:segment>
+
+		<medi:segment minOccurs="0" maxOccurs="1" segcode="ISA"
+			xmltag="InterchangeControlHeader">
+			<medi:field xmltag="AuthorizationInformationQualifier" />
+			<medi:field xmltag="AuthorizationInformation" />
+			<medi:field xmltag="SecurityInformationQualifier" />
+			<medi:field xmltag="SecurityInformation" />
+			<medi:field xmltag="InterchangeIDQualifier" />
+			<medi:field xmltag="InterchangeSenderID" />
+			<medi:field xmltag="InterchangeIDQualifier" />
+			<medi:field xmltag="InterchangeReceiverID" />
+			<medi:field xmltag="InterchangeDate" />
+			<medi:field xmltag="InterchangeTime" />
+			<medi:field xmltag="InterchangeControlStandardsIdentifier" />
+			<medi:field xmltag="InterchangeControlVersionNumber" />
+			<medi:field xmltag="InterchangeControlNumber" />
+			<medi:field xmltag="AcknowledgmentRequested" />
+			<medi:field xmltag="UsageIndicator" />
+			<medi:field xmltag="ComponentElementSeparator" />
+		</medi:segment>
+
+		<medi:segment segcode="GS" xmltag="FunctionalGroupHeader">
+			<medi:field xmltag="FunctionalIdentifierCode" />
+			<medi:field xmltag="ApplicationSendersCode" />
+			<medi:field xmltag="ApplicationReceiversCode" />
+			<medi:field xmltag="Date" />
+			<medi:field xmltag="Time" />
+			<medi:field xmltag="GroupControlNumber" />
+			<medi:field xmltag="ResponsibleAgencyCode" />
+			<medi:field xmltag="VersionReleaseIndustryIdentifierCode" />
+		</medi:segment>
+
+		<medi:segment segcode="ST" xmltag="TransactionSetHeader">
+			<medi:field xmltag="TransactionSetIdentifierCode" />
+			<medi:field xmltag="TransactionSetControlNumber" />
+		</medi:segment>
+
+		<medi:segment segcode="BHT"
+			xmltag="BeginningOfHierarchicalTransaction">
+			<medi:field xmltag="HierarchicalStructureCode" />
+			<medi:field xmltag="TransactionSetPurposeCode" />
+			<medi:field xmltag="OriginatorApplicationTransactionIdentifier" />
+			<medi:field xmltag="TransactionSetCreationDate" />
+			<medi:field xmltag="TransactionSetCreationTime" />
+			<medi:field xmltag="ClaimOrEncounterIdentifier" />
+		</medi:segment>
+
+		<medi:segment segcode="NM1" xmltag="SubmitterName"
+			minOccurs="0">
+			<medi:field xmltag="EntityIdentifierCode" />
+			<medi:field xmltag="EntityTypeQualifier" />
+			<medi:field xmltag="SubmitterLastOrOrganizationName" />
+			<medi:field xmltag="SubmitterFirstName" />
+			<medi:field xmltag="SubmitterMiddleName" />
+			<medi:field xmltag="IdentificationCodeQualifier" />
+			<medi:field xmltag="SubmitterIdentifier" />
+		</medi:segment>
+
+		<medi:segment segcode="PER" xmltag="SubmitterEDIContactInformation">
+			<medi:field xmltag="ContactFunctionCode" />
+			<medi:field xmltag="SubmitterContactName" />
+			<medi:field xmltag="CommunicationNumberQualifier" />
+			<medi:field xmltag="CommunicationNumber" />
+			<medi:field xmltag="CommunicationNumberQualifier" />
+			<medi:field xmltag="CommunicationNumber" />
+			<medi:field xmltag="CommunicationNumberQualifier" />
+			<medi:field xmltag="CommunicationNumber" />
+		</medi:segment>
+
+		<medi:segment segcode="NM1" xmltag="ReceiverName">
+			<medi:field xmltag="EntityIdentifierCode" />
+			<medi:field xmltag="EntityTypeQualifier" />
+			<medi:field xmltag="ReceiverName" />
+			<medi:field xmltag="InformationReceiverIdentificationNumber" />
+			<medi:field xmltag="ReceiverPrimaryIdentifier" />
+		</medi:segment>
+
+		<medi:segment segcode="HL"
+			xmltag="HL_BillingPayToProviderHierarchicalLevel">
+			<medi:field xmltag="HierarchicalIDNumber" />
+			<medi:field xmltag="HierarchicalLevelCode" />
+			<medi:field xmltag="HierarchicalChildCode" />
+		</medi:segment>
+
+		<medi:segment segcode="NM1" xmltag="BillingProviderName">
+			<medi:field xmltag="EntityIdentifierCode" />
+			<medi:field xmltag="EntityTypeQualifier" />
+			<medi:field xmltag="BillingProviderLastOrOrganizationalName" />
+			<medi:field xmltag="IdentificationCodeQualifier" />
+			<medi:field xmltag="BillingProviderIdentifier" />
+		</medi:segment>
+
+		<medi:segment segcode="N3" xmltag="BillingProviderAddress">
+			<medi:field xmltag="BillingProviderAddressLine" />
+			<medi:field xmltag="BillingProviderAddressLine" />
+		</medi:segment>
+
+		<medi:segment segcode="N4" xmltag="BillingProviderCityStateZIPCode">
+			<medi:field xmltag="BillingProviderCityName" />
+			<medi:field xmltag="BillingProviderStateOrProvinceCode" />
+			<medi:field xmltag="BillingProviderPostalZoneOrZIPCode" />
+			<medi:field xmltag="CountryCode" />
+		</medi:segment>
+
+		<medi:segment segcode="REF"
+			xmltag="BillingProviderSecondaryIdentification">
+			<medi:field xmltag="ReferenceIdentificationQualifier" />
+			<medi:field xmltag="BillingProviderAdditionalIdentifier" />
+		</medi:segment>
+
+		<medi:segment segcode="HL" xmltag="SubscriberHierarchicalLevel">
+			<medi:field xmltag="HierarchicalIDNumber" />
+			<medi:field xmltag="HierarchicalParentIDNumber" />
+			<medi:field xmltag="HierarchicalLevelCode" />
+			<medi:field xmltag="HierarchicalChildCode" />
+		</medi:segment>
+
+		<medi:segment segcode="SBR" xmltag="SubscriberInformation">
+			<medi:field xmltag="PayerResponsibilitySequenceNumberCode" />
+			<medi:field xmltag="IndividualRelationshipCode" />
+			<medi:field xmltag="InsuredGroupOrPolicyNumber" />
+			<medi:field xmltag="InsuredGroupName" />
+			<medi:field xmltag="ClaimFilingIndicatorCode" />
+		</medi:segment>
+
+		<medi:segmentGroup>
+			<medi:segment segcode="NM1" xmltag="SubscriberName">
+				<medi:field xmltag="EntityIdentifierCode" />
+				<medi:field xmltag="EntityTypeQualifier" />
+				<medi:field xmltag="SubscriberLastName" />
+				<medi:field xmltag="SubscriberFirstName" />
+				<medi:field xmltag="SubscriberMiddleName" />
+				<medi:field xmltag="SubscriberNameSuffix" />
+				<medi:field xmltag="IdentificationCodeQualifier" />
+				<medi:field xmltag="SubscriberPrimaryIdentifier" />
+			</medi:segment>
+
+			<medi:segment segcode="N3" xmltag="SubscriberAddress">
+				<medi:field xmltag="SubscriberAddressLine" />
+				<medi:field xmltag="SubscriberAddressLine" />
+			</medi:segment>
+
+			<medi:segment segcode="N4" xmltag="SubscriberCityStateZIPCode">
+				<medi:field xmltag="SubscriberCityName" />
+				<medi:field xmltag="WPC837Q34030D_2010BA_N402_SubscriberStateCode" />
+				<medi:field xmltag="SubscriberPostalZoneOrZIPCode" />
+				<medi:field xmltag="CountryCode" />
+			</medi:segment>
+		</medi:segmentGroup>
+
+		<medi:segment segcode="DMG" xmltag="SubscriberDemographicInformation">
+			<medi:field xmltag="DateTimePeriodFormatQualifier" />
+			<medi:field xmltag="SubscriberBirthDate" />
+			<medi:field xmltag="SubscriberGenderCode" />
+		</medi:segment>
+
+		<medi:segment segcode="NM1" xmltag="CreditDebitCardAccountHolderName">
+			<medi:field xmltag="EntityIdentifierCode" />
+			<medi:field xmltag="EntityTypeQualifier" />
+			<medi:field xmltag="CreditOrDebitCardHolderLastOrOrganizationalName" />
+			<medi:field xmltag="CreditOrDebitCardHolderFirstName" />
+			<medi:field xmltag="CreditOrDebitCardHolderMiddleName" />
+			<medi:field xmltag="CreditOrDebitCardHolderNameSuffix" />
+			<medi:field xmltag="IdentificationCodeQualifier" />
+			<medi:field xmltag="CreditOrDebitCardNumber" />
+		</medi:segment>
+
+		<medi:segment segcode="CLM" xmltag="CreditDebitCardAccountHolderName">
+			<medi:field xmltag="PatientAccountNumber" />
+			<medi:field xmltag="TotalClaimChargeAmount" />
+			<medi:field xmltag="ProviderOrSupplierSignatureIndicator" />
+			<medi:field xmltag="MedicareAssignmentCode" />
+			<medi:field xmltag="BenefitsAssignmentCertificationIndicator" />
+			<medi:field xmltag="ReleaseOfInformationCode" />
+			<medi:field xmltag="ExplanationOfBenefitsIndicator" />
+			<medi:field xmltag="DelayReasonCode" />
+			<medi:field xmltag="HealthCareServiceLocationInformation" />
+		</medi:segment>
+
+	</medi:segments>
+</medi:edimap>

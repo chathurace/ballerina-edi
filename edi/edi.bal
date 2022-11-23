@@ -253,18 +253,78 @@ function readEDIComposite(string compositeText, EDIMapping mapping, EDIElementMa
                 continue;
             }
         }
-        SimpleType|error value = convertToType(subelement, subMapping.dataType, mapping.delimiters.decimalSeparator);
-        if value is SimpleType? {
-            composite[subMapping.tag] = value;
+
+        if subMapping.subcomponents.length() > 0 {
+            SubcomponentGroup? scGroup = check readSubcomponentGroup(subelement, mapping, subMapping);
+            if scGroup is SubcomponentGroup || mapping.preserveEmptyFields {
+                composite[subMapping.tag] = scGroup;
+            }
         } else {
-            string errMsg = string `EDI field: ${subelement} cannot be converted to type: ${subMapping.dataType}.
-                        Composite mapping: ${subMapping.toJsonString()} | Composite text: ${compositeText}
-                        Error: ${value.message()}`;
-            return error(errMsg);
+            SimpleType|error value = convertToType(subelement, subMapping.dataType, mapping.delimiters.decimalSeparator);
+            if value is SimpleType? {
+                composite[subMapping.tag] = value;
+            } else {
+                string errMsg = string `EDI field: ${subelement} cannot be converted to type: ${subMapping.dataType}.
+                            Composite mapping: ${subMapping.toJsonString()} | Composite text: ${compositeText}
+                            Error: ${value.message()}`;
+                return error(errMsg);
+            }
         }
         subelementNumber = subelementNumber + 1;
     }
     return composite;
+}
+
+function readSubcomponentGroup(string scGroupText, EDIMapping mapping, EDISubelementMapping emap) returns SubcomponentGroup|error? {
+    if scGroupText.trim().length() == 0 {
+        // Composite value is not provided. Return null, which will cause this element to be not included.
+        return null;
+    }
+
+    string[] subcomponents = split(scGroupText, mapping.delimiters.subcomponent);
+    if emap.truncatable {
+        int minFields = getMinimumSubcomponentFields(emap);
+        if subcomponents.length() < minFields {
+            return error(string `Subcomponent group's mapping's field count does not match minimum field count of the truncatable field ${emap.tag}.
+                Required minimum field count: ${minFields}. Found ${subcomponents.length()} fields. 
+                Subcomponent group mapping: ${emap.toJsonString()} | Subcomponent group text: ${scGroupText}`);
+        }
+    } else if (emap.subcomponents.length() != subcomponents.length()) {
+        string errMsg = string `Subcomponent group mapping's element count does not match field ${emap.tag}. 
+                Subcomponent group mapping: ${emap.toJsonString()} | Subcomponent group text: ${scGroupText}`;
+        return error(errMsg);
+    }
+
+    SubcomponentMapping[] subMappings = emap.subcomponents;
+    SubcomponentGroup scGroup = {};
+    int subcomponentNumber = 0;
+    while (subcomponentNumber < subcomponents.length()) {
+        string subcomponent = subcomponents[subcomponentNumber];
+        SubcomponentMapping subMapping = subMappings[subcomponentNumber];
+        if subcomponent.trim().length() == 0 {
+            if subMapping.required {
+                return error(string `Required element ${subMapping.tag} is not provided.`);
+            } else {
+                if mapping.preserveEmptyFields {
+                    scGroup[subMapping.tag] = subMapping.dataType == STRING? subcomponent : null;
+                }
+                subcomponentNumber += 1;
+                continue;
+            }
+        }
+
+        SimpleType|error value = convertToType(subcomponent, subMapping.dataType, mapping.delimiters.decimalSeparator);
+        if value is SimpleType? {
+            scGroup[subMapping.tag] = value;
+        } else {
+            string errMsg = string `EDI field: ${subcomponent} cannot be converted to type: ${subMapping.dataType}.
+                        Subcomponent group mapping: ${subMapping.toJsonString()} | Subcomponent group text: ${scGroupText}
+                        Error: ${value.message()}`;
+            return error(errMsg);
+        }
+        subcomponentNumber = subcomponentNumber + 1;
+    }
+    return scGroup;
 }
 
 function readEDIRepeat(string repeatText, string repeatDelimiter, EDIMapping mapping, EDIElementMapping elementMapping)
@@ -318,6 +378,17 @@ function getMinimumCompositeFields(EDIElementMapping emap) returns int {
     int fieldIndex = emap.subelements.length() - 1;
     while fieldIndex > 0 {
         if emap.subelements[fieldIndex].required {
+            break;
+        }
+        fieldIndex -= 1;
+    }
+    return fieldIndex;
+}
+
+function getMinimumSubcomponentFields(EDISubelementMapping emap) returns int {
+    int fieldIndex = emap.subcomponents.length() - 1;
+    while fieldIndex > 0 {
+        if emap.subcomponents[fieldIndex].required {
             break;
         }
         fieldIndex -= 1;
