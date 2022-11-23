@@ -1,18 +1,18 @@
 {
     "name": "SimpleOrder",
-    "delimiters" : {"segment" : "~", "element" : "*", "subelement": ":", "repetition": "^"},
+    "delimiters" : {"segment" : "~", "field" : "*", "component": ":", "repetition": "^"},
     "segments" : [
         {
             "code": "HDR",
             "tag" : "header",
             "minOccurances": 1,
-            "elements" : [{"tag" : "orderId"}, {"tag" : "organization"}, {"tag" : "date"}]
+            "fields" : [{"tag" : "orderId"}, {"tag" : "organization"}, {"tag" : "date"}]
         },
         {
             "code": "ITM",
             "tag" : "items",
             "maxOccurances" : -1,
-            "elements" : [{"tag" : "item"}, {"tag" : "quantity", "dataType" : "int"}]
+            "fields" : [{"tag" : "item"}, {"tag" : "quantity", "dataType" : "int"}]
         }
     ]
 }

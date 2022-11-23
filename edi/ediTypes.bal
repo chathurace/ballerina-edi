@@ -13,8 +13,8 @@ public type EDISegmentGroup record {|
     EDISegment|EDISegment[]|EDISegmentGroup|EDISegmentGroup[]...;
 |}; 
 
-public type EDISegment map<EDIComposite|EDIComposite[]|SimpleType|SimpleArray?>;
+public type EDISegment map<EDIComponentGroup|EDIComponentGroup[]|SimpleType|SimpleArray?>;
 
-public type EDIComposite map<SimpleType|SimpleArray|SubcomponentGroup?>;
+public type EDIComponentGroup map<SimpleType|SimpleArray|EDISubcomponentGroup?>;
 
-public type SubcomponentGroup map<SimpleType?>;
+public type EDISubcomponentGroup map<SimpleType?>;

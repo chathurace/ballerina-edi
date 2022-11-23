@@ -2,15 +2,15 @@
     "name": "Sample3",
     "delimiters": {
         "segment": "~",
-        "element": "*", 
-        "subelement": ":", 
+        "field": "*", 
+        "component": ":", 
         "repetition": "^"
     },
     "segments": [
         {
             "code": "HDR",
             "tag": "header",
-            "elements": [
+            "fields": [
                 {
                     "tag": "orderId"
                 },
@@ -30,7 +30,7 @@
                 {
                     "code": "ITM",
                     "tag": "items",
-                    "elements": [
+                    "fields": [
                         {
                             "tag": "item"
                         },
@@ -44,7 +44,7 @@
                     "code": "SUP",
                     "tag": "supplier",
                     "minOccurances": 0,
-                    "elements": [
+                    "fields": [
                         {"tag": "supplierCode"}, {"tag": "promotionCode"}
                     ]
                 }

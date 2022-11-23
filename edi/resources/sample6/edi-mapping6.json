@@ -1,20 +1,20 @@
 {
     "name" : "PartnerOrder",
-    "delimiters" : {"segment" : "~", "element" : "*", "subelement" : ":", "subcomponent": "-", "repetition" : "^"},
+    "delimiters" : {"segment" : "~", "field" : "*", "component" : ":", "subcomponent": "-", "repetition" : "^"},
     "preserveEmptyFields": true,
     "segments" : [ 
         {
             "code": "HDR",
             "tag" : "header",
-            "elements" : [{"tag" : "orderId"}, {"tag" : "date"}]
+            "fields" : [{"tag" : "orderId"}, {"tag" : "date"}]
         },
         {
             "code": "ORG",
             "tag" : "organization",
-            "elements" : [
+            "fields" : [
                 {"tag" : "partnerCode"}, 
                 {"tag" : "name"}, 
-                {"tag" : "contact", "subelements" : [
+                {"tag" : "contact", "components" : [
                     {"tag": "mobile"},
                     {"tag": "fixedLine"},
                     {"tag" : "address", "subcomponents" : [
@@ -25,10 +25,10 @@
             "code": "ITM",
             "tag" : "items",
             "maxOccurances" : -1,
-            "elements" : [
+            "fields" : [
                 {"tag" : "item"}, 
                 {"tag" : "quantity", "dataType" : "int"}, 
-                {"tag" : "comments", "repeat" : true, "dataType" : "composite", "subelements" : [{"tag" : "author"}, {"tag" : "text"}]}]
+                {"tag" : "comments", "repeat" : true, "dataType" : "composite", "components" : [{"tag" : "author"}, {"tag" : "text"}]}]
         }
     ]
 }

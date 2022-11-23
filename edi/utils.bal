@@ -16,12 +16,12 @@ function convertToType(string value, EDIDataType dataType, string? decimalSepara
     return error("Undefined type for value:" + value);
 }
 
-function getArray(EDIDataType dataType) returns SimpleArray|EDIComposite[] {
+function getArray(EDIDataType dataType) returns SimpleArray|EDIComponentGroup[] {
     match dataType {
         STRING => {string[] values = []; return values;}
         INT => {int[] values = []; return values;}
         FLOAT => {float[] values = []; return values;}
-        COMPOSITE => {EDIComposite[] values = []; return values;}
+        COMPOSITE => {EDIComponentGroup[] values = []; return values;}
     }
     string[] values = []; 
     return values;

@@ -2,15 +2,15 @@
     "name": "Sample4",
     "delimiters": {
         "segment": "~",
-        "element": "*", 
-        "subelement": ":", 
+        "field": "*", 
+        "component": ":", 
         "repetition": "^"
     },
     "segments": [
         {
             "code": "HDR",
             "tag": "header",
-            "elements": [
+            "fields": [
                 {"tag": "orderId"},
                 {"tag": "organization"},
                 {"tag": "date"}
@@ -24,7 +24,7 @@
                 {
                     "code": "ITM",
                     "tag": "items",
-                    "elements": [
+                    "fields": [
                         {"tag": "item"},
                         {"tag": "quantity", "dataType": "int"}
                     ]
@@ -33,7 +33,7 @@
                     "code": "SUP",
                     "tag": "supplier",
                     "minOccurances": 0,
-                    "elements": [
+                    "fields": [
                         {"tag": "supplierCode"}, {"tag": "promotionCode"}
                     ]
                 },
@@ -45,7 +45,7 @@
                         {
                             "code": "DES",
                             "tag": "destination",
-                            "elements": [
+                            "fields": [
                                 {"tag": "addressCode"},
                                 {"tag": "contact"}
                             ]
@@ -53,7 +53,7 @@
                         {
                             "code": "QTY",
                             "tag": "destinationQuantity",
-                            "elements": [
+                            "fields": [
                                 {"tag":"quantity", "dataType": "int"},
                                 {"tag":"deliverBy"}
                             ]

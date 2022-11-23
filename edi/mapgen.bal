@@ -15,7 +15,7 @@ public function transformEDIMapping(xml xmlMapping) returns EDIMapping|error {
     xml rootSeg = xmlMapping/<s:segments>;
     string name = deriveTag(null, getString(rootSeg.xmltag, "Mapping"));
     xml delimiters = xmlMapping/<s:delimiters>;
-    EDIMapping mapping = {name: name, delimiters: {segment: check delimiters.segment, element: check delimiters.'field, subelement: check delimiters.component, subcomponent: getString(delimiters.subcomponent, "NOT_USED"), repetition: getString(delimiters.repetition, "NOT_USED")}};
+    EDIMapping mapping = {name: name, delimiters: {segment: check delimiters.segment, 'field: check delimiters.'field, component: check delimiters.component, subcomponent: getString(delimiters.subcomponent, "NOT_USED"), repetition: getString(delimiters.repetition, "NOT_USED")}};
     xml segments = xmlMapping/<s:segments>/*;
     foreach xml seg in segments {
         if seg is xml:Element {
@@ -65,19 +65,19 @@ function readSegmentMapping(xml seg) returns EDISegMapping|error {
     map<int> fieldTagCounts = {};
     xml fields = seg/<s:'field>;
     foreach xml f in fields {
-        EDIElementMapping emap = {tag: deriveTag(fieldTagCounts, check f.xmltag)};
+        EDIFieldMapping emap = {tag: deriveTag(fieldTagCounts, check f.xmltag)};
 
         // if this field has components, map them as subelements.
         xml components = f/<s:component>;
         map<int> subelementTagCounts = {};
         foreach xml component in components {
-            EDISubelementMapping submap = 
+            EDIComponentMapping submap = 
                 {tag: deriveTag(subelementTagCounts, check component.xmltag), dataType: getDataTypeForSmooksType(check component.dataType)};   
-            emap.subelements.push(submap); 
+            emap.components.push(submap); 
         } 
 
         // if no subelements have been found, this should be a basic field
-        if emap.subelements.length() == 0 {
+        if emap.components.length() == 0 {
             var dataType = f.dataType;
             if dataType is string {
                 emap.dataType = getDataTypeForSmooksType(dataType);   
@@ -90,7 +90,7 @@ function readSegmentMapping(xml seg) returns EDISegMapping|error {
             emap.dataType = COMPOSITE;
         }
 
-        segmap.elements.push(emap);
+        segmap.fields.push(emap);
     }
     return segmap;
 }

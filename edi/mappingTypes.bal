@@ -6,8 +6,8 @@ public type EDIMapping record {|
 
     record {|
         string segment;
-        string element;
-        string subelement;
+        string 'field;
+        string component;
         string subcomponent = "NOT_USED";
         string repetition = "NOT_USED";
         string decimalSeparator?;
@@ -33,27 +33,27 @@ public type EDISegMapping record {|
     boolean truncatable = true;
     int minOccurances = 0;
     int maxOccurances = 1;
-    EDIElementMapping[] elements = [];
+    EDIFieldMapping[] fields = [];
 |};
 
-public type EDIElementMapping record {|
+public type EDIFieldMapping record {|
     string tag;
     boolean repeat = false;
     boolean required = false;
     boolean truncatable = true;
     EDIDataType dataType = STRING;
-    EDISubelementMapping[] subelements = [];
+    EDIComponentMapping[] components = [];
 |};
 
-public type EDISubelementMapping record {|
+public type EDIComponentMapping record {|
     string tag;
     boolean required = false;
     boolean truncatable = true;
     EDIDataType dataType = STRING;
-    SubcomponentMapping[] subcomponents = [];
+    EDISubcomponentMapping[] subcomponents = [];
 |};
 
-public type SubcomponentMapping record {|
+public type EDISubcomponentMapping record {|
     string tag;
     boolean required = false;
     EDIDataType dataType = STRING;

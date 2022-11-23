@@ -35,8 +35,8 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegmen
     while currentRawIndex < rawSegments.length() {
         string sDesc = rawSegments[currentRawIndex];
         string segmentDesc = regex:replaceAll(sDesc, "\n", "");
-        string[] elements = split(segmentDesc, ediMapping.delimiters.element);
-        if ediMapping.ignoreSegments.indexOf(elements[0], 0) != null {
+        string[] fields = split(segmentDesc, ediMapping.delimiters.'field);
+        if ediMapping.ignoreSegments.indexOf(fields[0], 0) != null {
             currentRawIndex += 1;
             continue;
         }
@@ -45,7 +45,7 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegmen
         while mappingIndex < currentMapping.length() && !segmentMapped {
             EDIUnitMapping? segMapping = currentMapping[mappingIndex];
             if (segMapping is EDISegMapping) {
-                if segMapping.code != elements[0] {
+                if segMapping.code != fields[0] {
                     if segMapping.minOccurances == 0 {
                         // this is an optional segment. so we can ignore
                         log:printDebug(string `Ignoring optional segment: ${printSegMap(segMapping)} | Segment text: ${sDesc}`);
@@ -71,7 +71,7 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegmen
                     Current mapping index: ${mappingIndex}`);
                 }
                 currentRawIndex += 1;
-                EDISegment ediRecord = check readEDISegment(segMapping, elements, ediMapping, segmentDesc);
+                EDISegment ediRecord = check readEDISegment(segMapping, fields, ediMapping, segmentDesc);
                 if (segMapping.maxOccurances == 1) {
                     log:printDebug(string `Completed reading non-repeatable segment: ${printSegMap(segMapping)} | Segment text: ${sDesc}`);
                     mappingIndex += 1;
@@ -94,7 +94,7 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegmen
                 if firstSegMapping is EDISegGroupMapping {
                     return error("First item of group must be a segment.");
                 }
-                if firstSegMapping.code != elements[0] {
+                if firstSegMapping.code != fields[0] {
                     if segMapping.minOccurances == 0 {
                         // this is an optional segment. so we can ignore
                         log:printDebug(string `Ignoring optional segment group: ${printSegGroupMap(segMapping)} | Segment text: ${sDesc}`);
@@ -147,135 +147,135 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, string[] rawSegmen
     return [currentGroup, currentRawIndex];
 }
 
-function readEDISegment(EDISegMapping segMapping, string[] elements, EDIMapping mapping, string segmentDesc)
+function readEDISegment(EDISegMapping segMapping, string[] fields, EDIMapping mapping, string segmentDesc)
     returns EDISegment|error {
     log:printDebug(string `Reading ${printSegMap(segMapping)} | Seg text: ${segmentDesc}`);
     if segMapping.truncatable {
         int minFields = getMinimumFields(segMapping);
-        if elements.length() < minFields + 1 {
-            return error(string `Segment mapping's field count does not match minimum field count of the truncatable segment ${elements[0]}.
-                Required minimum field count (excluding the segment code): ${minFields}. Found ${elements.length() - 1} fields. 
+        if fields.length() < minFields + 1 {
+            return error(string `Segment mapping's field count does not match minimum field count of the truncatable segment ${fields[0]}.
+                Required minimum field count (excluding the segment code): ${minFields}. Found ${fields.length() - 1} fields. 
                 Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}`);
         }
-    } else if (segMapping.elements.length() + 1 != elements.length()) {
-        string errMsg = string `Segment mapping's element count does not match segment ${elements[0]}. 
+    } else if (segMapping.fields.length() + 1 != fields.length()) {
+        string errMsg = string `Segment mapping's field count does not match segment ${fields[0]}. 
                 Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}`;
         return error(errMsg);
     }
     EDISegment ediRecord = {};
-    int elementNumber = 0;
-    while (elementNumber < elements.length() - 1) {
-        EDIElementMapping elementMapping = segMapping.elements[elementNumber];
-        string tag = elementMapping.tag;
+    int fieldNumber = 0;
+    while (fieldNumber < fields.length() - 1) {
+        EDIFieldMapping fieldMapping = segMapping.fields[fieldNumber];
+        string tag = fieldMapping.tag;
 
-        // EDI segment starts with the segment name. So we have to skip the first element.
-        string elementText = elements[elementNumber + 1];
-        if elementText.trim().length() == 0 {
-            if elementMapping.required {
-                return error(string `Required element ${elementMapping.tag} is not provided.`);
+        // EDI segment starts with the segment name. So we have to skip the first field.
+        string fieldText = fields[fieldNumber + 1];
+        if fieldText.trim().length() == 0 {
+            if fieldMapping.required {
+                return error(string `Required field ${fieldMapping.tag} is not provided.`);
             } else {
                 if mapping.preserveEmptyFields {
-                    if elementMapping.repeat {
-                        ediRecord[tag] = getArray(elementMapping.dataType);
-                    } else if elementMapping.dataType == STRING {
-                        ediRecord[tag] = elementText;
+                    if fieldMapping.repeat {
+                        ediRecord[tag] = getArray(fieldMapping.dataType);
+                    } else if fieldMapping.dataType == STRING {
+                        ediRecord[tag] = fieldText;
                     } else {
                         ediRecord[tag] = null;
                     }
                 }
-                elementNumber = elementNumber + 1;
+                fieldNumber = fieldNumber + 1;
                 continue;
             }
         }
-        if (elementMapping.repeat) {
-            // this is a repeating element (i.e. array). can be a repeat of composites as well.
-            SimpleArray|EDIComposite[] repeatValues = check readEDIRepeat(elementText, mapping.delimiters.repetition, mapping, elementMapping);
+        if (fieldMapping.repeat) {
+            // this is a repeating field (i.e. array). can be a repeat of composites as well.
+            SimpleArray|EDIComponentGroup[] repeatValues = check readEDIRepeat(fieldText, mapping.delimiters.repetition, mapping, fieldMapping);
             if repeatValues.length() > 0 || mapping.preserveEmptyFields {
                 ediRecord[tag] = repeatValues;    
             } 
-        } else if (elementMapping.subelements.length() > 0) {
-            // this is a composite element (but not a repeat)
-            EDIComposite? composite = check readEDIComposite(elementText, mapping, elementMapping);
-            if (composite is EDIComposite || mapping.preserveEmptyFields) {
+        } else if (fieldMapping.components.length() > 0) {
+            // this is a composite field (but not a repeat)
+            EDIComponentGroup? composite = check readEDIComposite(fieldText, mapping, fieldMapping);
+            if (composite is EDIComponentGroup || mapping.preserveEmptyFields) {
                 ediRecord[tag] = composite;
             } 
         } else {
-            // this is a simple type element
-            SimpleType|error value = convertToType(elementText, elementMapping.dataType, mapping.delimiters.decimalSeparator);
+            // this is a simple type field
+            SimpleType|error value = convertToType(fieldText, fieldMapping.dataType, mapping.delimiters.decimalSeparator);
             if value is SimpleType {
                 ediRecord[tag] = value;
             } else {
-                string errMsg = string `EDI field: ${elementText} cannot be converted to type: ${elementMapping.dataType}.
+                string errMsg = string `EDI field: ${fieldText} cannot be converted to type: ${fieldMapping.dataType}.
                         Segment mapping: ${segMapping.toJsonString()} | Segment text: ${segmentDesc}|n${value.message()}`;
                 return error(errMsg);
             }
         }
-        elementNumber = elementNumber + 1;
+        fieldNumber = fieldNumber + 1;
     }
     return ediRecord;
 }
 
-function readEDIComposite(string compositeText, EDIMapping mapping, EDIElementMapping emap)
-            returns EDIComposite|error? {
+function readEDIComposite(string compositeText, EDIMapping mapping, EDIFieldMapping emap)
+            returns EDIComponentGroup|error? {
     if compositeText.trim().length() == 0 {
-        // Composite value is not provided. Return null, which will cause this element to be not included.
+        // Composite value is not provided. Return null, which will cause this field to be not included.
         return null;
     }
 
-    string[] subelements = split(compositeText, mapping.delimiters.subelement);
+    string[] components = split(compositeText, mapping.delimiters.component);
     if emap.truncatable {
         int minFields = getMinimumCompositeFields(emap);
-        if subelements.length() < minFields {
+        if components.length() < minFields {
             return error(string `Composite mapping's field count does not match minimum field count of the truncatable field ${emap.tag}.
-                Required minimum field count: ${minFields}. Found ${subelements.length()} fields. 
+                Required minimum field count: ${minFields}. Found ${components.length()} fields. 
                 Composite mapping: ${emap.toJsonString()} | Composite text: ${compositeText}`);
         }
-    } else if (emap.subelements.length() != subelements.length()) {
-        string errMsg = string `Composite mapping's element count does not match field ${emap.tag}. 
+    } else if (emap.components.length() != components.length()) {
+        string errMsg = string `Composite mapping's component count does not match field ${emap.tag}. 
                 Composite mapping: ${emap.toJsonString()} | Composite text: ${compositeText}`;
         return error(errMsg);
     }
 
-    EDISubelementMapping[] subMappings = emap.subelements;
-    EDIComposite composite = {};
-    int subelementNumber = 0;
-    while (subelementNumber < subelements.length()) {
-        string subelement = subelements[subelementNumber];
-        EDISubelementMapping subMapping = subMappings[subelementNumber];
-        if subelement.trim().length() == 0 {
+    EDIComponentMapping[] subMappings = emap.components;
+    EDIComponentGroup composite = {};
+    int componentNumber = 0;
+    while (componentNumber < components.length()) {
+        string component = components[componentNumber];
+        EDIComponentMapping subMapping = subMappings[componentNumber];
+        if component.trim().length() == 0 {
             if subMapping.required {
-                return error(string `Required element ${subMapping.tag} is not provided.`);
+                return error(string `Required component ${subMapping.tag} is not provided.`);
             } else {
                 if mapping.preserveEmptyFields {
-                    composite[subMapping.tag] = subMapping.dataType == STRING? subelement : null;
+                    composite[subMapping.tag] = subMapping.dataType == STRING? component : null;
                 }
-                subelementNumber += 1;
+                componentNumber += 1;
                 continue;
             }
         }
 
         if subMapping.subcomponents.length() > 0 {
-            SubcomponentGroup? scGroup = check readSubcomponentGroup(subelement, mapping, subMapping);
-            if scGroup is SubcomponentGroup || mapping.preserveEmptyFields {
+            EDISubcomponentGroup? scGroup = check readSubcomponentGroup(component, mapping, subMapping);
+            if scGroup is EDISubcomponentGroup || mapping.preserveEmptyFields {
                 composite[subMapping.tag] = scGroup;
             }
         } else {
-            SimpleType|error value = convertToType(subelement, subMapping.dataType, mapping.delimiters.decimalSeparator);
+            SimpleType|error value = convertToType(component, subMapping.dataType, mapping.delimiters.decimalSeparator);
             if value is SimpleType? {
                 composite[subMapping.tag] = value;
             } else {
-                string errMsg = string `EDI field: ${subelement} cannot be converted to type: ${subMapping.dataType}.
+                string errMsg = string `EDI field: ${component} cannot be converted to type: ${subMapping.dataType}.
                             Composite mapping: ${subMapping.toJsonString()} | Composite text: ${compositeText}
                             Error: ${value.message()}`;
                 return error(errMsg);
             }
         }
-        subelementNumber = subelementNumber + 1;
+        componentNumber = componentNumber + 1;
     }
     return composite;
 }
 
-function readSubcomponentGroup(string scGroupText, EDIMapping mapping, EDISubelementMapping emap) returns SubcomponentGroup|error? {
+function readSubcomponentGroup(string scGroupText, EDIMapping mapping, EDIComponentMapping emap) returns EDISubcomponentGroup|error? {
     if scGroupText.trim().length() == 0 {
         // Composite value is not provided. Return null, which will cause this element to be not included.
         return null;
@@ -290,20 +290,20 @@ function readSubcomponentGroup(string scGroupText, EDIMapping mapping, EDISubele
                 Subcomponent group mapping: ${emap.toJsonString()} | Subcomponent group text: ${scGroupText}`);
         }
     } else if (emap.subcomponents.length() != subcomponents.length()) {
-        string errMsg = string `Subcomponent group mapping's element count does not match field ${emap.tag}. 
+        string errMsg = string `Subcomponent group mapping's subcomponent count does not match field ${emap.tag}. 
                 Subcomponent group mapping: ${emap.toJsonString()} | Subcomponent group text: ${scGroupText}`;
         return error(errMsg);
     }
 
-    SubcomponentMapping[] subMappings = emap.subcomponents;
-    SubcomponentGroup scGroup = {};
+    EDISubcomponentMapping[] subMappings = emap.subcomponents;
+    EDISubcomponentGroup scGroup = {};
     int subcomponentNumber = 0;
     while (subcomponentNumber < subcomponents.length()) {
         string subcomponent = subcomponents[subcomponentNumber];
-        SubcomponentMapping subMapping = subMappings[subcomponentNumber];
+        EDISubcomponentMapping subMapping = subMappings[subcomponentNumber];
         if subcomponent.trim().length() == 0 {
             if subMapping.required {
-                return error(string `Required element ${subMapping.tag} is not provided.`);
+                return error(string `Required subcomponent ${subMapping.tag} is not provided.`);
             } else {
                 if mapping.preserveEmptyFields {
                     scGroup[subMapping.tag] = subMapping.dataType == STRING? subcomponent : null;
@@ -327,35 +327,35 @@ function readSubcomponentGroup(string scGroupText, EDIMapping mapping, EDISubele
     return scGroup;
 }
 
-function readEDIRepeat(string repeatText, string repeatDelimiter, EDIMapping mapping, EDIElementMapping elementMapping)
-        returns SimpleArray|EDIComposite[]|error {
-    string[] elements = split(repeatText, repeatDelimiter);
-    SimpleArray|EDIComposite[] repeatValues = getArray(elementMapping.dataType);
-    if (elements.length() == 0) {
+function readEDIRepeat(string repeatText, string repeatDelimiter, EDIMapping mapping, EDIFieldMapping fieldMapping)
+        returns SimpleArray|EDIComponentGroup[]|error {
+    string[] fields = split(repeatText, repeatDelimiter);
+    SimpleArray|EDIComponentGroup[] repeatValues = getArray(fieldMapping.dataType);
+    if (fields.length() == 0) {
         // None of the repeating values are provided. Return an empty array.
-        if elementMapping.required {
-            return error(string `Required element ${elementMapping.tag} is not provided.`);
+        if fieldMapping.required {
+            return error(string `Required field ${fieldMapping.tag} is not provided.`);
         }
         return repeatValues;
     }
-    foreach string element in elements {
-        if (elementMapping.dataType == COMPOSITE) {
-            EDIComposite? value = check readEDIComposite(element, mapping, elementMapping);
-            if (value is EDIComposite) {
+    foreach string 'field in fields {
+        if (fieldMapping.dataType == COMPOSITE) {
+            EDIComponentGroup? value = check readEDIComposite('field, mapping, fieldMapping);
+            if (value is EDIComponentGroup) {
                 repeatValues.push(value);
             } else {
                 log:printWarn(string `Repeat value not provided in ${repeatText}.`);
             }
         } else {
-            if element.trim().length() == 0 {
+            if 'field.trim().length() == 0 {
                 continue;
             }
-            SimpleType|error value = convertToType(element, elementMapping.dataType, mapping.delimiters.decimalSeparator);
+            SimpleType|error value = convertToType('field, fieldMapping.dataType, mapping.delimiters.decimalSeparator);
             if (value is SimpleType) {
                 repeatValues.push(value);
             } else {
-                string errMsg = string `EDI field: ${element} cannot be converted to type: ${elementMapping.dataType}.
-                        Element mapping: ${elementMapping.toJsonString()} | Repeat text: ${repeatText}\n${value.message()}`;
+                string errMsg = string `EDI field: ${'field} cannot be converted to type: ${fieldMapping.dataType}.
+                        field mapping: ${fieldMapping.toJsonString()} | Repeat text: ${repeatText}\n${value.message()}`;
                 return error(errMsg);
             }
         }
@@ -364,9 +364,9 @@ function readEDIRepeat(string repeatText, string repeatDelimiter, EDIMapping map
 }
 
 function getMinimumFields(EDISegMapping segmap) returns int {
-    int fieldIndex = segmap.elements.length() - 1;
+    int fieldIndex = segmap.fields.length() - 1;
     while fieldIndex > 0 {
-        if segmap.elements[fieldIndex].required {
+        if segmap.fields[fieldIndex].required {
             break;
         }
         fieldIndex -= 1;
@@ -374,10 +374,10 @@ function getMinimumFields(EDISegMapping segmap) returns int {
     return fieldIndex;
 }
 
-function getMinimumCompositeFields(EDIElementMapping emap) returns int {
-    int fieldIndex = emap.subelements.length() - 1;
+function getMinimumCompositeFields(EDIFieldMapping emap) returns int {
+    int fieldIndex = emap.components.length() - 1;
     while fieldIndex > 0 {
-        if emap.subelements[fieldIndex].required {
+        if emap.components[fieldIndex].required {
             break;
         }
         fieldIndex -= 1;
@@ -385,7 +385,7 @@ function getMinimumCompositeFields(EDIElementMapping emap) returns int {
     return fieldIndex;
 }
 
-function getMinimumSubcomponentFields(EDISubelementMapping emap) returns int {
+function getMinimumSubcomponentFields(EDIComponentMapping emap) returns int {
     int fieldIndex = emap.subcomponents.length() - 1;
     while fieldIndex > 0 {
         if emap.subcomponents[fieldIndex].required {

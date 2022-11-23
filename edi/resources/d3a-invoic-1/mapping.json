@@ -2,8 +2,8 @@
     "name": "INVOIC",
     "delimiters": {
       "segment": "'",
-      "element": "+",
-      "subelement": ":",
+      "field": "+",
+      "component": ":",
       "repetition": "^"
     },
     "preserveEmptyFields": false,
@@ -14,14 +14,14 @@
         "truncatable": true,
         "minOccurances": 1,
         "maxOccurances": 1,
-        "elements": [
+        "fields": [
           {
             "tag": "DOCUMENT_MESSAGE_NAME",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Document_message_name__coded",
                 "required": false,
@@ -50,7 +50,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Message_function__coded",
@@ -58,7 +58,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Response_type__coded",
@@ -66,7 +66,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           }
         ]
       },
@@ -76,14 +76,14 @@
         "truncatable": true,
         "minOccurances": 1,
         "maxOccurances": 35,
-        "elements": [
+        "fields": [
           {
             "tag": "DATE_TIME_PERIOD",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Date_time_period_qualifier",
                 "required": false,
@@ -109,14 +109,14 @@
         "truncatable": true,
         "minOccurances": 0,
         "maxOccurances": 1,
-        "elements": [
+        "fields": [
           {
             "tag": "PAYMENT_INSTRUCTION_DETAILS",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Payment_conditions__coded",
                 "required": false,
@@ -157,14 +157,14 @@
         "truncatable": true,
         "minOccurances": 0,
         "maxOccurances": 5,
-        "elements": [
+        "fields": [
           {
             "tag": "Country_of_origin__coded",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Type_of_duty_regime__coded",
@@ -172,7 +172,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Special_conditions__coded",
@@ -180,7 +180,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Special_conditions__coded_1",
@@ -188,7 +188,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Special_conditions__coded_2",
@@ -196,7 +196,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Special_conditions__coded_3",
@@ -204,7 +204,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Special_conditions__coded_4",
@@ -212,7 +212,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           }
         ]
       },
@@ -222,14 +222,14 @@
         "truncatable": true,
         "minOccurances": 0,
         "maxOccurances": 1,
-        "elements": [
+        "fields": [
           {
             "tag": "Item_description_type__coded",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Item_characteristic__coded",
@@ -237,7 +237,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "ITEM_DESCRIPTION",
@@ -245,7 +245,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Item_description_identification",
                 "required": false,
@@ -279,7 +279,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           }
         ]
       },
@@ -289,14 +289,14 @@
         "truncatable": true,
         "minOccurances": 0,
         "maxOccurances": 10,
-        "elements": [
+        "fields": [
           {
             "tag": "Text_subject_qualifier",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "Text_function__coded",
@@ -304,7 +304,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           },
           {
             "tag": "TEXT_REFERENCE",
@@ -312,7 +312,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Free_text__coded",
                 "required": false,
@@ -336,7 +336,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Free_text",
                 "required": false,
@@ -370,7 +370,7 @@
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           }
         ]
       },
@@ -385,14 +385,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "REFERENCE",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Reference_qualifier",
                     "required": false,
@@ -423,14 +423,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "DATE_TIME_PERIOD",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Date_time_period_qualifier",
                     "required": false,
@@ -463,14 +463,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Party_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "PARTY_IDENTIFICATION_DETAILS",
@@ -478,7 +478,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Party_id_identification",
                     "required": false,
@@ -502,7 +502,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Name_and_address_line",
                     "required": false,
@@ -536,7 +536,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Party_name",
                     "required": false,
@@ -575,7 +575,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Street_and_number_P_O__Box",
                     "required": false,
@@ -599,7 +599,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Country_sub_entity_identification",
@@ -607,7 +607,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Postcode_identification",
@@ -615,7 +615,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Country__coded",
@@ -623,7 +623,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -633,14 +633,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 25,
-            "elements": [
+            "fields": [
               {
                 "tag": "Place_location_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "LOCATION_IDENTIFICATION",
@@ -648,7 +648,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Place_location_identification",
                     "required": false,
@@ -677,7 +677,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Related_place_location_one_identification",
                     "required": false,
@@ -706,7 +706,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Related_place_location_two_identification",
                     "required": false,
@@ -735,7 +735,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -745,14 +745,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Party_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "ACCOUNT_IDENTIFICATION",
@@ -760,7 +760,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Account_holder_number",
                     "required": false,
@@ -789,7 +789,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Institution_name_identification",
                     "required": false,
@@ -838,7 +838,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -853,14 +853,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "REFERENCE",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Reference_qualifier",
                         "required": false,
@@ -891,14 +891,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -931,14 +931,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DOCUMENT_MESSAGE_NAME",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Document_message_name__coded",
                         "required": false,
@@ -967,7 +967,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Document_message_number",
                         "required": false,
@@ -996,7 +996,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Number_of_copies_of_document_required",
@@ -1004,7 +1004,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "float",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Number_of_originals_of_document_required",
@@ -1012,7 +1012,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "float",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -1022,14 +1022,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -1062,14 +1062,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Contact_function__coded",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "DEPARTMENT_OR_EMPLOYEE_DETAILS",
@@ -1077,7 +1077,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Department_or_employee_identification",
                         "required": false,
@@ -1098,14 +1098,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "COMMUNICATION_CONTACT",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Communication_number",
                         "required": false,
@@ -1135,14 +1135,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Duty_tax_fee_function_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "DUTY_TAX_FEE_TYPE",
@@ -1150,7 +1150,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Duty_tax_fee_type__coded",
                     "required": false,
@@ -1179,7 +1179,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Duty_tax_fee_account_identification",
                     "required": false,
@@ -1203,7 +1203,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "DUTY_TAX_FEE_DETAIL",
@@ -1211,7 +1211,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Duty_tax_fee_rate_identification",
                     "required": false,
@@ -1255,7 +1255,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Party_tax_identification_number",
@@ -1263,7 +1263,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -1273,14 +1273,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "MONETARY_AMOUNT",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Monetary_amount_type_qualifier",
                     "required": false,
@@ -1316,14 +1316,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Place_location_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "LOCATION_IDENTIFICATION",
@@ -1331,7 +1331,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Place_location_identification",
                     "required": false,
@@ -1360,7 +1360,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Related_place_location_one_identification",
                     "required": false,
@@ -1389,7 +1389,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Related_place_location_two_identification",
                     "required": false,
@@ -1418,7 +1418,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           }
@@ -1435,14 +1435,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "CURRENCY_DETAILS",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Currency_details_qualifier",
                     "required": false,
@@ -1471,7 +1471,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Currency_details_qualifier",
                     "required": false,
@@ -1500,7 +1500,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "float",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Currency_market_exchange__coded",
@@ -1508,7 +1508,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -1518,14 +1518,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "DATE_TIME_PERIOD",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Date_time_period_qualifier",
                     "required": false,
@@ -1558,14 +1558,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Payment_terms_type_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "PAYMENT_TERMS",
@@ -1573,7 +1573,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Terms_of_payment_identification",
                     "required": false,
@@ -1607,7 +1607,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Payment_time_reference__coded",
                     "required": false,
@@ -1638,14 +1638,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "DATE_TIME_PERIOD",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Date_time_period_qualifier",
                     "required": false,
@@ -1671,14 +1671,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "PERCENTAGE_DETAILS",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Percentage_qualifier",
                     "required": false,
@@ -1714,14 +1714,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "MONETARY_AMOUNT",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Monetary_amount_type_qualifier",
                     "required": false,
@@ -1764,14 +1764,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Transport_stage_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Conveyance_reference_number",
@@ -1779,7 +1779,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "MODE_OF_TRANSPORT",
@@ -1787,7 +1787,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Mode_of_transport__coded",
                     "required": false,
@@ -1806,7 +1806,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Type_of_means_of_transport_identification",
                     "required": false,
@@ -1825,7 +1825,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Carrier_identification",
                     "required": false,
@@ -1854,7 +1854,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "EXCESS_TRANSPORTATION_INFORMATION",
@@ -1862,7 +1862,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Excess_transportation_reason__coded",
                     "required": false,
@@ -1886,7 +1886,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Id_of_means_of_transport_identification",
                     "required": false,
@@ -1927,14 +1927,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Place_location_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "LOCATION_IDENTIFICATION",
@@ -1942,7 +1942,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Place_location_identification",
                         "required": false,
@@ -1971,7 +1971,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_one_identification",
                         "required": false,
@@ -2000,7 +2000,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_two_identification",
                         "required": false,
@@ -2029,7 +2029,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -2039,14 +2039,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -2081,14 +2081,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Terms_of_delivery_function__coded",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Transport_charges_method_of_payment__coded",
@@ -2096,7 +2096,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "TERMS_OF_DELIVERY",
@@ -2104,7 +2104,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Terms_of_delivery__coded",
                     "required": false,
@@ -2140,14 +2140,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 2,
-            "elements": [
+            "fields": [
               {
                 "tag": "Place_location_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "LOCATION_IDENTIFICATION",
@@ -2155,7 +2155,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Place_location_identification",
                     "required": false,
@@ -2184,7 +2184,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Related_place_location_one_identification",
                     "required": false,
@@ -2213,7 +2213,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Related_place_location_two_identification",
                     "required": false,
@@ -2242,7 +2242,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           }
@@ -2259,14 +2259,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Number_of_packages",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "float",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "PACKAGING_DETAILS",
@@ -2274,7 +2274,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Packaging_level__coded",
                     "required": false,
@@ -2298,7 +2298,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Type_of_packages_identification",
                     "required": false,
@@ -2327,7 +2327,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_description_type__coded",
                     "required": false,
@@ -2361,7 +2361,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Returnable_package_freight_payment_responsibility__coded",
                     "required": false,
@@ -2382,14 +2382,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Measurement_application_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "MEASUREMENT_DETAILS",
@@ -2397,7 +2397,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Measurement_dimension__coded",
                     "required": false,
@@ -2421,7 +2421,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Measure_unit_qualifier",
                     "required": false,
@@ -2450,7 +2450,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -2465,14 +2465,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Marking_instructions__coded",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "MARKS___LABELS",
@@ -2480,7 +2480,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Shipping_marks",
                         "required": false,
@@ -2539,7 +2539,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -2549,14 +2549,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "REFERENCE",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Reference_qualifier",
                         "required": false,
@@ -2587,14 +2587,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -2620,14 +2620,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Identity_number_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "IDENTITY_NUMBER_RANGE",
@@ -2635,7 +2635,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Identity_number",
                         "required": false,
@@ -2654,7 +2654,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Identity_number",
                         "required": false,
@@ -2673,7 +2673,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Identity_number",
                         "required": false,
@@ -2692,7 +2692,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Identity_number",
                         "required": false,
@@ -2711,7 +2711,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Identity_number",
                         "required": false,
@@ -2741,14 +2741,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Allowance_or_charge_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "ALLOWANCE_CHARGE_INFORMATION",
@@ -2756,7 +2756,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Allowance_or_charge_number",
                     "required": false,
@@ -2775,7 +2775,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Calculation_sequence_indicator__coded",
@@ -2783,7 +2783,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "SPECIAL_SERVICES_IDENTIFICATION",
@@ -2791,7 +2791,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Special_services__coded",
                     "required": false,
@@ -2822,14 +2822,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Country_of_origin__coded",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Type_of_duty_regime__coded",
@@ -2837,7 +2837,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded",
@@ -2845,7 +2845,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_1",
@@ -2853,7 +2853,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_2",
@@ -2861,7 +2861,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_3",
@@ -2869,7 +2869,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_4",
@@ -2877,7 +2877,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -2892,14 +2892,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "REFERENCE",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Reference_qualifier",
                         "required": false,
@@ -2930,14 +2930,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -2970,14 +2970,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "QUANTITY_DETAILS",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Quantity_qualifier",
                         "required": false,
@@ -3003,14 +3003,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Range_type_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "RANGE",
@@ -3018,7 +3018,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measure_unit_qualifier",
                         "required": false,
@@ -3051,14 +3051,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "PERCENTAGE_DETAILS",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Percentage_qualifier",
                         "required": false,
@@ -3094,14 +3094,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Range_type_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "RANGE",
@@ -3109,7 +3109,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measure_unit_qualifier",
                         "required": false,
@@ -3142,14 +3142,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "MONETARY_AMOUNT",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Monetary_amount_type_qualifier",
                         "required": false,
@@ -3185,14 +3185,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Range_type_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "RANGE",
@@ -3200,7 +3200,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measure_unit_qualifier",
                         "required": false,
@@ -3233,14 +3233,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "RATE_DETAILS",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Rate_type_qualifier",
                         "required": false,
@@ -3271,14 +3271,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Range_type_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "RANGE",
@@ -3286,7 +3286,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measure_unit_qualifier",
                         "required": false,
@@ -3319,14 +3319,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Duty_tax_fee_function_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "DUTY_TAX_FEE_TYPE",
@@ -3334,7 +3334,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Duty_tax_fee_type__coded",
                         "required": false,
@@ -3363,7 +3363,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Duty_tax_fee_account_identification",
                         "required": false,
@@ -3387,7 +3387,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "DUTY_TAX_FEE_DETAIL",
@@ -3395,7 +3395,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Duty_tax_fee_rate_identification",
                         "required": false,
@@ -3439,7 +3439,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Party_tax_identification_number",
@@ -3447,7 +3447,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -3457,14 +3457,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "MONETARY_AMOUNT",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Monetary_amount_type_qualifier",
                         "required": false,
@@ -3509,14 +3509,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Sector_subject_identification_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "REQUIREMENT_CONDITION_IDENTIFICATION",
@@ -3524,7 +3524,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Requirement_condition_identification",
                     "required": false,
@@ -3548,7 +3548,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -3558,14 +3558,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "REFERENCE",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Reference_qualifier",
                     "required": false,
@@ -3596,14 +3596,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "DATE_TIME_PERIOD",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Date_time_period_qualifier",
                     "required": false,
@@ -3629,14 +3629,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Text_subject_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Text_function__coded",
@@ -3644,7 +3644,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "TEXT_REFERENCE",
@@ -3652,7 +3652,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Free_text__coded",
                     "required": false,
@@ -3676,7 +3676,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Free_text",
                     "required": false,
@@ -3710,7 +3710,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           }
@@ -3727,14 +3727,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Line_item_number",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "float",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Action_request_notification__coded",
@@ -3742,7 +3742,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "ITEM_NUMBER_IDENTIFICATION",
@@ -3750,7 +3750,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_number",
                     "required": false,
@@ -3779,7 +3779,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Configuration_level",
@@ -3787,7 +3787,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "float",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Configuration__coded",
@@ -3795,7 +3795,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -3805,14 +3805,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 25,
-            "elements": [
+            "fields": [
               {
                 "tag": "Product_id_function_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "ITEM_NUMBER_IDENTIFICATION",
@@ -3820,7 +3820,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_number",
                     "required": false,
@@ -3849,7 +3849,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_number",
                     "required": false,
@@ -3878,7 +3878,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_number",
                     "required": false,
@@ -3907,7 +3907,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_number",
                     "required": false,
@@ -3936,7 +3936,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_number",
                     "required": false,
@@ -3967,14 +3967,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 10,
-            "elements": [
+            "fields": [
               {
                 "tag": "Item_description_type__coded",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Item_characteristic__coded",
@@ -3982,7 +3982,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "ITEM_DESCRIPTION",
@@ -3990,7 +3990,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Item_description_identification",
                     "required": false,
@@ -4024,7 +4024,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -4034,14 +4034,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Measurement_application_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "MEASUREMENT_DETAILS",
@@ -4049,7 +4049,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Measurement_dimension__coded",
                     "required": false,
@@ -4073,7 +4073,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Measure_unit_qualifier",
                     "required": false,
@@ -4102,7 +4102,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -4112,14 +4112,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "QUANTITY_DETAILS",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Quantity_qualifier",
                     "required": false,
@@ -4145,14 +4145,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "PERCENTAGE_DETAILS",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Percentage_qualifier",
                     "required": false,
@@ -4188,14 +4188,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Country_of_origin__coded",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Type_of_duty_regime__coded",
@@ -4203,7 +4203,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded",
@@ -4211,7 +4211,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_1",
@@ -4219,7 +4219,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_2",
@@ -4227,7 +4227,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_3",
@@ -4235,7 +4235,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_4",
@@ -4243,7 +4243,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -4253,14 +4253,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 35,
-            "elements": [
+            "fields": [
               {
                 "tag": "DATE_TIME_PERIOD",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Date_time_period_qualifier",
                     "required": false,
@@ -4286,14 +4286,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1000,
-            "elements": [
+            "fields": [
               {
                 "tag": "Identity_number_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "IDENTITY_NUMBER_RANGE",
@@ -4301,7 +4301,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4320,7 +4320,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4339,7 +4339,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4358,7 +4358,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4377,7 +4377,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4398,14 +4398,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1000,
-            "elements": [
+            "fields": [
               {
                 "tag": "Set_identification_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "IDENTIFICATION_NUMBER",
@@ -4413,7 +4413,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4432,7 +4432,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4451,7 +4451,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4470,7 +4470,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4489,7 +4489,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Identity_number",
                     "required": false,
@@ -4510,14 +4510,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "QUANTITY_DIFFERENCE_INFORMATION",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Quantity_difference",
                     "required": false,
@@ -4536,7 +4536,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "REASON_FOR_CHANGE",
@@ -4544,7 +4544,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Change_reason__coded",
                     "required": false,
@@ -4565,14 +4565,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 5,
-            "elements": [
+            "fields": [
               {
                 "tag": "Text_subject_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Text_function__coded",
@@ -4580,7 +4580,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "TEXT_REFERENCE",
@@ -4588,7 +4588,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Free_text__coded",
                     "required": false,
@@ -4612,7 +4612,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Free_text",
                     "required": false,
@@ -4646,7 +4646,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -4661,14 +4661,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "MONETARY_AMOUNT",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Monetary_amount_type_qualifier",
                         "required": false,
@@ -4704,14 +4704,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "CURRENCY_DETAILS",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Currency_details_qualifier",
                         "required": false,
@@ -4740,7 +4740,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Currency_details_qualifier",
                         "required": false,
@@ -4769,7 +4769,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "float",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Currency_market_exchange__coded",
@@ -4777,7 +4777,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               }
@@ -4794,14 +4794,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Payment_terms_type_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "PAYMENT_TERMS",
@@ -4809,7 +4809,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Terms_of_payment_identification",
                         "required": false,
@@ -4843,7 +4843,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Payment_time_reference__coded",
                         "required": false,
@@ -4874,14 +4874,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -4907,14 +4907,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "PERCENTAGE_DETAILS",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Percentage_qualifier",
                         "required": false,
@@ -4950,14 +4950,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "MONETARY_AMOUNT",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Monetary_amount_type_qualifier",
                         "required": false,
@@ -5000,14 +5000,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "PRICE_INFORMATION",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Price_qualifier",
                         "required": false,
@@ -5046,7 +5046,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -5056,14 +5056,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Class_of_trade__coded",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "PRICE_MULTIPLIER_INFORMATION",
@@ -5071,7 +5071,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Price_multiplier",
                         "required": false,
@@ -5090,7 +5090,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Change_reason__coded",
                         "required": false,
@@ -5111,14 +5111,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Range_type_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "RANGE",
@@ -5126,7 +5126,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measure_unit_qualifier",
                         "required": false,
@@ -5152,14 +5152,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -5192,14 +5192,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "REFERENCE",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Reference_qualifier",
                         "required": false,
@@ -5230,14 +5230,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -5270,14 +5270,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Number_of_packages",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "float",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "PACKAGING_DETAILS",
@@ -5285,7 +5285,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Packaging_level__coded",
                         "required": false,
@@ -5309,7 +5309,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Type_of_packages_identification",
                         "required": false,
@@ -5338,7 +5338,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Item_description_type__coded",
                         "required": false,
@@ -5372,7 +5372,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Returnable_package_freight_payment_responsibility__coded",
                         "required": false,
@@ -5393,14 +5393,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 10,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Measurement_application_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "MEASUREMENT_DETAILS",
@@ -5408,7 +5408,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measurement_dimension__coded",
                         "required": false,
@@ -5432,7 +5432,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Measure_unit_qualifier",
                         "required": false,
@@ -5461,7 +5461,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -5476,14 +5476,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Marking_instructions__coded",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "MARKS___LABELS",
@@ -5491,7 +5491,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Shipping_marks",
                             "required": false,
@@ -5550,7 +5550,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       }
                     ]
                   },
@@ -5560,14 +5560,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "REFERENCE",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Reference_qualifier",
                             "required": false,
@@ -5598,14 +5598,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 5,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "DATE_TIME_PERIOD",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Date_time_period_qualifier",
                             "required": false,
@@ -5631,14 +5631,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 10,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Identity_number_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "IDENTITY_NUMBER_RANGE",
@@ -5646,7 +5646,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Identity_number",
                             "required": false,
@@ -5665,7 +5665,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Identity_number",
                             "required": false,
@@ -5684,7 +5684,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Identity_number",
                             "required": false,
@@ -5703,7 +5703,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Identity_number",
                             "required": false,
@@ -5722,7 +5722,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Identity_number",
                             "required": false,
@@ -5752,14 +5752,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Place_location_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "LOCATION_IDENTIFICATION",
@@ -5767,7 +5767,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Place_location_identification",
                         "required": false,
@@ -5796,7 +5796,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_one_identification",
                         "required": false,
@@ -5825,7 +5825,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_two_identification",
                         "required": false,
@@ -5854,7 +5854,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -5864,14 +5864,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "QUANTITY_DETAILS",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Quantity_qualifier",
                         "required": false,
@@ -5897,14 +5897,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -5937,14 +5937,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Duty_tax_fee_function_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "DUTY_TAX_FEE_TYPE",
@@ -5952,7 +5952,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Duty_tax_fee_type__coded",
                         "required": false,
@@ -5981,7 +5981,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Duty_tax_fee_account_identification",
                         "required": false,
@@ -6005,7 +6005,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "DUTY_TAX_FEE_DETAIL",
@@ -6013,7 +6013,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Duty_tax_fee_rate_identification",
                         "required": false,
@@ -6057,7 +6057,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Party_tax_identification_number",
@@ -6065,7 +6065,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -6075,14 +6075,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "MONETARY_AMOUNT",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Monetary_amount_type_qualifier",
                         "required": false,
@@ -6118,14 +6118,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Place_location_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "LOCATION_IDENTIFICATION",
@@ -6133,7 +6133,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Place_location_identification",
                         "required": false,
@@ -6162,7 +6162,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_one_identification",
                         "required": false,
@@ -6191,7 +6191,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_two_identification",
                         "required": false,
@@ -6220,7 +6220,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               }
@@ -6237,14 +6237,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Party_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "PARTY_IDENTIFICATION_DETAILS",
@@ -6252,7 +6252,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Party_id_identification",
                         "required": false,
@@ -6276,7 +6276,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Name_and_address_line",
                         "required": false,
@@ -6310,7 +6310,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Party_name",
                         "required": false,
@@ -6349,7 +6349,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Street_and_number_P_O__Box",
                         "required": false,
@@ -6373,7 +6373,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Country_sub_entity_identification",
@@ -6381,7 +6381,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Postcode_identification",
@@ -6389,7 +6389,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Country__coded",
@@ -6397,7 +6397,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -6407,14 +6407,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Place_location_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "LOCATION_IDENTIFICATION",
@@ -6422,7 +6422,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Place_location_identification",
                         "required": false,
@@ -6451,7 +6451,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_one_identification",
                         "required": false,
@@ -6480,7 +6480,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_two_identification",
                         "required": false,
@@ -6509,7 +6509,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -6524,14 +6524,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "REFERENCE",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Reference_qualifier",
                             "required": false,
@@ -6562,14 +6562,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 5,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "DATE_TIME_PERIOD",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Date_time_period_qualifier",
                             "required": false,
@@ -6602,14 +6602,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "DOCUMENT_MESSAGE_NAME",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Document_message_name__coded",
                             "required": false,
@@ -6638,7 +6638,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Document_message_number",
                             "required": false,
@@ -6667,7 +6667,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "Number_of_copies_of_document_required",
@@ -6675,7 +6675,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "float",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "Number_of_originals_of_document_required",
@@ -6683,7 +6683,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "float",
-                        "subelements": []
+                        "components": []
                       }
                     ]
                   },
@@ -6693,14 +6693,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 5,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "DATE_TIME_PERIOD",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Date_time_period_qualifier",
                             "required": false,
@@ -6733,14 +6733,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Contact_function__coded",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "DEPARTMENT_OR_EMPLOYEE_DETAILS",
@@ -6748,7 +6748,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Department_or_employee_identification",
                             "required": false,
@@ -6769,14 +6769,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 5,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "COMMUNICATION_CONTACT",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Communication_number",
                             "required": false,
@@ -6806,14 +6806,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Allowance_or_charge_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "ALLOWANCE_CHARGE_INFORMATION",
@@ -6821,7 +6821,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Allowance_or_charge_number",
                         "required": false,
@@ -6840,7 +6840,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Calculation_sequence_indicator__coded",
@@ -6848,7 +6848,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "SPECIAL_SERVICES_IDENTIFICATION",
@@ -6856,7 +6856,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Special_services__coded",
                         "required": false,
@@ -6887,14 +6887,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Country_of_origin__coded",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Type_of_duty_regime__coded",
@@ -6902,7 +6902,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Special_conditions__coded",
@@ -6910,7 +6910,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Special_conditions__coded_1",
@@ -6918,7 +6918,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Special_conditions__coded_2",
@@ -6926,7 +6926,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Special_conditions__coded_3",
@@ -6934,7 +6934,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Special_conditions__coded_4",
@@ -6942,7 +6942,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -6957,14 +6957,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "QUANTITY_DETAILS",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Quantity_qualifier",
                             "required": false,
@@ -6990,14 +6990,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Range_type_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "RANGE",
@@ -7005,7 +7005,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Measure_unit_qualifier",
                             "required": false,
@@ -7038,14 +7038,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "PERCENTAGE_DETAILS",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Percentage_qualifier",
                             "required": false,
@@ -7081,14 +7081,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Range_type_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "RANGE",
@@ -7096,7 +7096,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Measure_unit_qualifier",
                             "required": false,
@@ -7129,14 +7129,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "MONETARY_AMOUNT",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Monetary_amount_type_qualifier",
                             "required": false,
@@ -7172,14 +7172,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Range_type_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "RANGE",
@@ -7187,7 +7187,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Measure_unit_qualifier",
                             "required": false,
@@ -7220,14 +7220,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "RATE_DETAILS",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Rate_type_qualifier",
                             "required": false,
@@ -7258,14 +7258,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Range_type_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "RANGE",
@@ -7273,7 +7273,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Measure_unit_qualifier",
                             "required": false,
@@ -7306,14 +7306,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Duty_tax_fee_function_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "DUTY_TAX_FEE_TYPE",
@@ -7321,7 +7321,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Duty_tax_fee_type__coded",
                             "required": false,
@@ -7350,7 +7350,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Duty_tax_fee_account_identification",
                             "required": false,
@@ -7374,7 +7374,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "DUTY_TAX_FEE_DETAIL",
@@ -7382,7 +7382,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Duty_tax_fee_rate_identification",
                             "required": false,
@@ -7426,7 +7426,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "Party_tax_identification_number",
@@ -7434,7 +7434,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       }
                     ]
                   },
@@ -7444,14 +7444,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "MONETARY_AMOUNT",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Monetary_amount_type_qualifier",
                             "required": false,
@@ -7496,14 +7496,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Transport_stage_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Conveyance_reference_number",
@@ -7511,7 +7511,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "MODE_OF_TRANSPORT",
@@ -7519,7 +7519,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Mode_of_transport__coded",
                         "required": false,
@@ -7538,7 +7538,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Type_of_means_of_transport_identification",
                         "required": false,
@@ -7557,7 +7557,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Carrier_identification",
                         "required": false,
@@ -7586,7 +7586,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "EXCESS_TRANSPORTATION_INFORMATION",
@@ -7594,7 +7594,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Excess_transportation_reason__coded",
                         "required": false,
@@ -7618,7 +7618,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Id_of_means_of_transport_identification",
                         "required": false,
@@ -7659,14 +7659,14 @@
                     "truncatable": true,
                     "minOccurances": 1,
                     "maxOccurances": 1,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "Place_location_qualifier",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       },
                       {
                         "tag": "LOCATION_IDENTIFICATION",
@@ -7674,7 +7674,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Place_location_identification",
                             "required": false,
@@ -7703,7 +7703,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Related_place_location_one_identification",
                             "required": false,
@@ -7732,7 +7732,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Related_place_location_two_identification",
                             "required": false,
@@ -7761,7 +7761,7 @@
                         "required": false,
                         "truncatable": true,
                         "dataType": "string",
-                        "subelements": []
+                        "components": []
                       }
                     ]
                   },
@@ -7771,14 +7771,14 @@
                     "truncatable": true,
                     "minOccurances": 0,
                     "maxOccurances": 5,
-                    "elements": [
+                    "fields": [
                       {
                         "tag": "DATE_TIME_PERIOD",
                         "repeat": false,
                         "required": false,
                         "truncatable": true,
                         "dataType": "composite",
-                        "subelements": [
+                        "components": [
                           {
                             "tag": "Date_time_period_qualifier",
                             "required": false,
@@ -7813,14 +7813,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Terms_of_delivery_function__coded",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Transport_charges_method_of_payment__coded",
@@ -7828,7 +7828,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "TERMS_OF_DELIVERY",
@@ -7836,7 +7836,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Terms_of_delivery__coded",
                         "required": false,
@@ -7872,14 +7872,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 2,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Place_location_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "LOCATION_IDENTIFICATION",
@@ -7887,7 +7887,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Place_location_identification",
                         "required": false,
@@ -7916,7 +7916,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_one_identification",
                         "required": false,
@@ -7945,7 +7945,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Related_place_location_two_identification",
                         "required": false,
@@ -7974,7 +7974,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               }
@@ -7991,14 +7991,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Sector_subject_identification_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "REQUIREMENT_CONDITION_IDENTIFICATION",
@@ -8006,7 +8006,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Requirement_condition_identification",
                         "required": false,
@@ -8030,7 +8030,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               },
@@ -8040,14 +8040,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "REFERENCE",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Reference_qualifier",
                         "required": false,
@@ -8078,14 +8078,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -8111,14 +8111,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "Text_subject_qualifier",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "Text_function__coded",
@@ -8126,7 +8126,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   },
                   {
                     "tag": "TEXT_REFERENCE",
@@ -8134,7 +8134,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Free_text__coded",
                         "required": false,
@@ -8158,7 +8158,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Free_text",
                         "required": false,
@@ -8192,7 +8192,7 @@
                     "required": false,
                     "truncatable": true,
                     "dataType": "string",
-                    "subelements": []
+                    "components": []
                   }
                 ]
               }
@@ -8206,14 +8206,14 @@
         "truncatable": true,
         "minOccurances": 1,
         "maxOccurances": 1,
-        "elements": [
+        "fields": [
           {
             "tag": "SECTION_IDENTIFICATION",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "string",
-            "subelements": []
+            "components": []
           }
         ]
       },
@@ -8223,14 +8223,14 @@
         "truncatable": true,
         "minOccurances": 0,
         "maxOccurances": 10,
-        "elements": [
+        "fields": [
           {
             "tag": "CONTROL",
             "repeat": false,
             "required": false,
             "truncatable": true,
             "dataType": "composite",
-            "subelements": [
+            "components": [
               {
                 "tag": "Control_qualifier",
                 "required": false,
@@ -8261,14 +8261,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "MONETARY_AMOUNT",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Monetary_amount_type_qualifier",
                     "required": false,
@@ -8309,14 +8309,14 @@
                 "truncatable": true,
                 "minOccurances": 1,
                 "maxOccurances": 1,
-                "elements": [
+                "fields": [
                   {
                     "tag": "REFERENCE",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Reference_qualifier",
                         "required": false,
@@ -8347,14 +8347,14 @@
                 "truncatable": true,
                 "minOccurances": 0,
                 "maxOccurances": 5,
-                "elements": [
+                "fields": [
                   {
                     "tag": "DATE_TIME_PERIOD",
                     "repeat": false,
                     "required": false,
                     "truncatable": true,
                     "dataType": "composite",
-                    "subelements": [
+                    "components": [
                       {
                         "tag": "Date_time_period_qualifier",
                         "required": false,
@@ -8389,14 +8389,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Duty_tax_fee_function_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "DUTY_TAX_FEE_TYPE",
@@ -8404,7 +8404,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Duty_tax_fee_type__coded",
                     "required": false,
@@ -8433,7 +8433,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Duty_tax_fee_account_identification",
                     "required": false,
@@ -8457,7 +8457,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "DUTY_TAX_FEE_DETAIL",
@@ -8465,7 +8465,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Duty_tax_fee_rate_identification",
                     "required": false,
@@ -8509,7 +8509,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Party_tax_identification_number",
@@ -8517,7 +8517,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -8527,14 +8527,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 2,
-            "elements": [
+            "fields": [
               {
                 "tag": "MONETARY_AMOUNT",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Monetary_amount_type_qualifier",
                     "required": false,
@@ -8577,14 +8577,14 @@
             "truncatable": true,
             "minOccurances": 1,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Allowance_or_charge_qualifier",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "ALLOWANCE_CHARGE_INFORMATION",
@@ -8592,7 +8592,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Allowance_or_charge_number",
                     "required": false,
@@ -8611,7 +8611,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Calculation_sequence_indicator__coded",
@@ -8619,7 +8619,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "SPECIAL_SERVICES_IDENTIFICATION",
@@ -8627,7 +8627,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Special_services__coded",
                     "required": false,
@@ -8658,14 +8658,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 1,
-            "elements": [
+            "fields": [
               {
                 "tag": "Country_of_origin__coded",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Type_of_duty_regime__coded",
@@ -8673,7 +8673,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded",
@@ -8681,7 +8681,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_1",
@@ -8689,7 +8689,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_2",
@@ -8697,7 +8697,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_3",
@@ -8705,7 +8705,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               },
               {
                 "tag": "Special_conditions__coded_4",
@@ -8713,7 +8713,7 @@
                 "required": false,
                 "truncatable": true,
                 "dataType": "string",
-                "subelements": []
+                "components": []
               }
             ]
           },
@@ -8723,14 +8723,14 @@
             "truncatable": true,
             "minOccurances": 0,
             "maxOccurances": 2,
-            "elements": [
+            "fields": [
               {
                 "tag": "MONETARY_AMOUNT",
                 "repeat": false,
                 "required": false,
                 "truncatable": true,
                 "dataType": "composite",
-                "subelements": [
+                "components": [
                   {
                     "tag": "Monetary_amount_type_qualifier",
                     "required": false,

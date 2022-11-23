@@ -47,14 +47,14 @@ function generateRecordForUnits(EDIUnitMapping[] umaps, string typeName, GenCont
 }
 
 function generateRecordForSegment(EDISegMapping segmap, GenContext context) returns BalRecord {
-    string sTypeName = startWithUppercase(segmap.tag + "_SType");
+    string sTypeName = startWithUppercase(segmap.tag + "_Type");
     BalRecord? erec = context.typeRecords[sTypeName];
     if erec is BalRecord {
         return erec;
     }
 
     BalRecord srec = new(sTypeName);
-    foreach EDIElementMapping emap in segmap.elements {
+    foreach EDIFieldMapping emap in segmap.fields {
         BalType? balType = ediToBalTypes[emap.dataType]; 
         if emap.dataType == COMPOSITE {
             balType = generateRecordForComposite(emap, context);
@@ -68,10 +68,10 @@ function generateRecordForSegment(EDISegMapping segmap, GenContext context) retu
     return srec;
 }
 
-function generateRecordForComposite(EDIElementMapping emap, GenContext context) returns BalRecord {
+function generateRecordForComposite(EDIFieldMapping emap, GenContext context) returns BalRecord {
     string cTypeName = generateTypeName(emap.tag, context);
     BalRecord crec = new(cTypeName);
-    foreach EDISubelementMapping submap in emap.subelements {
+    foreach EDIComponentMapping submap in emap.components {
         BalType? balType = ediToBalTypes[submap.dataType];
         if balType is BalType {
             crec.addField(balType, submap.tag, false, !submap.required);
@@ -96,11 +96,11 @@ function generateTypeName(string tag, GenContext context) returns string {
     if num is int {
         int newNum = num + 1;
         context.typeNumber[tag] = newNum;
-        return startWithUppercase(string `${tag}${newNum}_Type`);
+        return startWithUppercase(string `${tag}${newNum}_GType`);
     } else {
         int newNum = 1;
         context.typeNumber[tag] = newNum;
-        return startWithUppercase(tag + "_Type");
+        return startWithUppercase(tag + "_GType");
     }
 }
 
