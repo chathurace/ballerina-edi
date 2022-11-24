@@ -2,12 +2,12 @@ import ballerina/io;
 import chathurace/edi;
 
 public function main() returns error? {
-    json mappingJson = check io:fileReadJson("resources/edi-mapping1.json");
-    edi:EDIMapping mapping = check mappingJson.cloneWithType(edi:EDIMapping);
+    edi:EDIMapping mapping = check edi:readMappingFromFile("resources/edi-mapping1.json");
 
     string ediText = check io:fileReadString("resources/edi-sample1.edi");
     json orderData = check edi:readEDIAsJson(ediText, mapping);
+    io:println(orderData.toJsonString());
 
     SimpleOrder order1 = check orderData.cloneWithType(SimpleOrder);
-    io:println("Order date: " + (order1.header.date?:"Not given"));
+    io:println(order1.header.date);
 }
