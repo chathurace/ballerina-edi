@@ -9,7 +9,7 @@ EDI module provides functionality to read EDI files and map those to Ballerina r
 | Ballerina Language                | 2201.2.3              |
 | Java Development Kit (JDK)        | 11                    |
 
-## Example code
+## Example
 
 A simple EDI mapping is shown below (let's assume that this is saved in edi-mapping1.json file):
 
@@ -42,6 +42,8 @@ ITM*K-80*250
 ITM*T-46*28
 ````
 
+### Code generation
+
 Ballerina records for the above the EDI mapping in edi-mapping1.json can be generated as follows (generated Ballerina records will be saved in orderRecords.bal):
 
 ```
@@ -67,6 +69,8 @@ type SimpleOrder record {|
    Items_Type[] items?;
 |};
 ```
+
+### Parsing EDI files
 
 Below code reads the edi-sample1.edi into a json variable named "orderData" and then convert the orderData json to the generated record "SimpleOrder". Once EDI documents are mapped to the SimpleOrder record, any attribute in the EDI can be accessed using record's fields as shown in the example code below.
 
@@ -122,3 +126,23 @@ public function main() returns error? {
 A sample Ballerina project which uses the EDI library is given in [here](https://github.com/chathurace/ballerina-edi/tree/main/samples/simpleEDI)
 
 Also refer to [resources](https://github.com/chathurace/ballerina-edi/tree/main/edi/resources) section for example mapping files and edi samples.
+
+## Converting Smooks mapping files to Ballerina mappings
+
+Smooks library is commonly used for parsing EDI files. Therefore, many organizations have already created Smooks mappings for their EDIs. Ballerina EDI module can convert such Smooks mapping to Ballerina compatible mappings, so that organizations can start using Ballerina for EDI processing without redoing any mappings.
+
+Following command converts Smooks EDI mapping to Ballerina EDI mapping:
+
+```
+java -jar edi.jar smooksToBal <Smooks mapping xml file path> <Ballerina mapping json file path>
+```
+
+For example, the below command converts the Smooks mapping for EDIFACT [Invoice EDI](https://github.com/chathurace/ballerina-edi/blob/main/edi/resources/d3a-invoic-1/mapping.xml) to a Ballerina compatible json mapping:
+
+```
+java -jar edi.jar smooksToBal d3a-invoic-1/mapping.xml d3a-invoic-1/mapping.json
+```
+
+Generated json mapping is shown [here](https://github.com/chathurace/ballerina-edi/blob/main/edi/resources/d3a-invoic-1/mapping.json).
+
+Then we can use the generated json mapping to generate Ballerina records and to parse invoice EDIs as shown above.
