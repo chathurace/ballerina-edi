@@ -1,35 +1,37 @@
 ## Module Overview
 
-EDI module provides functionality to read EDI files and map those to Ballerina records or 'json' type. Mapping for the EDI file has to be provided in json format. Once the mapping is provided, EDI module can read EDI files (in text format) in to Ballerina records or json value, which can be accessed from Ballerina code.
+EDI module provides functionality to read EDI files and map those to Ballerina records or 'json' type. Mappings for EDI files have to be provided in json format. Once a mapping is provided, EDI module can generate Ballerina records to hold data in any EDI file represented by that mapping. Then the module can read EDI files (in text format) in to generated Ballerina records or as json values, which can be accessed from Ballerina code.
 
 ## Compatibility
 
 |                                   | Version               |
 |:---------------------------------:|:---------------------:|
-| Ballerina Language                | 2201.2.2              |
+| Ballerina Language                | 2201.2.3              |
 | Java Development Kit (JDK)        | 11                    |
 
-## Example code
+## Example
 
-A simple EDI mapping file is shown below:
+A simple EDI mapping is shown below (let's assume that this is saved in edi-mapping1.json file):
 
 ````json
 {
-    "delimiters" : {"segment" : "~", "element" : "*"},
+    "name": "SimpleOrder",
+    "delimiters" : {"segment" : "~", "field" : "*"},
     "segments" : {
         "HDR": {
             "tag" : "header",
-            "elements" : [{"tag" : "orderId"}, {"tag" : "organization"}, {"tag" : "date"}]
+            "fields" : [{"tag" : "orderId"}, {"tag" : "organization"}, {"tag" : "date"}]
         },
         "ITM": {
             "tag" : "items",
             "maxOccurances" : -1,
-            "elements" : [{"tag" : "item"}, {"tag" : "quantity", "dataType" : "int"}]
+            "fields" : [{"tag" : "item"}, {"tag" : "quantity", "dataType" : "int"}]
         }
     }
 }
 ````
-Above mapping can be used to parse EDI documents with one HDR segment (mapped to "header") and any number of ITM segments (mapped to "items"). HDR segment contains three elements, which are mapped to "orderId", "organization" and "date". Each ITM segment contains two elements mapped to "item" and "quantity". Below is a sample EDI document that can be parsed using the above mapping:
+
+Above mapping can be used to parse EDI documents with one HDR segment (mapped to "header") and any number of ITM segments (mapped to "items"). HDR segment contains three fields, which are mapped to "orderId", "organization" and "date". Each ITM segment contains two fields mapped to "item" and "quantity". Below is a sample EDI document that can be parsed using the above mapping (let's assume that below EDI is saved in edi-sample1.edi file):
 
 ````edi
 HDR*ORDER_1201*ABC_Store*2008-01-01~
@@ -39,23 +41,55 @@ ITM*D-10*58
 ITM*K-80*250
 ITM*T-46*28
 ````
-Using the EDI module, Ballerina programs can read EDI documents into json types (or user defined types) and access them similar to any other json or record variable.
+
+### Code generation
+
+Ballerina records for the above the EDI mapping in edi-mapping1.json can be generated as follows (generated Ballerina records will be saved in orderRecords.bal):
+
+```
+java -jar edi.jar codegen edi-mapping1.json orderRecords.bal
+```
+
+Generated Ballerina records for the above mapping are shown below:
+
+```ballerina
+type Header_Type record {|
+   string orderId?;
+   string organization?;
+   string date?;
+|};
+
+type Items_Type record {|
+   string item?;
+   int quantity?;
+|};
+
+type SimpleOrder record {|
+   Header_Type header;
+   Items_Type[] items?;
+|};
+```
+
+### Parsing EDI files
+
+Below code reads the edi-sample1.edi into a json variable named "orderData" and then convert the orderData json to the generated record "SimpleOrder". Once EDI documents are mapped to the SimpleOrder record, any attribute in the EDI can be accessed using record's fields as shown in the example code below.
 
 ````ballerina
 import ballerina/io;
 import chathurace/edi;
 
 public function main() returns error? {
-    json mappingJson = check io:fileReadJson("resources/edi-mapping1.json");
-    edi:EDIMapping mapping = check mappingJson.cloneWithType(edi:EDIMapping);
+    edi:EDIMapping mapping = check edi:readMappingFromFile("resources/edi-mapping1.json");
 
     string ediText = check io:fileReadString("resources/edi-sample1.edi");
-    json output = check edi:readEDIAsJson(ediText, mapping);
+    json orderData = check edi:readEDIAsJson(ediText, mapping);
+    io:println(orderData.toJsonString());
 
-    io:println(output.toJsonString());
+    SimpleOrder order1 = check orderData.cloneWithType(SimpleOrder);
+    io:println(order1.header.date);
 }
 ````
-Above code will read the EDI document "edi-sample1.edi" and generates a json according to the mapping "edi-mapping1.json". Output json will be as follows:
+"orderData" json variable value will be as follows (i.e. output of io:println(orderData.toJsonString())):
 
 ````json
 {
@@ -88,137 +122,27 @@ Above code will read the EDI document "edi-sample1.edi" and generates a json acc
   ]
 }
 ````
-It is also possible to convert generated json output to user defined types in Ballerina. Using this method, it is possible to access and change values of EDI documents as below:
 
-````ballerina
-json mappingText = check io:fileReadJson("resources/edi-mapping2.json");
-edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
+A sample Ballerina project which uses the EDI library is given in [here](https://github.com/chathurace/ballerina-edi/tree/main/samples/simpleEDI)
 
-string ediText = check io:fileReadString("resources/edi-sample2.edi");
-json output = check edi:readEDIAsJson(ediText, mapping);
-io:println(output.toJsonString());
+Also refer to [resources](https://github.com/chathurace/ballerina-edi/tree/main/edi/resources) section for example mapping files and edi samples.
 
-OrderDetails orderDetails = check output.cloneWithType(OrderDetails);
-io:println("Customer's city: " + orderDetails.organization.address.city);
-````
+## Converting Smooks mapping files to Ballerina mappings
 
-In addition to segments and basic elements, EDI documents can contain composite elements (i.e. elements with subelements) and repeating elements. Below is a sample EDI mapping file containing such composite elements and repeating elements. This has three segment types. 
+Smooks library is commonly used for parsing EDI files. Therefore, many organizations have already created Smooks mappings for their EDIs. Ballerina EDI module can convert such Smooks mapping to Ballerina compatible mappings, so that organizations can start using Ballerina for EDI processing without redoing any mappings.
 
-1. HDR segment with two elements named "orderId" and "date"
-2. ORG segment with four elements named "partnerCode", "name", "address" and "contact". Among those, "address" is a composite element containing three subelements named "streetAddress", "city" and "state". "contact" is repeating element, which can contain multiple values.
-3. ITM segment with three elements. Among those, "comments" is a both a repeating and composite element. Therefore, there can be multiple comments each having two subelements named "author" and "text".
+Following command converts Smooks EDI mapping to Ballerina EDI mapping:
 
-````json
-{
-    "delimiters" : {"segment" : "~", "element" : "*", "subelement" : ":", "repetition" : "^"},
-    "segments" : { 
-        "HDR": {
-            "tag" : "header",
-            "elements" : [{"tag" : "orderId"}, {"tag" : "date"}]
-        },
-        "ORG": {
-            "tag" : "organization",
-            "elements" : [
-                {"tag" : "partnerCode"}, 
-                {"tag" : "name"}, 
-                {"tag" : "address", "subelements" : [{"tag" : "streetAddress"}, {"tag" : "city"}, {"tag" : "country"}]}, 
-                {"tag" : "contact", "repeat" : true}]
-        },
-        "ITM": {
-            "tag" : "items",
-            "maxOccurances" : -1,
-            "elements" : [
-                {"tag" : "item"}, 
-                {"tag" : "quantity", "dataType" : "int"}, 
-                {"tag" : "comments", "repeat" : true, "dataType" : "composite", "subelements" : [{"tag" : "author"}, {"tag" : "text"}]}]
-        }
-    }
-}
-````
+```
+java -jar edi.jar smooksToBal <Smooks mapping xml file path> <Ballerina mapping json file path>
+```
 
-Below is a sample EDI file that can be parsed using the above EDI mapping:
+For example, the below command converts the Smooks mapping for EDIFACT [Invoice EDI](https://github.com/chathurace/ballerina-edi/blob/main/edi/resources/d3a-invoic-1/mapping.xml) to a Ballerina compatible json mapping:
 
-```` edi
-HDR*1201*2008-01-01~
-ORG*P120*ABC Store*67, Park road:Colombo:Sri Lanka*01 678 8908^04 732 3721^04 783 6702~
-ITM*A-250*12*N/A~
-ITM*A-45*100*Kevin:Urgent~
-ITM*D-10*58*Smith:REF 10053^Steven:Pre orders~
-ITM*K-80*250*Steven:Before December~
-ITM*T-46*28*Smith:Discount code AA1200~
-````
-Same Ballerina code used in the previous example, can be used to parse this EDI document as well by updating the EDI mapping. Once parsed, it will generate a json variable as below:
+```
+java -jar edi.jar smooksToBal d3a-invoic-1/mapping.xml d3a-invoic-1/mapping.json
+```
 
-````json
-{
-    "header": {
-      "orderId": "1201",
-      "date": "2008-01-01"
-    },
-    "organization": {
-      "partnerCode": "P120",
-      "name": "ABC Store",
-      "address": {
-        "streetAddress": "67, Park road",
-        "city": "Colombo",
-        "country": "Sri Lanka"
-      },
-      "contact": [
-        "01 678 8908",
-        "04 732 3721",
-        "04 783 6702"
-      ]
-    },
-    "items": [
-      {
-        "item": "A-250",
-        "quantity": 12,
-        "comments": []
-      },
-      {
-        "item": "A-45",
-        "quantity": 100,
-        "comments": [
-          {
-            "author": "Kevin",
-            "text": "Urgent"
-          }
-        ]
-      },
-      {
-        "item": "D-10",
-        "quantity": 58,
-        "comments": [
-          {
-            "author": "Smith",
-            "text": "REF 10053"
-          },
-          {
-            "author": "Steven",
-            "text": "Pre orders"
-          }
-        ]
-      },
-      {
-        "item": "K-80",
-        "quantity": 250,
-        "comments": [
-          {
-            "author": "Steven",
-            "text": "Before December"
-          }
-        ]
-      },
-      {
-        "item": "T-46",
-        "quantity": 28,
-        "comments": [
-          {
-            "author": "Smith",
-            "text": "Discount code AA1200"
-          }
-        ]
-      }
-    ]
-}
-````
+Generated json mapping is shown [here](https://github.com/chathurace/ballerina-edi/blob/main/edi/resources/d3a-invoic-1/mapping.json).
+
+Then we can use the generated json mapping to generate Ballerina records and to parse invoice EDIs as shown above.
