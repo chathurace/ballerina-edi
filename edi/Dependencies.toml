@@ -9,7 +9,7 @@ dependencies-toml-version = "2"
 [[package]]
 org = "ballerina"
 name = "io"
-version = "1.3.0"
+version = "1.3.1"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
@@ -56,7 +56,7 @@ modules = [
 [[package]]
 org = "ballerina"
 name = "observe"
-version = "1.0.5"
+version = "1.0.6"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
 ]
@@ -64,7 +64,7 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "regex"
-version = "1.3.0"
+version = "1.3.2"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.string"}
@@ -88,7 +88,7 @@ modules = [
 [[package]]
 org = "chathurace"
 name = "edi"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "log"},
@@ -96,7 +96,11 @@ dependencies = [
 	{org = "ballerina", name = "test"}
 ]
 modules = [
-	{org = "chathurace", packageName = "edi", moduleName = "edi"}
+	{org = "chathurace", packageName = "edi", moduleName = "edi"},
+	{org = "chathurace", packageName = "edi", moduleName = "edi.codegen"},
+	{org = "chathurace", packageName = "edi", moduleName = "edi.core"},
+	{org = "chathurace", packageName = "edi", moduleName = "edi.integrationTests"},
+	{org = "chathurace", packageName = "edi", moduleName = "edi.mapgen"}
 ]
 
 

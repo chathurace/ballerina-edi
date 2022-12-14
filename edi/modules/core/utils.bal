@@ -1,5 +1,4 @@
 import ballerina/regex;
-import ballerina/io;
 
 function convertToType(string value, EDIDataType dataType, string? decimalSeparator) returns SimpleType|error {
     match dataType {
@@ -85,35 +84,44 @@ function printSegGroupMap(EDISegGroupMapping sgmap) returns string {
     return string `[Segment group: ${sgcode} ]`;
 }
 
-function getString(any|error option1, string option2) returns string {
+public function getString(any|error option1, string option2) returns string {
     if option1 is string {
         return option1;
     }
     return option2;
 }
 
-
-public function main(string[] args) returns error? {
-
-    string usage = string `Usage:
-        Ballerina code generation for edi mapping: java -jar edi.jar codegen <mapping json path> <output bal file path>
-        Smooks to json mapping conversion: java -jar edi.jar smooksToBal <smooks mapping xml path> <mapping json path>`;
-    
-    if args.length() != 3 {
-        io:println(usage);
-        return;
+function getMinimumFields(EDISegMapping segmap) returns int {
+    int fieldIndex = segmap.fields.length() - 1;
+    while fieldIndex > 0 {
+        if segmap.fields[fieldIndex].required {
+            break;
+        }
+        fieldIndex -= 1;
     }
+    return fieldIndex;
+}
 
-    string mode = args[0].trim();
-    if mode == "codegen" {
-        json mappingText = check io:fileReadJson(args[1].trim());
-        EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);  
-        check generateCodeToFile(mapping, args[2].trim());    
-    } else if mode == "smooksToBal" {
-        check processMapping(args[1].trim(), args[2].trim()); 
-    } else {
-        io:println(usage);
+function getMinimumCompositeFields(EDIFieldMapping emap) returns int {
+    int fieldIndex = emap.components.length() - 1;
+    while fieldIndex > 0 {
+        if emap.components[fieldIndex].required {
+            break;
+        }
+        fieldIndex -= 1;
     }
+    return fieldIndex;
+}
+
+function getMinimumSubcomponentFields(EDIComponentMapping emap) returns int {
+    int fieldIndex = emap.subcomponents.length() - 1;
+    while fieldIndex > 0 {
+        if emap.subcomponents[fieldIndex].required {
+            break;
+        }
+        fieldIndex -= 1;
+    }
+    return fieldIndex;
 }
 
 

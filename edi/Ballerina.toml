@@ -1,5 +1,6 @@
 [package]
 org = "chathurace"
 name = "edi"
-version = "0.4.0"
+version = "0.4.1"
+export=["edi", "edi.core"]
 distribution = "2201.2.3"

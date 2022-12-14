@@ -1,5 +1,5 @@
 import ballerina/io;
-import chathurace/edi;
+import chathurace/edi.core as edi;
 
 public function main() returns error? {
     edi:EDIMapping mapping = check edi:readMappingFromFile("resources/edi-mapping1.json");
