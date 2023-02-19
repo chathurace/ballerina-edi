@@ -3,4 +3,4 @@ org = "chathurace"
 name = "edi"
 version = "0.4.1"
 export=["edi", "edi.core"]
-distribution = "2201.2.3"
+distribution = "2201.3.2"
