@@ -48,7 +48,7 @@ function testComplexRecordGeneration() {
    r2.addField(r2, "subteams", true, true);
    r2.addField(BSTRING, "location", false, true);
 
-   string expected = "type Team record {| string teamName; Person lead?; Person[] members; Team[] subteams?; string location?;|};";
+   string expected = "public type Team record {| string teamName; Person lead?; Person[] members; Team[] subteams?; string location?;|};";
    string output = regex:replaceAll(r2.toString(), "\n", "");
    output = regex:replaceAll(output, "   ", " ");
    test:assertEquals(output, expected);
@@ -80,6 +80,13 @@ function testCodeGenForD3A_Invoic_Mapping() returns error? {
     json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
     edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
     check generateCodeToFile(mapping, "tests/d3a-invoic-1-mapping-records.bal");
+}
+
+@test:Config {}
+function testCodeGenFor_X12_834() returns error? {
+    json mappingText = check io:fileReadJson("modules/codegen/resources/834.json");
+    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
+    check generateCodeToFile(mapping, "modules/codegen/tests/x12_834.bal");
 }
 
 @test:Config {}

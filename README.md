@@ -146,3 +146,5 @@ java -jar edi.jar smooksToBal d3a-invoic-1/mapping.xml d3a-invoic-1/mapping.json
 Generated json mapping is shown [here](https://github.com/chathurace/ballerina-edi/blob/main/edi/resources/d3a-invoic-1/mapping.json).
 
 Then we can use the generated json mapping to generate Ballerina records and to parse invoice EDIs as shown above.
+
+

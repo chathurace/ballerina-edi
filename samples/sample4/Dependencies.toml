@@ -8,22 +8,6 @@ dependencies-toml-version = "2"
 
 [[package]]
 org = "ballerina"
-name = "file"
-version = "1.5.0"
-dependencies = [
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "log"},
-	{org = "ballerina", name = "os"},
-	{org = "ballerina", name = "regex"},
-	{org = "ballerina", name = "time"}
-]
-modules = [
-	{org = "ballerina", packageName = "file", moduleName = "file"}
-]
-
-[[package]]
-org = "ballerina"
 name = "io"
 version = "1.3.1"
 dependencies = [
@@ -67,15 +51,12 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "log"
-version = "2.5.1"
+version = "2.4.1"
 dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"},
 	{org = "ballerina", name = "observe"}
-]
-modules = [
-	{org = "ballerina", packageName = "log", moduleName = "log"}
 ]
 
 [[package]]
@@ -88,43 +69,36 @@ dependencies = [
 
 [[package]]
 org = "ballerina"
-name = "os"
-version = "1.5.0"
-dependencies = [
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "jballerina.java"}
-]
-
-[[package]]
-org = "ballerina"
 name = "regex"
 version = "1.3.2"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.string"}
 ]
-modules = [
-	{org = "ballerina", packageName = "regex", moduleName = "regex"}
-]
 
 [[package]]
-org = "ballerina"
-name = "test"
+org = "ballerinai"
+name = "observe"
 version = "0.0.0"
-scope = "testOnly"
 dependencies = [
-	{org = "ballerina", name = "jballerina.java"}
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "observe"}
 ]
 modules = [
-	{org = "ballerina", packageName = "test", moduleName = "test"}
+	{org = "ballerinai", packageName = "observe", moduleName = "observe"}
 ]
 
 [[package]]
-org = "ballerina"
-name = "time"
-version = "2.2.3"
+org = "chathura"
+name = "sample4"
+version = "0.1.0"
 dependencies = [
-	{org = "ballerina", name = "jballerina.java"}
+	{org = "ballerina", name = "io"},
+	{org = "ballerinai", name = "observe"},
+	{org = "chathurace", name = "edi"}
+]
+modules = [
+	{org = "chathura", packageName = "sample4", moduleName = "sample4"}
 ]
 
 [[package]]
@@ -132,19 +106,15 @@ org = "chathurace"
 name = "edi"
 version = "0.4.1"
 dependencies = [
-	{org = "ballerina", name = "file"},
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "log"},
-	{org = "ballerina", name = "regex"},
-	{org = "ballerina", name = "test"}
+	{org = "ballerina", name = "regex"}
 ]
 modules = [
 	{org = "chathurace", packageName = "edi", moduleName = "edi"},
 	{org = "chathurace", packageName = "edi", moduleName = "edi.codegen"},
 	{org = "chathurace", packageName = "edi", moduleName = "edi.core"},
-	{org = "chathurace", packageName = "edi", moduleName = "edi.esl"},
 	{org = "chathurace", packageName = "edi", moduleName = "edi.integrationTests"},
-	{org = "chathurace", packageName = "edi", moduleName = "edi.libgen"},
 	{org = "chathurace", packageName = "edi", moduleName = "edi.mapgen"}
 ]
 

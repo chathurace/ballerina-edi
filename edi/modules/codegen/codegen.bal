@@ -109,6 +109,7 @@ public class BalRecord {
     string name;
     BalField[] fields = [];
     boolean closed = true;
+    boolean publicRecord  = true;
 
     function init(string name) {
         self.name = name;
@@ -129,7 +130,7 @@ public class BalRecord {
         recString += string `${self.closed?"|":""}};` + "\n";
 
         if !anonymous[0] {
-            recString = string `type ${self.name} ${recString}`; 
+            recString = string `${self.publicRecord?"public":""} type ${self.name} ${recString}`; 
         }
         return recString;
     }
@@ -165,7 +166,7 @@ class BalField {
             typeName = t.toString();
         }
         // string typeName = t is BalRecord? t.name : t.toString();
-        return string `${typeName}${self.array?"[]":""} ${self.name}${self.optional?"?":""};`;
+        return string `${typeName}${self.array?"[]":""} ${self.name}${(self.optional && !self.array)?"?":""}${self.array?" = []":""};`;
     }
 }
 

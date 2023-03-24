@@ -18,6 +18,11 @@ function readEDISegment(EDISegMapping segMapping, string[] fields, EDIMapping ma
     EDISegment ediRecord = {};
     int fieldNumber = 0;
     while (fieldNumber < fields.length() - 1) {
+        if fieldNumber >= segMapping.fields.length() {
+            return error(string `EDI segment [1] in the message containes more fields than the segment definition [2]
+            [1] ${fields.toJsonString()}
+            [2] ${segMapping.toJsonString()}`);
+        }
         EDIFieldMapping fieldMapping = segMapping.fields[fieldNumber];
         string tag = fieldMapping.tag;
 

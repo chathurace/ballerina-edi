@@ -9,7 +9,7 @@ type ParseConext record {|
 |};
 
 public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|error {
-    log:printDebug(string `Reading ${ediText.substring(0,30)} ...`);
+    log:printDebug(string `Reading EDI text ${ediText.substring(0,30)} ...`);
     EDISegmentGroup ediDoc = check readEDI(ediText, mapping);
     return ediDoc.toJson();
 }

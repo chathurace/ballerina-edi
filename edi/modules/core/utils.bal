@@ -35,7 +35,7 @@ public function getDataType(string typeString) returns EDIDataType {
     return STRING;
 }
 
-function split(string text, string delimiter) returns string[] {
+public function split(string text, string delimiter) returns string[] {
     string preparedText = prepareToSplit(text, delimiter);
     string validatedDelimiter = validateDelimiter(delimiter);
     return regex:split(preparedText, validatedDelimiter);
