@@ -6,7 +6,7 @@ EDI module provides functionality to read EDI files and map those to Ballerina r
 
 |                                   | Version               |
 |:---------------------------------:|:---------------------:|
-| Ballerina Language                | 2201.2.3              |
+| Ballerina Language                | 2201.4.0              |
 | Java Development Kit (JDK)        | 11                    |
 
 ## Example
@@ -146,5 +146,35 @@ java -jar edi.jar smooksToBal d3a-invoic-1/mapping.xml d3a-invoic-1/mapping.json
 Generated json mapping is shown [here](https://github.com/chathurace/ballerina-edi/blob/main/edi/resources/d3a-invoic-1/mapping.json).
 
 Then we can use the generated json mapping to generate Ballerina records and to parse invoice EDIs as shown above.
+
+## Converting EDI Schema Language (ESL) files to Ballerina compatible mappings
+
+ESL is another format used in EDI mapping files. Ballerina EDI tool can convert ESL mappings into Ballerina compatible mappings, so that it is possible to generate Ballerina code and process EDIs defined in ESLs without having to rework on mappings.
+
+Following command converts ESL files to Ballerina EDI mappings. Note that segment definitions are given in a separate file, which is usually shared by multiple ESL mappings.
+
+```
+java -jar edi.jar eslToBal <ESL file path or directory> <ESL segment definitions path> <output json path or directory>
+```
+
+If a directory containing multiple ESL files are given as the input, all ESLs will be converted to Ballerina mappings and written into the output directory.
+
+## Creating an EDI library
+
+Usually, organizations have to work with many EDI formats, and integration developers need to have a convinient way to work on EDI data with minimum effort. EDI libraries facilitate this by allowing organizations to pack all EDI processing code for to thier EDI collections in to an importable library. Therefore, integration developers can simply import those libraries and convert EDI messages into Ballerin records in a single line of code.
+
+Below command can be used to generate EDI libraries:
+
+```
+java -jar edi.jar libgen <org name> <library name> <EDI mappings folder> <output folder>
+```
+
+Ballerina library project will be generated in the output folder. This library can be built and published by issuing "bal pack" and "bal push" commands from the output folder.
+
+Then the generated library can be imported into any Ballerina project and generated utility functions of the library can be invoked to parse EDI messages into Ballerin records. For example, the below Ballerina code parses an X12 834 EDI message into the corresponding Ballerina record:
+
+```
+m834:Benefit_Enrollment_and_Maintenance b = check hl71:readEDI(ediText, hl71:EDI_834).ensureType();
+```
 
 

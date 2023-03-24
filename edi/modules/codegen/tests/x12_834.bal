@@ -1,10 +1,10 @@
-type Transaction_Set_Header_Type record {|
+public type Transaction_Set_Header_Type record {|
    string Transaction_Set_Identifier_Code;
    string Transaction_Set_Control_Number;
    string Implementation_Convention_Reference?;
 |};
 
-type Beginning_Segment_Type record {|
+public type Beginning_Segment_Type record {|
    string Transaction_Set_Purpose_Code;
    string Reference_Identification;
    string Date;
@@ -16,7 +16,7 @@ type Beginning_Segment_Type record {|
    string Security_Level_Code?;
 |};
 
-type Reference_Identifier_GType record {|
+public type Reference_Identifier_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -25,26 +25,26 @@ type Reference_Identifier_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_Type record {|
+public type Reference_Information_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier_GType Reference_Identifier?;
 |};
 
-type Date_or_Time_or_Period_Type record {|
+public type Date_or_Time_or_Period_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Monetary_Amount_Information_Type record {|
+public type Monetary_Amount_Information_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Composite_Unit_of_Measure_GType record {|
+public type Composite_Unit_of_Measure_GType record {|
    string Unit_or_Basis_for_Measurement_Code;
    float Exponent?;
    float Multiplier?;
@@ -62,14 +62,14 @@ type Composite_Unit_of_Measure_GType record {|
    float Multiplier_4?;
 |};
 
-type Quantity_Information_Type record {|
+public type Quantity_Information_Type record {|
    string Quantity_Qualifier;
    float Quantity?;
    Composite_Unit_of_Measure_GType Composite_Unit_of_Measure?;
    string Free_form_Information?;
 |};
 
-type Party_Identification_Type record {|
+public type Party_Identification_Type record {|
    string Entity_Identifier_Code;
    string Name?;
    string Identification_Code_Qualifier?;
@@ -78,17 +78,17 @@ type Party_Identification_Type record {|
    string Entity_Identifier_Code_1?;
 |};
 
-type Additional_Name_Information_Type record {|
+public type Additional_Name_Information_Type record {|
    string Name;
    string Name_1?;
 |};
 
-type Party_Location_Type record {|
+public type Party_Location_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_Type record {|
+public type Geographic_Location_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -98,7 +98,7 @@ type Geographic_Location_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Administrative_Communications_Contact_Type record {|
+public type Administrative_Communications_Contact_Type record {|
    string Contact_Function_Code;
    string Name?;
    string Communication_Number_Qualifier?;
@@ -110,7 +110,7 @@ type Administrative_Communications_Contact_Type record {|
    string Contact_Inquiry_Reference?;
 |};
 
-type Account_Identification_Type record {|
+public type Account_Identification_Type record {|
    string Account_Number;
    string Name?;
    string Identification_Code_Qualifier?;
@@ -122,7 +122,7 @@ type Account_Identification_Type record {|
    string Benefit_Status_Code?;
 |};
 
-type Reference_Identifier2_GType record {|
+public type Reference_Identifier2_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -131,19 +131,19 @@ type Reference_Identifier2_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_1_Type record {|
+public type Reference_Information_1_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier2_GType Reference_Identifier?;
 |};
 
-type Party_Location_1_Type record {|
+public type Party_Location_1_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_1_Type record {|
+public type Geographic_Location_1_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -153,7 +153,7 @@ type Geographic_Location_1_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Administrative_Communications_Contact_1_Type record {|
+public type Administrative_Communications_Contact_1_Type record {|
    string Contact_Function_Code;
    string Name?;
    string Communication_Number_Qualifier?;
@@ -165,45 +165,45 @@ type Administrative_Communications_Contact_1_Type record {|
    string Contact_Inquiry_Reference?;
 |};
 
-type Date_or_Time_or_Period_1_Type record {|
+public type Date_or_Time_or_Period_1_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Monetary_Amount_Information_1_Type record {|
+public type Monetary_Amount_Information_1_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type A_1100_Loop_GType record {|
+public type A_1100_Loop_GType record {|
    Account_Identification_Type Account_Identification?;
-   Reference_Information_1_Type[] Reference_Information_1?;
+   Reference_Information_1_Type[] Reference_Information_1 = [];
    Party_Location_1_Type Party_Location_1?;
    Geographic_Location_1_Type Geographic_Location_1?;
-   Administrative_Communications_Contact_1_Type[] Administrative_Communications_Contact_1?;
+   Administrative_Communications_Contact_1_Type[] Administrative_Communications_Contact_1 = [];
    Date_or_Time_or_Period_1_Type Date_or_Time_or_Period_1?;
    Monetary_Amount_Information_1_Type Monetary_Amount_Information_1?;
 |};
 
-type A_1000_Loop_GType record {|
+public type A_1000_Loop_GType record {|
    Party_Identification_Type Party_Identification;
-   Additional_Name_Information_Type[] Additional_Name_Information?;
-   Party_Location_Type[] Party_Location?;
+   Additional_Name_Information_Type[] Additional_Name_Information = [];
+   Party_Location_Type[] Party_Location = [];
    Geographic_Location_Type Geographic_Location?;
-   Administrative_Communications_Contact_Type[] Administrative_Communications_Contact?;
-   A_1100_Loop_GType[] A_1100_Loop?;
+   Administrative_Communications_Contact_Type[] Administrative_Communications_Contact = [];
+   A_1100_Loop_GType[] A_1100_Loop = [];
 |};
 
-type Medicare_Status_Code_GType record {|
+public type Medicare_Status_Code_GType record {|
    string Medicare_Plan_Code;
    string Eligibility_Reason_Code?;
    string Eligibility_Reason_Code_1?;
    string Eligibility_Reason_Code_2?;
 |};
 
-type Insured_Benefit_Type record {|
+public type Insured_Benefit_Type record {|
    string Yes_No_Condition_or_Response_Code;
    string Individual_Relationship_Code;
    string Maintenance_Type_Code?;
@@ -223,7 +223,7 @@ type Insured_Benefit_Type record {|
    int Number?;
 |};
 
-type Reference_Identifier3_GType record {|
+public type Reference_Identifier3_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -232,20 +232,20 @@ type Reference_Identifier3_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_2_Type record {|
+public type Reference_Information_2_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier3_GType Reference_Identifier?;
 |};
 
-type Date_or_Time_or_Period_2_Type record {|
+public type Date_or_Time_or_Period_2_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Individual_or_Organizational_Name_Type record {|
+public type Individual_or_Organizational_Name_Type record {|
    string Entity_Identifier_Code;
    string Entity_Type_Qualifier;
    string Name_Last_or_Organization_Name?;
@@ -260,7 +260,7 @@ type Individual_or_Organizational_Name_Type record {|
    string Name_Last_or_Organization_Name_1?;
 |};
 
-type Administrative_Communications_Contact_2_Type record {|
+public type Administrative_Communications_Contact_2_Type record {|
    string Contact_Function_Code;
    string Name?;
    string Communication_Number_Qualifier?;
@@ -272,12 +272,12 @@ type Administrative_Communications_Contact_2_Type record {|
    string Contact_Inquiry_Reference?;
 |};
 
-type Party_Location_2_Type record {|
+public type Party_Location_2_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_2_Type record {|
+public type Geographic_Location_2_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -287,13 +287,13 @@ type Geographic_Location_2_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Composite_Race_or_Ethnicity_Information_GType record {|
+public type Composite_Race_or_Ethnicity_Information_GType record {|
    string Race_or_Ethnicity_Code?;
    string Code_List_Qualifier_Code?;
    string Industry_Code?;
 |};
 
-type Demographic_Information_Type record {|
+public type Demographic_Information_Type record {|
    string Date_Time_Period_Format_Qualifier?;
    string Date_Time_Period?;
    string Gender_Code?;
@@ -307,7 +307,7 @@ type Demographic_Information_Type record {|
    string Industry_Code?;
 |};
 
-type Electronic_Funds_Transfer_Information_Type record {|
+public type Electronic_Funds_Transfer_Information_Type record {|
    string A__DFI__Identification_Number;
    string Account_Number;
    string Yes_No_Condition_or_Response_Code;
@@ -316,7 +316,7 @@ type Electronic_Funds_Transfer_Information_Type record {|
    string A__DFI__ID_Number_Qualifier?;
 |};
 
-type Employment_Class_Type record {|
+public type Employment_Class_Type record {|
    string Employment_Class_Code?;
    string Employment_Class_Code_1?;
    string Employment_Class_Code_2?;
@@ -325,7 +325,7 @@ type Employment_Class_Type record {|
    string Occupation_Code?;
 |};
 
-type Individual_Income_Type record {|
+public type Individual_Income_Type record {|
    string Frequency_Code;
    float Monetary_Amount;
    float Quantity?;
@@ -334,13 +334,13 @@ type Individual_Income_Type record {|
    string Currency_Code?;
 |};
 
-type Monetary_Amount_Information_2_Type record {|
+public type Monetary_Amount_Information_2_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Health_Information_Type record {|
+public type Health_Information_Type record {|
    string Health_Related_Code?;
    float Height?;
    float Weight?;
@@ -350,7 +350,7 @@ type Health_Information_Type record {|
    string Description_1?;
 |};
 
-type Health_Care_Code_Information_GType record {|
+public type Health_Care_Code_Information_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -362,7 +362,7 @@ type Health_Care_Code_Information_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_1_GType record {|
+public type Health_Care_Code_Information_1_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -374,7 +374,7 @@ type Health_Care_Code_Information_1_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_2_GType record {|
+public type Health_Care_Code_Information_2_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -386,7 +386,7 @@ type Health_Care_Code_Information_2_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_3_GType record {|
+public type Health_Care_Code_Information_3_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -398,7 +398,7 @@ type Health_Care_Code_Information_3_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_4_GType record {|
+public type Health_Care_Code_Information_4_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -410,7 +410,7 @@ type Health_Care_Code_Information_4_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_5_GType record {|
+public type Health_Care_Code_Information_5_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -422,7 +422,7 @@ type Health_Care_Code_Information_5_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_6_GType record {|
+public type Health_Care_Code_Information_6_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -434,7 +434,7 @@ type Health_Care_Code_Information_6_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_7_GType record {|
+public type Health_Care_Code_Information_7_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -446,7 +446,7 @@ type Health_Care_Code_Information_7_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_8_GType record {|
+public type Health_Care_Code_Information_8_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -458,7 +458,7 @@ type Health_Care_Code_Information_8_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_9_GType record {|
+public type Health_Care_Code_Information_9_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -470,7 +470,7 @@ type Health_Care_Code_Information_9_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_10_GType record {|
+public type Health_Care_Code_Information_10_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -482,7 +482,7 @@ type Health_Care_Code_Information_10_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Code_Information_11_GType record {|
+public type Health_Care_Code_Information_11_GType record {|
    string Code_List_Qualifier_Code;
    string Industry_Code;
    string Date_Time_Period_Format_Qualifier?;
@@ -494,7 +494,7 @@ type Health_Care_Code_Information_11_GType record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Health_Care_Information_Codes_Type record {|
+public type Health_Care_Information_Codes_Type record {|
    Health_Care_Code_Information_GType Health_Care_Code_Information;
    Health_Care_Code_Information_1_GType Health_Care_Code_Information_1?;
    Health_Care_Code_Information_2_GType Health_Care_Code_Information_2?;
@@ -509,7 +509,7 @@ type Health_Care_Information_Codes_Type record {|
    Health_Care_Code_Information_11_GType Health_Care_Code_Information_11?;
 |};
 
-type Language_Use_Type record {|
+public type Language_Use_Type record {|
    string Identification_Code_Qualifier?;
    string Identification_Code?;
    string Description?;
@@ -517,22 +517,22 @@ type Language_Use_Type record {|
    string Language_Proficiency_Indicator?;
 |};
 
-type A_2100_Loop_GType record {|
+public type A_2100_Loop_GType record {|
    Individual_or_Organizational_Name_Type Individual_or_Organizational_Name?;
    Administrative_Communications_Contact_2_Type Administrative_Communications_Contact_2?;
    Party_Location_2_Type Party_Location_2?;
    Geographic_Location_2_Type Geographic_Location_2?;
    Demographic_Information_Type Demographic_Information?;
    Electronic_Funds_Transfer_Information_Type Electronic_Funds_Transfer_Information?;
-   Employment_Class_Type[] Employment_Class?;
+   Employment_Class_Type[] Employment_Class = [];
    Individual_Income_Type Individual_Income?;
-   Monetary_Amount_Information_2_Type[] Monetary_Amount_Information_2?;
+   Monetary_Amount_Information_2_Type[] Monetary_Amount_Information_2 = [];
    Health_Information_Type Health_Information?;
-   Health_Care_Information_Codes_Type[] Health_Care_Information_Codes?;
-   Language_Use_Type[] Language_Use?;
+   Health_Care_Information_Codes_Type[] Health_Care_Information_Codes = [];
+   Language_Use_Type[] Language_Use = [];
 |};
 
-type Disability_Information_Type record {|
+public type Disability_Information_Type record {|
    string Disability_Type_Code;
    float Quantity?;
    string Occupation_Code?;
@@ -543,13 +543,13 @@ type Disability_Information_Type record {|
    string Medical_Code_Value?;
 |};
 
-type Date_or_Time_or_Period_3_Type record {|
+public type Date_or_Time_or_Period_3_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Adjustment_Amount_Type record {|
+public type Adjustment_Amount_Type record {|
    string Adjustment_Reason_Code;
    float Monetary_Amount?;
    string Adjustment_Reason_Code_Characteristic?;
@@ -557,13 +557,13 @@ type Adjustment_Amount_Type record {|
    string Late_Reason_Code?;
 |};
 
-type A_2200_Loop_GType record {|
+public type A_2200_Loop_GType record {|
    Disability_Information_Type Disability_Information?;
-   Date_or_Time_or_Period_3_Type[] Date_or_Time_or_Period_3?;
-   Adjustment_Amount_Type[] Adjustment_Amount?;
+   Date_or_Time_or_Period_3_Type[] Date_or_Time_or_Period_3 = [];
+   Adjustment_Amount_Type[] Adjustment_Amount = [];
 |};
 
-type Health_Coverage_Type record {|
+public type Health_Coverage_Type record {|
    string Maintenance_Type_Code;
    string Maintenance_Reason_Code?;
    string Insurance_Line_Code?;
@@ -577,19 +577,19 @@ type Health_Coverage_Type record {|
    string Yes_No_Condition_or_Response_Code_1?;
 |};
 
-type Date_or_Time_or_Period_4_Type record {|
+public type Date_or_Time_or_Period_4_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Monetary_Amount_Information_3_Type record {|
+public type Monetary_Amount_Information_3_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Reference_Identifier4_GType record {|
+public type Reference_Identifier4_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -598,25 +598,25 @@ type Reference_Identifier4_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_3_Type record {|
+public type Reference_Information_3_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier4_GType Reference_Identifier?;
 |};
 
-type Identification_Card_Type record {|
+public type Identification_Card_Type record {|
    string Plan_Coverage_Description;
    string Identification_Card_Type_Code;
    float Quantity?;
    string Action_Code?;
 |};
 
-type Transaction_Set_Line_Number_Type record {|
+public type Transaction_Set_Line_Number_Type record {|
    int Assigned_Number;
 |};
 
-type Individual_or_Organizational_Name_1_Type record {|
+public type Individual_or_Organizational_Name_1_Type record {|
    string Entity_Identifier_Code;
    string Entity_Type_Qualifier;
    string Name_Last_or_Organization_Name?;
@@ -631,7 +631,7 @@ type Individual_or_Organizational_Name_1_Type record {|
    string Name_Last_or_Organization_Name_1?;
 |};
 
-type Party_Identification_1_Type record {|
+public type Party_Identification_1_Type record {|
    string Entity_Identifier_Code;
    string Name?;
    string Identification_Code_Qualifier?;
@@ -640,17 +640,17 @@ type Party_Identification_1_Type record {|
    string Entity_Identifier_Code_1?;
 |};
 
-type Additional_Name_Information_1_Type record {|
+public type Additional_Name_Information_1_Type record {|
    string Name;
    string Name_1?;
 |};
 
-type Party_Location_3_Type record {|
+public type Party_Location_3_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_3_Type record {|
+public type Geographic_Location_3_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -660,7 +660,7 @@ type Geographic_Location_3_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Administrative_Communications_Contact_3_Type record {|
+public type Administrative_Communications_Contact_3_Type record {|
    string Contact_Function_Code;
    string Name?;
    string Communication_Number_Qualifier?;
@@ -672,13 +672,13 @@ type Administrative_Communications_Contact_3_Type record {|
    string Contact_Inquiry_Reference?;
 |};
 
-type Provider_Specialty_Information_GType record {|
+public type Provider_Specialty_Information_GType record {|
    string Provider_Specialty_Code;
    string Agency_Qualifier_Code?;
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Provider_Information_Type record {|
+public type Provider_Information_Type record {|
    string Provider_Code;
    string Reference_Identification_Qualifier?;
    string Reference_Identification?;
@@ -687,13 +687,13 @@ type Provider_Information_Type record {|
    string Provider_Organization_Code?;
 |};
 
-type Date_or_Time_or_Period_5_Type record {|
+public type Date_or_Time_or_Period_5_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Place_or_Location_Type record {|
+public type Place_or_Location_Type record {|
    string Action_Code;
    string Entity_Identifier_Code;
    string Date;
@@ -701,27 +701,27 @@ type Place_or_Location_Type record {|
    string Maintenance_Reason_Code?;
 |};
 
-type A_2310_Loop_GType record {|
+public type A_2310_Loop_GType record {|
    Transaction_Set_Line_Number_Type Transaction_Set_Line_Number?;
    Individual_or_Organizational_Name_1_Type Individual_or_Organizational_Name_1?;
-   Party_Identification_1_Type[] Party_Identification_1?;
+   Party_Identification_1_Type[] Party_Identification_1 = [];
    Additional_Name_Information_1_Type Additional_Name_Information_1?;
-   Party_Location_3_Type[] Party_Location_3?;
-   Geographic_Location_3_Type[] Geographic_Location_3?;
-   Administrative_Communications_Contact_3_Type[] Administrative_Communications_Contact_3?;
+   Party_Location_3_Type[] Party_Location_3 = [];
+   Geographic_Location_3_Type[] Geographic_Location_3 = [];
+   Administrative_Communications_Contact_3_Type[] Administrative_Communications_Contact_3 = [];
    Provider_Information_Type Provider_Information?;
-   Date_or_Time_or_Period_5_Type[] Date_or_Time_or_Period_5?;
+   Date_or_Time_or_Period_5_Type[] Date_or_Time_or_Period_5 = [];
    Place_or_Location_Type Place_or_Location?;
 |};
 
-type Coordination_of_Benefits_Type record {|
+public type Coordination_of_Benefits_Type record {|
    string Payer_Responsibility_Sequence_Number_Code?;
    string Reference_Identification?;
    string Coordination_of_Benefits_Code?;
    string Service_Type_Code?;
 |};
 
-type Reference_Identifier5_GType record {|
+public type Reference_Identifier5_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -730,20 +730,20 @@ type Reference_Identifier5_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_4_Type record {|
+public type Reference_Information_4_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier5_GType Reference_Identifier?;
 |};
 
-type Date_or_Time_or_Period_6_Type record {|
+public type Date_or_Time_or_Period_6_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Individual_or_Organizational_Name_2_Type record {|
+public type Individual_or_Organizational_Name_2_Type record {|
    string Entity_Identifier_Code;
    string Entity_Type_Qualifier;
    string Name_Last_or_Organization_Name?;
@@ -758,17 +758,17 @@ type Individual_or_Organizational_Name_2_Type record {|
    string Name_Last_or_Organization_Name_1?;
 |};
 
-type Additional_Name_Information_2_Type record {|
+public type Additional_Name_Information_2_Type record {|
    string Name;
    string Name_1?;
 |};
 
-type Party_Location_4_Type record {|
+public type Party_Location_4_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_4_Type record {|
+public type Geographic_Location_4_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -778,7 +778,7 @@ type Geographic_Location_4_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Administrative_Communications_Contact_4_Type record {|
+public type Administrative_Communications_Contact_4_Type record {|
    string Contact_Function_Code;
    string Name?;
    string Communication_Number_Qualifier?;
@@ -790,32 +790,32 @@ type Administrative_Communications_Contact_4_Type record {|
    string Contact_Inquiry_Reference?;
 |};
 
-type A_2330_Loop_GType record {|
+public type A_2330_Loop_GType record {|
    Individual_or_Organizational_Name_2_Type Individual_or_Organizational_Name_2?;
    Additional_Name_Information_2_Type Additional_Name_Information_2?;
-   Party_Location_4_Type[] Party_Location_4?;
+   Party_Location_4_Type[] Party_Location_4 = [];
    Geographic_Location_4_Type Geographic_Location_4?;
    Administrative_Communications_Contact_4_Type Administrative_Communications_Contact_4?;
 |};
 
-type A_2320_Loop_GType record {|
+public type A_2320_Loop_GType record {|
    Coordination_of_Benefits_Type Coordination_of_Benefits?;
-   Reference_Information_4_Type[] Reference_Information_4?;
-   Date_or_Time_or_Period_6_Type[] Date_or_Time_or_Period_6?;
-   A_2330_Loop_GType[] A_2330_Loop?;
+   Reference_Information_4_Type[] Reference_Information_4 = [];
+   Date_or_Time_or_Period_6_Type[] Date_or_Time_or_Period_6 = [];
+   A_2330_Loop_GType[] A_2330_Loop = [];
 |};
 
-type A_2300_Loop_GType record {|
+public type A_2300_Loop_GType record {|
    Health_Coverage_Type Health_Coverage?;
-   Date_or_Time_or_Period_4_Type[] Date_or_Time_or_Period_4?;
-   Monetary_Amount_Information_3_Type[] Monetary_Amount_Information_3?;
-   Reference_Information_3_Type[] Reference_Information_3?;
-   Identification_Card_Type[] Identification_Card?;
-   A_2310_Loop_GType[] A_2310_Loop?;
-   A_2320_Loop_GType[] A_2320_Loop?;
+   Date_or_Time_or_Period_4_Type[] Date_or_Time_or_Period_4 = [];
+   Monetary_Amount_Information_3_Type[] Monetary_Amount_Information_3 = [];
+   Reference_Information_3_Type[] Reference_Information_3 = [];
+   Identification_Card_Type[] Identification_Card = [];
+   A_2310_Loop_GType[] A_2310_Loop = [];
+   A_2320_Loop_GType[] A_2320_Loop = [];
 |};
 
-type Life_Coverage_Type record {|
+public type Life_Coverage_Type record {|
    string Maintenance_Type_Code;
    string Maintenance_Reason_Code?;
    string Insurance_Line_Code?;
@@ -825,19 +825,19 @@ type Life_Coverage_Type record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Monetary_Amount_Information_4_Type record {|
+public type Monetary_Amount_Information_4_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Date_or_Time_or_Period_7_Type record {|
+public type Date_or_Time_or_Period_7_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Reference_Identifier6_GType record {|
+public type Reference_Identifier6_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -846,14 +846,14 @@ type Reference_Identifier6_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_5_Type record {|
+public type Reference_Information_5_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier6_GType Reference_Identifier?;
 |};
 
-type Beneficiary_or_Owner_Information_Type record {|
+public type Beneficiary_or_Owner_Information_Type record {|
    string Primary_or_Contingent_Code?;
    float Percentage_as_Decimal?;
    string Individual_Relationship_Code?;
@@ -862,7 +862,7 @@ type Beneficiary_or_Owner_Information_Type record {|
    string Type_of_Account_Code?;
 |};
 
-type Individual_or_Organizational_Name_3_Type record {|
+public type Individual_or_Organizational_Name_3_Type record {|
    string Entity_Identifier_Code;
    string Entity_Type_Qualifier;
    string Name_Last_or_Organization_Name?;
@@ -877,7 +877,7 @@ type Individual_or_Organizational_Name_3_Type record {|
    string Name_Last_or_Organization_Name_1?;
 |};
 
-type Party_Identification_2_Type record {|
+public type Party_Identification_2_Type record {|
    string Entity_Identifier_Code;
    string Name?;
    string Identification_Code_Qualifier?;
@@ -886,17 +886,17 @@ type Party_Identification_2_Type record {|
    string Entity_Identifier_Code_1?;
 |};
 
-type Additional_Name_Information_3_Type record {|
+public type Additional_Name_Information_3_Type record {|
    string Name;
    string Name_1?;
 |};
 
-type Party_Location_5_Type record {|
+public type Party_Location_5_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_5_Type record {|
+public type Geographic_Location_5_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -906,13 +906,13 @@ type Geographic_Location_5_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Composite_Race_or_Ethnicity_Information2_GType record {|
+public type Composite_Race_or_Ethnicity_Information2_GType record {|
    string Race_or_Ethnicity_Code?;
    string Code_List_Qualifier_Code?;
    string Industry_Code?;
 |};
 
-type Demographic_Information_1_Type record {|
+public type Demographic_Information_1_Type record {|
    string Date_Time_Period_Format_Qualifier?;
    string Date_Time_Period?;
    string Gender_Code?;
@@ -926,7 +926,7 @@ type Demographic_Information_1_Type record {|
    string Industry_Code?;
 |};
 
-type A_2410_Loop_GType record {|
+public type A_2410_Loop_GType record {|
    Beneficiary_or_Owner_Information_Type Beneficiary_or_Owner_Information?;
    Individual_or_Organizational_Name_3_Type Individual_or_Organizational_Name_3?;
    Party_Identification_2_Type Party_Identification_2?;
@@ -936,15 +936,15 @@ type A_2410_Loop_GType record {|
    Demographic_Information_1_Type Demographic_Information_1?;
 |};
 
-type A_2400_Loop_GType record {|
+public type A_2400_Loop_GType record {|
    Life_Coverage_Type Life_Coverage?;
-   Monetary_Amount_Information_4_Type[] Monetary_Amount_Information_4?;
-   Date_or_Time_or_Period_7_Type[] Date_or_Time_or_Period_7?;
-   Reference_Information_5_Type[] Reference_Information_5?;
-   A_2410_Loop_GType[] A_2410_Loop?;
+   Monetary_Amount_Information_4_Type[] Monetary_Amount_Information_4 = [];
+   Date_or_Time_or_Period_7_Type[] Date_or_Time_or_Period_7 = [];
+   Reference_Information_5_Type[] Reference_Information_5 = [];
+   A_2410_Loop_GType[] A_2410_Loop = [];
 |};
 
-type Flexible_Spending_Account_Type record {|
+public type Flexible_Spending_Account_Type record {|
    string Maintenance_Type_Code;
    string Flexible_Spending_Account_Selection_Code?;
    string Maintenance_Reason_Code?;
@@ -956,19 +956,19 @@ type Flexible_Spending_Account_Type record {|
    string Product_Option_Code_2?;
 |};
 
-type Monetary_Amount_Information_5_Type record {|
+public type Monetary_Amount_Information_5_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Date_or_Time_or_Period_8_Type record {|
+public type Date_or_Time_or_Period_8_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Reference_Identifier7_GType record {|
+public type Reference_Identifier7_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -977,21 +977,21 @@ type Reference_Identifier7_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_6_Type record {|
+public type Reference_Information_6_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier7_GType Reference_Identifier?;
 |};
 
-type A_2500_Loop_GType record {|
+public type A_2500_Loop_GType record {|
    Flexible_Spending_Account_Type Flexible_Spending_Account?;
-   Monetary_Amount_Information_5_Type[] Monetary_Amount_Information_5?;
-   Date_or_Time_or_Period_8_Type[] Date_or_Time_or_Period_8?;
-   Reference_Information_6_Type[] Reference_Information_6?;
+   Monetary_Amount_Information_5_Type[] Monetary_Amount_Information_5 = [];
+   Date_or_Time_or_Period_8_Type[] Date_or_Time_or_Period_8 = [];
+   Reference_Information_6_Type[] Reference_Information_6 = [];
 |};
 
-type Retirement_Product_Type record {|
+public type Retirement_Product_Type record {|
    string Maintenance_Type_Code;
    string Insurance_Line_Code?;
    string Maintenance_Reason_Code?;
@@ -1003,13 +1003,13 @@ type Retirement_Product_Type record {|
    string Plan_Coverage_Description?;
 |};
 
-type Date_or_Time_or_Period_9_Type record {|
+public type Date_or_Time_or_Period_9_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Reference_Identifier8_GType record {|
+public type Reference_Identifier8_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -1018,14 +1018,14 @@ type Reference_Identifier8_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_7_Type record {|
+public type Reference_Information_7_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier8_GType Reference_Identifier?;
 |};
 
-type Investment_Vehicle_Selection_Type record {|
+public type Investment_Vehicle_Selection_Type record {|
    string Description;
    float Percentage_as_Decimal?;
    float Monetary_Amount?;
@@ -1035,13 +1035,13 @@ type Investment_Vehicle_Selection_Type record {|
    float Monetary_Amount_1?;
 |};
 
-type Monetary_Amount_Information_6_Type record {|
+public type Monetary_Amount_Information_6_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Composite_Unit_of_Measure2_GType record {|
+public type Composite_Unit_of_Measure2_GType record {|
    string Unit_or_Basis_for_Measurement_Code;
    float Exponent?;
    float Multiplier?;
@@ -1059,14 +1059,14 @@ type Composite_Unit_of_Measure2_GType record {|
    float Multiplier_4?;
 |};
 
-type Quantity_Information_1_Type record {|
+public type Quantity_Information_1_Type record {|
    string Quantity_Qualifier;
    float Quantity?;
    Composite_Unit_of_Measure2_GType Composite_Unit_of_Measure?;
    string Free_form_Information?;
 |};
 
-type Composite_Unit_of_Measure3_GType record {|
+public type Composite_Unit_of_Measure3_GType record {|
    string Unit_or_Basis_for_Measurement_Code;
    float Exponent?;
    float Multiplier?;
@@ -1084,18 +1084,18 @@ type Composite_Unit_of_Measure3_GType record {|
    float Multiplier_4?;
 |};
 
-type File_Information_Type record {|
+public type File_Information_Type record {|
    string Fixed_Format_Information;
    string Record_Format_Code?;
    Composite_Unit_of_Measure3_GType Composite_Unit_of_Measure?;
 |};
 
-type Relationship_Type record {|
+public type Relationship_Type record {|
    string Individual_Relationship_Code;
    int Number?;
 |};
 
-type Individual_or_Organizational_Name_4_Type record {|
+public type Individual_or_Organizational_Name_4_Type record {|
    string Entity_Identifier_Code;
    string Entity_Type_Qualifier;
    string Name_Last_or_Organization_Name?;
@@ -1110,18 +1110,18 @@ type Individual_or_Organizational_Name_4_Type record {|
    string Name_Last_or_Organization_Name_1?;
 |};
 
-type Additional_Name_Information_4_Type record {|
+public type Additional_Name_Information_4_Type record {|
    string Name;
    string Name_1?;
 |};
 
-type Composite_Race_or_Ethnicity_Information3_GType record {|
+public type Composite_Race_or_Ethnicity_Information3_GType record {|
    string Race_or_Ethnicity_Code?;
    string Code_List_Qualifier_Code?;
    string Industry_Code?;
 |};
 
-type Demographic_Information_2_Type record {|
+public type Demographic_Information_2_Type record {|
    string Date_Time_Period_Format_Qualifier?;
    string Date_Time_Period?;
    string Gender_Code?;
@@ -1135,7 +1135,7 @@ type Demographic_Information_2_Type record {|
    string Industry_Code?;
 |};
 
-type Beneficiary_or_Owner_Information_1_Type record {|
+public type Beneficiary_or_Owner_Information_1_Type record {|
    string Primary_or_Contingent_Code?;
    float Percentage_as_Decimal?;
    string Individual_Relationship_Code?;
@@ -1144,7 +1144,7 @@ type Beneficiary_or_Owner_Information_1_Type record {|
    string Type_of_Account_Code?;
 |};
 
-type Reference_Identifier9_GType record {|
+public type Reference_Identifier9_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -1153,14 +1153,14 @@ type Reference_Identifier9_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_8_Type record {|
+public type Reference_Information_8_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier9_GType Reference_Identifier?;
 |};
 
-type Property_or_Entity_Identification_Type record {|
+public type Property_or_Entity_Identification_Type record {|
    string Entity_Identifier_Code;
    string Entity_Identifier_Code_1?;
    string Entity_Identifier_Code_2?;
@@ -1168,12 +1168,12 @@ type Property_or_Entity_Identification_Type record {|
    string Entity_Identifier_Code_4?;
 |};
 
-type Party_Location_6_Type record {|
+public type Party_Location_6_Type record {|
    string Address_Information;
    string Address_Information_1?;
 |};
 
-type Geographic_Location_6_Type record {|
+public type Geographic_Location_6_Type record {|
    string City_Name?;
    string State_or_Province_Code?;
    string Postal_Code?;
@@ -1183,29 +1183,29 @@ type Geographic_Location_6_Type record {|
    string Country_Subdivision_Code?;
 |};
 
-type Date_or_Time_or_Period_10_Type record {|
+public type Date_or_Time_or_Period_10_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type A_2620_Loop_GType record {|
+public type A_2620_Loop_GType record {|
    Property_or_Entity_Identification_Type Property_or_Entity_Identification?;
    Party_Location_6_Type Party_Location_6?;
    Geographic_Location_6_Type Geographic_Location_6?;
-   Date_or_Time_or_Period_10_Type[] Date_or_Time_or_Period_10?;
+   Date_or_Time_or_Period_10_Type[] Date_or_Time_or_Period_10 = [];
 |};
 
-type A_2610_Loop_GType record {|
+public type A_2610_Loop_GType record {|
    Individual_or_Organizational_Name_4_Type Individual_or_Organizational_Name_4?;
    Additional_Name_Information_4_Type Additional_Name_Information_4?;
    Demographic_Information_2_Type Demographic_Information_2?;
    Beneficiary_or_Owner_Information_1_Type Beneficiary_or_Owner_Information_1?;
-   Reference_Information_8_Type[] Reference_Information_8?;
-   A_2620_Loop_GType[] A_2620_Loop?;
+   Reference_Information_8_Type[] Reference_Information_8 = [];
+   A_2620_Loop_GType[] A_2620_Loop = [];
 |};
 
-type Financial_Contribution_Type record {|
+public type Financial_Contribution_Type record {|
    string Contribution_Code;
    float Percentage_as_Decimal?;
    float Monetary_Amount?;
@@ -1213,13 +1213,13 @@ type Financial_Contribution_Type record {|
    string Yes_No_Condition_or_Response_Code?;
 |};
 
-type Date_or_Time_or_Period_11_Type record {|
+public type Date_or_Time_or_Period_11_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Investment_Vehicle_Selection_1_Type record {|
+public type Investment_Vehicle_Selection_1_Type record {|
    string Description;
    float Percentage_as_Decimal?;
    float Monetary_Amount?;
@@ -1229,13 +1229,13 @@ type Investment_Vehicle_Selection_1_Type record {|
    float Monetary_Amount_1?;
 |};
 
-type Date_or_Time_or_Period_12_Type record {|
+public type Date_or_Time_or_Period_12_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type Composite_Unit_of_Measure4_GType record {|
+public type Composite_Unit_of_Measure4_GType record {|
    string Unit_or_Basis_for_Measurement_Code;
    float Exponent?;
    float Multiplier?;
@@ -1253,14 +1253,14 @@ type Composite_Unit_of_Measure4_GType record {|
    float Multiplier_4?;
 |};
 
-type Quantity_Information_2_Type record {|
+public type Quantity_Information_2_Type record {|
    string Quantity_Qualifier;
    float Quantity?;
    Composite_Unit_of_Measure4_GType Composite_Unit_of_Measure?;
    string Free_form_Information?;
 |};
 
-type Entity_Type record {|
+public type Entity_Type record {|
    int Assigned_Number?;
    string Entity_Identifier_Code?;
    string Identification_Code_Qualifier?;
@@ -1272,7 +1272,7 @@ type Entity_Type record {|
    string Reference_Identification?;
 |};
 
-type Reference_Identifier10_GType record {|
+public type Reference_Identifier10_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -1281,20 +1281,20 @@ type Reference_Identifier10_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_9_Type record {|
+public type Reference_Information_9_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier10_GType Reference_Identifier?;
 |};
 
-type Monetary_Amount_Information_7_Type record {|
+public type Monetary_Amount_Information_7_Type record {|
    string Amount_Qualifier_Code;
    float Monetary_Amount;
    string Credit_Debit_Flag_Code?;
 |};
 
-type Composite_Unit_of_Measure5_GType record {|
+public type Composite_Unit_of_Measure5_GType record {|
    string Unit_or_Basis_for_Measurement_Code;
    float Exponent?;
    float Multiplier?;
@@ -1312,29 +1312,29 @@ type Composite_Unit_of_Measure5_GType record {|
    float Multiplier_4?;
 |};
 
-type File_Information_1_Type record {|
+public type File_Information_1_Type record {|
    string Fixed_Format_Information;
    string Record_Format_Code?;
    Composite_Unit_of_Measure5_GType Composite_Unit_of_Measure?;
 |};
 
-type A_2640_Loop_GType record {|
+public type A_2640_Loop_GType record {|
    Investment_Vehicle_Selection_1_Type Investment_Vehicle_Selection_1?;
-   Date_or_Time_or_Period_12_Type[] Date_or_Time_or_Period_12?;
-   Quantity_Information_2_Type[] Quantity_Information_2?;
-   Entity_Type[] Entity?;
-   Reference_Information_9_Type[] Reference_Information_9?;
-   Monetary_Amount_Information_7_Type[] Monetary_Amount_Information_7?;
-   File_Information_1_Type[] File_Information_1?;
+   Date_or_Time_or_Period_12_Type[] Date_or_Time_or_Period_12 = [];
+   Quantity_Information_2_Type[] Quantity_Information_2 = [];
+   Entity_Type[] Entity = [];
+   Reference_Information_9_Type[] Reference_Information_9 = [];
+   Monetary_Amount_Information_7_Type[] Monetary_Amount_Information_7 = [];
+   File_Information_1_Type[] File_Information_1 = [];
 |};
 
-type A_2630_Loop_GType record {|
+public type A_2630_Loop_GType record {|
    Financial_Contribution_Type Financial_Contribution?;
-   Date_or_Time_or_Period_11_Type[] Date_or_Time_or_Period_11?;
-   A_2640_Loop_GType[] A_2640_Loop?;
+   Date_or_Time_or_Period_11_Type[] Date_or_Time_or_Period_11 = [];
+   A_2640_Loop_GType[] A_2640_Loop = [];
 |};
 
-type Income_Type record {|
+public type Income_Type record {|
    string Type_of_Income_Code;
    string Frequency_Code;
    float Monetary_Amount;
@@ -1350,7 +1350,7 @@ type Income_Type record {|
    string Description?;
 |};
 
-type Composite_Unit_of_Measure6_GType record {|
+public type Composite_Unit_of_Measure6_GType record {|
    string Unit_or_Basis_for_Measurement_Code;
    float Exponent?;
    float Multiplier?;
@@ -1368,30 +1368,30 @@ type Composite_Unit_of_Measure6_GType record {|
    float Multiplier_4?;
 |};
 
-type Quantity_Information_3_Type record {|
+public type Quantity_Information_3_Type record {|
    string Quantity_Qualifier;
    float Quantity?;
    Composite_Unit_of_Measure6_GType Composite_Unit_of_Measure?;
    string Free_form_Information?;
 |};
 
-type Date_or_Time_or_Period_13_Type record {|
+public type Date_or_Time_or_Period_13_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type A_2650_Loop_GType record {|
+public type A_2650_Loop_GType record {|
    Income_Type Income?;
-   Quantity_Information_3_Type[] Quantity_Information_3?;
-   Date_or_Time_or_Period_13_Type[] Date_or_Time_or_Period_13?;
+   Quantity_Information_3_Type[] Quantity_Information_3 = [];
+   Date_or_Time_or_Period_13_Type[] Date_or_Time_or_Period_13 = [];
 |};
 
-type Transaction_Set_Line_Number_1_Type record {|
+public type Transaction_Set_Line_Number_1_Type record {|
    int Assigned_Number;
 |};
 
-type Party_Identification_3_Type record {|
+public type Party_Identification_3_Type record {|
    string Entity_Identifier_Code;
    string Name?;
    string Identification_Code_Qualifier?;
@@ -1400,7 +1400,7 @@ type Party_Identification_3_Type record {|
    string Entity_Identifier_Code_1?;
 |};
 
-type Reference_Identifier11_GType record {|
+public type Reference_Identifier11_GType record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification;
    string Reference_Identification_Qualifier_1?;
@@ -1409,71 +1409,71 @@ type Reference_Identifier11_GType record {|
    string Reference_Identification_2?;
 |};
 
-type Reference_Information_10_Type record {|
+public type Reference_Information_10_Type record {|
    string Reference_Identification_Qualifier;
    string Reference_Identification?;
    string Description?;
    Reference_Identifier11_GType Reference_Identifier?;
 |};
 
-type Date_or_Time_or_Period_14_Type record {|
+public type Date_or_Time_or_Period_14_Type record {|
    string Date_Time_Qualifier;
    string Date_Time_Period_Format_Qualifier;
    string Date_Time_Period;
 |};
 
-type A_2750_Loop_GType record {|
+public type A_2750_Loop_GType record {|
    Party_Identification_3_Type Party_Identification_3;
    Reference_Information_10_Type Reference_Information_10;
    Date_or_Time_or_Period_14_Type Date_or_Time_or_Period_14?;
 |};
 
-type A_2700_Loop_GType record {|
+public type A_2700_Loop_GType record {|
    Transaction_Set_Line_Number_1_Type Transaction_Set_Line_Number_1?;
-   A_2750_Loop_GType[] A_2750_Loop?;
+   A_2750_Loop_GType[] A_2750_Loop = [];
 |};
 
-type A_2600_Loop_GType record {|
+public type A_2600_Loop_GType record {|
    Retirement_Product_Type Retirement_Product?;
-   Date_or_Time_or_Period_9_Type[] Date_or_Time_or_Period_9?;
-   Reference_Information_7_Type[] Reference_Information_7?;
-   Investment_Vehicle_Selection_Type[] Investment_Vehicle_Selection?;
-   Monetary_Amount_Information_6_Type[] Monetary_Amount_Information_6?;
-   Quantity_Information_1_Type[] Quantity_Information_1?;
-   File_Information_Type[] File_Information?;
+   Date_or_Time_or_Period_9_Type[] Date_or_Time_or_Period_9 = [];
+   Reference_Information_7_Type[] Reference_Information_7 = [];
+   Investment_Vehicle_Selection_Type[] Investment_Vehicle_Selection = [];
+   Monetary_Amount_Information_6_Type[] Monetary_Amount_Information_6 = [];
+   Quantity_Information_1_Type[] Quantity_Information_1 = [];
+   File_Information_Type[] File_Information = [];
    Relationship_Type Relationship?;
-   A_2610_Loop_GType[] A_2610_Loop?;
-   A_2630_Loop_GType[] A_2630_Loop?;
-   A_2650_Loop_GType[] A_2650_Loop?;
-   A_2700_Loop_GType[] A_2700_Loop?;
+   A_2610_Loop_GType[] A_2610_Loop = [];
+   A_2630_Loop_GType[] A_2630_Loop = [];
+   A_2650_Loop_GType[] A_2650_Loop = [];
+   A_2700_Loop_GType[] A_2700_Loop = [];
 |};
 
-type A_2000_Loop_GType record {|
+public type A_2000_Loop_GType record {|
    Insured_Benefit_Type Insured_Benefit?;
-   Reference_Information_2_Type[] Reference_Information_2;
-   Date_or_Time_or_Period_2_Type[] Date_or_Time_or_Period_2?;
-   A_2100_Loop_GType[] A_2100_Loop?;
-   A_2200_Loop_GType[] A_2200_Loop?;
-   A_2300_Loop_GType[] A_2300_Loop?;
-   A_2400_Loop_GType[] A_2400_Loop?;
-   A_2500_Loop_GType[] A_2500_Loop?;
-   A_2600_Loop_GType[] A_2600_Loop?;
+   Reference_Information_2_Type[] Reference_Information_2 = [];
+   Date_or_Time_or_Period_2_Type[] Date_or_Time_or_Period_2 = [];
+   A_2100_Loop_GType[] A_2100_Loop = [];
+   A_2200_Loop_GType[] A_2200_Loop = [];
+   A_2300_Loop_GType[] A_2300_Loop = [];
+   A_2400_Loop_GType[] A_2400_Loop = [];
+   A_2500_Loop_GType[] A_2500_Loop = [];
+   A_2600_Loop_GType[] A_2600_Loop = [];
 |};
 
-type Transaction_Set_Trailer_Type record {|
+public type Transaction_Set_Trailer_Type record {|
    int Number_of_Included_Segments;
    string Transaction_Set_Control_Number;
 |};
 
-type Benefit_Enrollment_and_Maintenance record {|
+public type Benefit_Enrollment_and_Maintenance record {|
    Transaction_Set_Header_Type Transaction_Set_Header;
    Beginning_Segment_Type Beginning_Segment;
-   Reference_Information_Type[] Reference_Information?;
-   Date_or_Time_or_Period_Type[] Date_or_Time_or_Period?;
-   Monetary_Amount_Information_Type[] Monetary_Amount_Information?;
-   Quantity_Information_Type[] Quantity_Information?;
-   A_1000_Loop_GType[] A_1000_Loop?;
-   A_2000_Loop_GType[] A_2000_Loop?;
+   Reference_Information_Type[] Reference_Information = [];
+   Date_or_Time_or_Period_Type[] Date_or_Time_or_Period = [];
+   Monetary_Amount_Information_Type[] Monetary_Amount_Information = [];
+   Quantity_Information_Type[] Quantity_Information = [];
+   A_1000_Loop_GType[] A_1000_Loop = [];
+   A_2000_Loop_GType[] A_2000_Loop = [];
    Transaction_Set_Trailer_Type Transaction_Set_Trailer;
 |};
 
