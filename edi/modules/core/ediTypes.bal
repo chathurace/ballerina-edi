@@ -13,10 +13,6 @@ public type EDISegmentGroup record {|
     EDISegment|EDISegment[]|EDISegmentGroup|EDISegmentGroup[]...;
 |};
 
-// public type EDISegmentGroup record {|
-//     EDIUnit|EDIUnit[]...;
-// |};
-
 public type EDISegment map<EDIComponentGroup|EDIComponentGroup[]|SimpleType|SimpleArray?>;
 
 public type EDIUnit EDISegment|EDISegmentGroup;
