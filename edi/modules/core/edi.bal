@@ -1,11 +1,10 @@
 import ballerina/log;
 import ballerina/io;
 
-type ParseConext record {|
-    EDIMapping mapping;
-    string ediText;
+public type ParseConext record {|
+    EDIMapping ediMapping;
     int rawIndex;
-    string segmentText = "";
+    string[] rawSegments = [];
 |};
 
 public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|error {
@@ -19,7 +18,8 @@ public function readEDI(string ediText, EDIMapping ediMapping) returns EDISegmen
     // string preparedEDIText = regex:replaceAll(ediText, "\n", "");
     string preparedEDIText = ediText;
     string[] segmentsDesc = splitAndIgnoreLastEmptyItem(preparedEDIText, ediMapping.delimiters.segment);
-    var [rootGroup, _] = check readEDISegmentGroup(currentMapping, segmentsDesc, 0, ediMapping);
+    ParseConext context = {ediMapping: ediMapping, rawIndex: 0, rawSegments: segmentsDesc};
+    EDISegmentGroup rootGroup = check readEDISegmentGroup(currentMapping, context, true);
     return rootGroup;
 }
 

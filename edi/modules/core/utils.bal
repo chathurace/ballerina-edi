@@ -67,6 +67,22 @@ function prepareToSplit(string content, string delimeter) returns string {
     return preparedContent;
 }
 
+function printEDIUnitMapping(EDIUnitMapping smap) returns string {
+    if smap is EDISegMapping {
+        return string `Segment ${smap.code} | Min: ${smap.minOccurances} | Max: ${smap.maxOccurances} | Trunc: ${smap.truncatable}`;    
+    } else {
+        string sgcode = "";
+        foreach EDIUnitMapping umap in smap.segments {
+            if umap is EDISegMapping {
+                sgcode += umap.code + "-";
+            } else {
+                sgcode += printSegGroupMap(umap);
+            }
+        }
+        return string `[Segment group: ${sgcode} ]`;    
+    }
+}
+
 function printSegMap(EDISegMapping smap) returns string {
     return string `Segment ${smap.code} | Min: ${smap.minOccurances} | Max: ${smap.maxOccurances} | Trunc: ${smap.truncatable}`;
 }
@@ -76,7 +92,7 @@ function printSegGroupMap(EDISegGroupMapping sgmap) returns string {
     foreach EDIUnitMapping umap in sgmap.segments {
         if umap is EDISegMapping {
             sgcode += umap.code + "-";
-        } else if umap is EDISegGroupMapping {
+        } else {
             sgcode += printSegGroupMap(umap);
         }
     }
