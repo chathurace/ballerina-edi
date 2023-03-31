@@ -28,3 +28,10 @@ public function readMappingFromFile(string filePath) returns EDIMapping|error {
     EDIMapping mapping = check mappingJson.cloneWithType(EDIMapping);
     return mapping;
 }
+
+public function readMappingFromString(string mappingString) returns EDIMapping|error {
+    io:StringReader sr = new(mappingString);
+    json mappingJson = check sr.readJson();
+    EDIMapping mapping = check mappingJson.cloneWithType(EDIMapping);
+    return mapping;
+}
