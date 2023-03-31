@@ -25,6 +25,13 @@ public function generateLibrary(string orgName, string libName, string ediMappin
         string recordsPath = check file:joinPath(modulePath, "G_" + ediName + ".bal");
         check codegen:generateCodeToFile(ediMapping, recordsPath);
 
+        string transformer = generateTransformerCode(libName, ediName, ediMapping.name);
+        check io:fileWriteString(check file:joinPath(modulePath, "transformer.bal"), transformer);
+
+        string resourcesPath = check file:joinPath(libPath, "resources");
+        check file:createDir(check file:joinPath(resourcesPath, libName), file:RECURSIVE);
+        check file:copy(mappingFile.absPath, check file:joinPath(resourcesPath, libName, check file:basename(mappingFile.absPath)));
+
         selectionBlocks += generateEDISelectionBlock(libName, ediName, ediMapping.name);
         importsBlock += string `
 import ${libName}.m${ediName};`;
@@ -35,6 +42,8 @@ import ${libName}.m${ediName};`;
     string selectorCode = generateRecordSelectionCode(libName, importsBlock, enumBlock, selectionBlocks);
     string mainBalName = check file:joinPath(libPath, libName + ".bal");
     check io:fileWriteString(mainBalName, selectorCode, io:OVERWRITE);
+
+    check io:fileWriteString(check file:joinPath(libPath, "commonProcessing.bal"), generateGenericProcessors());
 
     // add export package names to the Ballerina.toml file
     string ballerinaTomlPath = check file:joinPath(libPath, "Ballerina.toml");
@@ -66,10 +75,9 @@ public function readEDI(string ediText, EDI_NAMES ediName) returns any|error {
 }
 
 function generateEDISelectionBlock(string libName, string ediName, string mainRecordName) returns string {
-    // string mappingPath = check file:joinPath("modules", "m${ediName}", "resources", "${ediName}.json");
-
     string selectionBlock = string `
         EDI_${ediName} => {
+            check preProcess(ediName, "${mainRecordName}", ediText);
             string mappingPath = check file:joinPath(mappingDirectory, ediName + ".json");
             if !check file:test(mappingPath, file:EXISTS) {
                 return error("Unknown EDI " + ediName + "\nMissing EDI mapping file: " + check file:getAbsolutePath(mappingPath));    
@@ -77,7 +85,8 @@ function generateEDISelectionBlock(string libName, string ediName, string mainRe
             edi:EDIMapping mapping = check edi:readMappingFromFile(mappingPath);
             json jb = check edi:readEDIAsJson(ediText, mapping);
             m${ediName}:${mainRecordName} b = check jb.cloneWithType(m${ediName}:${mainRecordName});
-            return b;
+            any targetEDI = m${ediName}:process(b);
+            return check postProcess(ediName, mapping.name, ediText, targetEDI);
         }`;
     return selectionBlock;
 }
@@ -98,15 +107,22 @@ function createBalLib(string outputPath, string orgName, string libName) returns
 org = "${orgName}"
 name = "${libName}"
 version = "0.1.0"
-distribution = "2201.3.2"
+distribution = "2201.3.1"
 `;
-
     string balTomlPath = check file:joinPath(libPath, "Ballerina.toml");
     check io:fileWriteString(balTomlPath, balTomlContent);
 
-    string resourcesPath = check file:joinPath("modules", "libgen", "resources");
-    check file:copy(check file:joinPath(resourcesPath, "Package.md"), 
-            check file:joinPath(libPath, "Package.md"));
-    check file:copy(check file:joinPath(resourcesPath, "Module.md"), 
-            check file:joinPath(libPath, "Module.md"));
+    string packageMdContent = string `
+    EDI Library
+
+# Package Overview
+This EDI library contains EDI schema files, generated Ballerina types and functions to convert EDI messages to Ballerina types.`;
+    check io:fileWriteString(check file:joinPath(libPath, "Package.md"), packageMdContent);
+
+    string moduleMdContent = string `
+    EDI Library
+
+# Module Overview
+This EDI library contains EDI schema files, generated Ballerina types and functions to convert EDI messages to Ballerina types.`;
+    check io:fileWriteString(check file:joinPath(libPath, "Module.md"), moduleMdContent);
 }

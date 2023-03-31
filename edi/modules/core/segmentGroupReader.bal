@@ -66,11 +66,19 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, ParseConext contex
     return sgContext.segmentGroup;
 }
 
+# Ignores the given mapping if any of the below two conditions are satisfied. This function will be called
+# if a mapping cannot be mapped with the next available segment text.
+# 
+#   1. Given mapping is optional
+#   2. Given mapping is a repeatable one and it has already occured at least once
+# 
+# If above conditions are not met, mapping cannot be ignored, and should result in an error. 
+#
+# + segMapping - Segment mapping or segment group mapping to be ignored
+# + sgContext - Segment group parsing context  
+# + context - EDI parsing context
+# + return - Return error if the given mapping cannot be ignored.
 function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, ParseConext context) returns error? {
-    // Current segment does not match with the current mapping. There can be 3 reasons for this.
-    // 1. Current mapping is optional
-    // 2. Current mapping is a repeatable one and it has already occured at least once
-    // 3. There is an error in the EDI doc
 
     // If the current segment mapping is optional, we can ignore the current mapping and compare the 
     // current segment with the next mapping.
@@ -87,7 +95,7 @@ function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, Pars
         var segments = sgContext.segmentGroup[segMapping.tag];
         if (segments is EDISegment[]|EDISegmentGroup[]) {
             if segments.length() > 0 {
-                // This repeatable segment has already occured at least once.
+                // This repeatable segment has already occured at least once. So move to the next mapping.
                 sgContext.mappingIndex += 1;
                 log:printDebug(string `Completed reading repeatable segment: ${printEDIUnitMapping(segMapping)} | Segment text: ${context.rawSegments[context.rawIndex]}`);
                 return;
