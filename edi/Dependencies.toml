@@ -130,7 +130,7 @@ dependencies = [
 [[package]]
 org = "chathurace"
 name = "edi"
-version = "0.5.1"
+version = "0.5.3"
 dependencies = [
 	{org = "ballerina", name = "file"},
 	{org = "ballerina", name = "io"},

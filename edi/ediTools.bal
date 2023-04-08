@@ -71,11 +71,9 @@ public function main(string[] args) returns error? {
         string libName = args[2];
         string ediMappingFolder = args[3];
         string outputPath = args[4];
-        boolean excludeMappings = false;
-        if args.length() >= 6 && args[5] == "excludeMappings" {
-            excludeMappings = true;
-        }
-        check libgen:generateLibrary(orgName, libName, ediMappingFolder, outputPath, !excludeMappings);
+        // check libgen:generateLibrary(orgName, libName, ediMappingFolder, outputPath, !excludeMappings);
+        libgen:LibGen g = check new(orgName, libName, outputPath, ediMappingFolder, "");
+        check g.generateLibrary();
     } else {
         io:println(usage);
     }

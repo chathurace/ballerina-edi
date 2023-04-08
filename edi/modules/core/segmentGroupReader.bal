@@ -83,7 +83,7 @@ function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, Pars
     // If the current segment mapping is optional, we can ignore the current mapping and compare the 
     // current segment with the next mapping.
     if segMapping.minOccurances == 0 {
-        log:printDebug(string `Ignoring optional segment: ${printEDIUnitMapping(segMapping)} | Segment text: ${context.rawSegments[context.rawIndex]}`);
+        log:printDebug(string `Ignoring optional segment: ${printEDIUnitMapping(segMapping)} | Segment text: ${context.rawIndex < context.rawSegments.length()? context.rawSegments[context.rawIndex] : "-- EOF --"}`);
         sgContext.mappingIndex += 1;
         return;
     }
@@ -97,7 +97,7 @@ function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, Pars
             if segments.length() > 0 {
                 // This repeatable segment has already occured at least once. So move to the next mapping.
                 sgContext.mappingIndex += 1;
-                log:printDebug(string `Completed reading repeatable segment: ${printEDIUnitMapping(segMapping)} | Segment text: ${context.rawSegments[context.rawIndex]}`);
+                log:printDebug(string `Completed reading repeatable segment: ${printEDIUnitMapping(segMapping)} | Segment text: ${context.rawIndex < context.rawSegments.length()? context.rawSegments[context.rawIndex] : "-- EOF --"}`);
                 return;
             } 
         }   
@@ -139,7 +139,7 @@ function placeEDISegment(EDISegment segment, EDISegMapping segMapping, SGParseCo
 function placeEDISegmentGroup(EDISegmentGroup segmentGroup, EDISegGroupMapping segMapping, SGParseContext sgContext, ParseConext context) returns error? {
     if segMapping.maxOccurances == 1 {
         // This is a non-repeatable mapping. So we have to compare the next segment with the next mapping.
-        log:printDebug(string `Completed reading non-repeating segment group ${printSegGroupMap(segMapping)} | Current segment text: ${context.rawSegments[context.rawIndex]}`);
+        log:printDebug(string `Completed reading non-repeating segment group ${printSegGroupMap(segMapping)} | Current segment text: ${context.rawIndex < context.rawSegments.length()? context.rawSegments[context.rawIndex] : "-- EOF --"}`);
         sgContext.mappingIndex += 1;
         sgContext.segmentGroup[segMapping.tag] = segmentGroup;
     } else {
