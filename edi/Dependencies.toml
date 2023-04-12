@@ -81,7 +81,7 @@ modules = [
 [[package]]
 org = "ballerina"
 name = "observe"
-version = "1.0.6"
+version = "1.0.7"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
 ]
@@ -147,5 +147,4 @@ modules = [
 	{org = "chathurace", packageName = "edi", moduleName = "edi.libgen"},
 	{org = "chathurace", packageName = "edi", moduleName = "edi.mapgen"}
 ]
-
 
