@@ -30,7 +30,7 @@ function readEDISegment(EDISegMapping segMapping, string[] fields, EDIMapping ma
         string fieldText = fields[fieldNumber + 1];
         if fieldText.trim().length() == 0 {
             if fieldMapping.required {
-                return error(string `Required field ${fieldMapping.tag} is not provided.`);
+                return error(string `Required field ${fieldMapping.tag} of segment ${segMapping.code} is not provided.`);
             } else {
                 if mapping.preserveEmptyFields {
                     if fieldMapping.repeat {

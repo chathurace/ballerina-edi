@@ -1,8 +1,12 @@
-string configText = string `
+function generateConfigText(string libName) returns string {
+
+    return string `
 
 # DO NOT store this file in a public github repository or any publically accessible location.
 # Use secret value provisioning mechanism such as Kubernetes secrets or Choreo secrets to provide provide these
 # values to the library runtime.
+
+partnerId = "${libName}"
 
 # -- EDI schema location --
 # EDI schemas used for generating this module needs to be accessible during runtime. 
@@ -18,9 +22,9 @@ schemaAccessToken = "<github token>"
 awsAccessKeyId = ""
 awsAccessSecret = ""
 awsRegion = ""
-inputBucket = "m-<partnerId>-input"
-processedBucket = "m-<partnerId>-processed"
-failedBucket = "m-<partnerId>-failed"
+inputBucket = "m-${libName}-input"
+processedBucket = "m-${libName}-processed"
+failedBucket = "m-${libName}-failed"
 
 # Polling interval for reading input S3 bucket for EDI files.
 # If this library is scheduled for periodic execution by an external mechanism (e.g. Choreo scheduled component),
@@ -31,3 +35,5 @@ pollingInterval = 5
 applicationEndpoint = "https://<host>:<port>/path"
 applicationToken = "access token for application endpoint if required"
 `;
+
+}

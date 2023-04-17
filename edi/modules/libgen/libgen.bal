@@ -65,7 +65,7 @@ public class LibGen {
         check self.writeLibFile(ModuleMdText, "Module.md");
 
         check file:createDir(check file:joinPath(self.outputPath, "secrets"), file:RECURSIVE);
-        check io:fileWriteString(check file:joinPath(self.outputPath, "secrets", "secrets.toml"), configText);
+        check io:fileWriteString(check file:joinPath(self.outputPath, "secrets", "secrets.toml"), generateConfigText(self.libName));
     }
 
     function writeLibFile(string content, string targetName) returns error? {
@@ -101,7 +101,7 @@ import chathurace/edi.core as edi;
 import ballerina/http;
 ${self.importsBlock}
 
-final string partnerId = "${self.libName}";
+configurable string partnerId = "${self.libName}";
 
 public enum EDI_NAMES {
     ${self.enumBlock}

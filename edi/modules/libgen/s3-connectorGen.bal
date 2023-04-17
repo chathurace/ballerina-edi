@@ -1,4 +1,5 @@
 string s3ConnectorCode = string `
+
 import ballerinax/aws.s3;
 import ballerina/http;
 import ballerina/regex;
@@ -11,7 +12,7 @@ configurable string awsRegion = ?;
 configurable string inputBucket = ?;
 configurable string processedBucket = ?;
 configurable string failedBucket = ?;
-configurable decimal pollingInterval = 5;
+configurable int pollingInterval = 5;
 
 configurable string schemaURL = ?;
 configurable string schemaAccessToken = ?;
@@ -43,12 +44,12 @@ public function main() {
         if e is error {
             log:printError("Couldn't read EDIs.\n" + e.message());
         }
-        if pollingInterval < 0d {
+        if pollingInterval < 0 {
             // Negative values for polling interval forces this to run one time.
             // Can be used with external schedulars.
             break;
         }
-        runtime:sleep(pollingInterval);
+        runtime:sleep(<decimal>pollingInterval);
     }
 }
 
@@ -74,13 +75,14 @@ public function readEDIs(EDIReader ediReader, s3:Client s3Client) returns error?
             if result is error {
                 log:printError("Failed to process EDI: " + ediName + " of file: " + parts[1] + "\n" + result.message());
                 check tracker.track({partnerId: partnerId, ediName: ediName, ediFileName: parts[1], status: "FAILED"});
-                error? e = s3Client->createObject(failedBucket, fileName, ediText);
+                error? e = s3Client->createObject(failedBucket, partnerId + "/" + fileName, ediText);
                 if e is error {
                     log:printError("Failed to copy invalid EDI " + fileName + " to bucket " + failedBucket + ". " + e.message());
+                    continue;
                 }
-                continue;
             } else {
-                error? e2 = s3Client->createObject(processedBucket, fileName, ediText);
+                check tracker.track({partnerId: partnerId, ediName: ediName, ediFileName: parts[1], status: "PROCESSING COMPLETED"});
+                error? e2 = s3Client->createObject(processedBucket, partnerId + "/" + fileName, ediText);
                 if e2 is error {
                     log:printError("Failed to copy processed EDI " + fileName + " to bucket " + processedBucket + ". " + e2.message());
                     continue;
@@ -91,7 +93,6 @@ public function readEDIs(EDIReader ediReader, s3:Client s3Client) returns error?
                 log:printError("Failed to delete the processed EDI file: " + fileName + " from bucket " + inputBucket + ". " + e3.message());
                 continue;
             }
-            check tracker.track({partnerId: partnerId, ediName: ediName, ediFileName: parts[1], status: "COMPLETED"});
         } else {
             log:printError("Object/file does not contain a valid name in EDI input bucket: " + inputBucket);
         }    
