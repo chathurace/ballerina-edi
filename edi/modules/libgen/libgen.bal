@@ -49,7 +49,10 @@ public class LibGen {
     function createBalLib() returns error? {
         string selectorCode = self.generateLibraryMainCode();
         string mainBalName = check file:joinPath(self.libPath, self.libName + ".bal");
-        check io:fileWriteString(mainBalName, selectorCode, io:OVERWRITE);        
+        check io:fileWriteString(mainBalName, selectorCode, io:OVERWRITE);    
+
+        string restConnectorFilePath = check file:joinPath(self.libPath, "restConnector.bal");
+        check io:fileWriteString(restConnectorFilePath, generateRESTConnector(self.libName));    
 
         // add export package names to the Ballerina.toml file
         string ballerinaTomlPath = check file:joinPath(self.libPath, "Ballerina.toml");
@@ -59,7 +62,6 @@ public class LibGen {
 
     function copyNonTemplatedFiles() returns error? {
         check self.writeLibFile(ediTrackerCode, "ediTracker.bal");
-        check self.writeLibFile(s3ConnectorCode, "s3-connector.bal");
         check self.writeLibFile(commonProcessingCode, "commonProcessing.bal");
         check self.writeLibFile(packageText, "Package.md");
         check self.writeLibFile(ModuleMdText, "Module.md");
@@ -119,7 +121,7 @@ public class EDIReader {
     public function readEDI(string ediText, EDI_NAMES ediName, string? ediFileName) returns anydata|error {
         string|error mappingText = self.getEDISchemaText(ediName);
         if mappingText is error {
-            return error("Schema for the EDI " + ediName + " not found in URL " + schemaURL);
+            return error("Schema for the EDI " + ediName + " not found in URL " + self.schemaURL);
         }
         
         match ediName {
@@ -132,7 +134,7 @@ public class EDIReader {
     }
 
     function getEDISchemaText(string ediName) returns string|error {
-        http:Client sclient = check new(schemaURL);
+        http:Client sclient = check new(self.schemaURL);
         string fileName = ediName + ".json";
         string authHeader = "Bearer" + self.schemaAccessToken;
         string schemaContent = check sclient->/[fileName]({
@@ -174,7 +176,7 @@ public class EDIReader {
 org = "${self.orgName}"
 name = "${self.libName}"
 version = "0.1.0"
-distribution = "2201.3.1"
+distribution = "2201.4.1"
 `;
         string balTomlPath = check file:joinPath(self.libPath, "Ballerina.toml");
         check io:fileWriteString(balTomlPath, balTomlContent);
