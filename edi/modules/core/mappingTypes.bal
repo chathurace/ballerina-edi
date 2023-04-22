@@ -36,6 +36,14 @@ public type EDISegMapping record {|
     EDIFieldMapping[] fields = [];
 |};
 
+public class SegSchema {
+    EDISegMapping segMap = {code: "", tag: ""};
+    
+    function init(EDISegMapping segMap) {
+        self.segMap = segMap;
+    }
+};
+
 public function createSegmentMaping(string code, string tag) returns EDISegMapping {
     int minOccurs = 0;
     int maxOccurs = 0;

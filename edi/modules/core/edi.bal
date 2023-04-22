@@ -7,6 +7,10 @@ public type ParseConext record {|
     string[] rawSegments = [];
 |};
 
+public function jsonToEDI(EDIMapping mapping, json msg) returns string|error {
+    return "";
+}
+
 public function readEDIAsJson(string ediText, EDIMapping mapping) returns json|error {
     log:printDebug(string `Reading EDI text ${ediText.substring(0,30)} ...`);
     EDISegmentGroup ediDoc = check readEDI(ediText, mapping);

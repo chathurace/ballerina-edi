@@ -110,7 +110,7 @@ function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, Pars
 
 function placeEDISegment(EDISegment segment, EDISegMapping segMapping, SGParseContext sgContext, ParseConext context) returns error? {
     if (segMapping.maxOccurances == 1) {
-        // Current segment as matched with the current mapping AND current segment is not repeatable.
+        // Current segment has matched with the current mapping AND current segment is not repeatable.
         // So we can move to the next mapping.
         log:printDebug(string `Completed reading non-repeatable segment: ${printSegMap(segMapping)}.
         Segment text: ${context.rawSegments[context.rawIndex]}`);

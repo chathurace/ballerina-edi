@@ -105,5 +105,15 @@ function testEDI837() returns error? {
     
 }
 
+@test:Config
+function t1() returns error? {
+    json j1 = check io:fileReadJson("resources/sample5/expected-5.json");
+    EDISegmentGroup g1 = check j1.cloneWithType(EDISegmentGroup);
+    // if g1.get("header") is EDISegment {
+    //     g1[""]
+    // }
+    // io:println(g1);
+}
+
 
 

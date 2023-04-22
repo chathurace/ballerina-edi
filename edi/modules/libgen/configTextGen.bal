@@ -15,25 +15,6 @@ partnerId = "${libName}"
 # be provided as below.
 schemaURL = "https://api.github.com/repos/<org name>/<repo name>/contents/<path>/<to>/<schema>/<location>"
 schemaAccessToken = "<github token>"
-
-# -- Amazon S3 connector configuration --
-# S3 buckets are used for receiving EDI files, and for storing processed and failed EDI files.
-# Provide AWS credentials, region (e.g. us-east-2) and bucket names below if the generated S3 connector is used.
-awsAccessKeyId = ""
-awsAccessSecret = ""
-awsRegion = ""
-inputBucket = "m-${libName}-input"
-processedBucket = "m-${libName}-processed"
-failedBucket = "m-${libName}-failed"
-
-# Polling interval for reading input S3 bucket for EDI files.
-# If this library is scheduled for periodic execution by an external mechanism (e.g. Choreo scheduled component),
-# provide -1 as the polling interval.
-pollingInterval = 5
-
-# Connector will send processed EDI content (as JSON) to the below application endpoint
-applicationEndpoint = "https://<host>:<port>/path"
-applicationToken = "access token for application endpoint if required"
 `;
 
 }
