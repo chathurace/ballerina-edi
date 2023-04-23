@@ -13,6 +13,7 @@ public class LibGen {
     string importsBlock = "";
     string exportsBlock = "";
     string enumBlock = "";
+    string ediFunctions = "";
     string selectionBlocks = "";
     string token = "";
     string[] ediNames = [];
@@ -62,7 +63,6 @@ public class LibGen {
 
     function copyNonTemplatedFiles() returns error? {
         check self.writeLibFile(ediTrackerCode, "ediTracker.bal");
-        check self.writeLibFile(commonProcessingCode, "commonProcessing.bal");
         check self.writeLibFile(packageText, "Package.md");
         check self.writeLibFile(ModuleMdText, "Module.md");
 
@@ -90,6 +90,7 @@ public class LibGen {
         string transformer = self.generateTransformerCode(ediName, ediMapping.name);
         check io:fileWriteString(check file:joinPath(modulePath, "transformer.bal"), transformer);
 
+        self.ediFunctions += self.generateEDITypeFunctions(ediName, ediMapping.name);
         self.selectionBlocks += self.generateEDISelectionBlock(ediName, ediMapping.name);
         self.importsBlock += string `
 import ${self.libName}.m${ediName};`;
@@ -118,12 +119,19 @@ public class EDIReader {
         self.schemaAccessToken = schemaAccessToken;
     }
 
-    public function readEDI(string ediText, EDI_NAMES ediName, string? ediFileName) returns anydata|error {
+    function parse(string ediText, string ediName) returns json|error {
         string|error mappingText = self.getEDISchemaText(ediName);
         if mappingText is error {
             return error("Schema for the EDI " + ediName + " not found in URL " + self.schemaURL);
         }
-        
+        edi:EDIMapping mapping = check edi:readMappingFromString(mappingText);
+        json jb = check edi:readEDIAsJson(ediText, mapping);
+        return jb;
+    }
+
+    ${self.ediFunctions}
+
+    public function readEDI(string ediText, EDI_NAMES ediName, string? ediFileName) returns anydata|error {
         match ediName {
             ${self.selectionBlocks}
         }
@@ -147,16 +155,24 @@ public class EDIReader {
         return codeBlock;        
     }
 
+    function generateEDITypeFunctions(string ediName, string mainRecordName) returns string {
+        string ediFunctions = string `
+    public function read_${ediName}(string ediText) returns m${ediName}:${mainRecordName}|error {
+        m${ediName}:${mainRecordName} b = check (check self.parse(ediText, "${ediName}")).cloneWithType(m${ediName}:${mainRecordName});
+        return m${ediName}:process(b);
+    }
+
+    public function readAndTransform_${ediName}(string ediText) returns anydata|error {
+        m${ediName}:${mainRecordName} b = check self.read_${ediName}(ediText);
+        return m${ediName}:transform(b);
+    }
+        `;
+        return ediFunctions;
+    }
+
     function generateEDISelectionBlock(string ediName, string mainRecordName) returns string {
-        string block = string `
-            EDI_${ediName} => {
-                check preProcess(ediName, "${mainRecordName}", ediText, ediFileName);
-                edi:EDIMapping mapping = check edi:readMappingFromString(mappingText);
-                json jb = check edi:readEDIAsJson(ediText, mapping);
-                m${ediName}:${mainRecordName} b = check jb.cloneWithType(m${ediName}:${mainRecordName});
-                anydata targetEDI = m${ediName}:process(b);
-                return check postProcess(ediName, mapping.name, ediText, targetEDI, ediFileName);
-            }`;
+        string block = string `EDI_${ediName} => { return self.readAndTransform_${ediName}(ediText); }
+            `;
         return block;
     }
 
@@ -185,15 +201,14 @@ distribution = "2201.4.1"
     function generateTransformerCode(string ediName, string mainRecordName) returns string {
         string transformer = string `
 
-type SourceType ${mainRecordName};
 type TargetType ${mainRecordName};
 
-function transform(SourceType sourceType) returns TargetType => sourceType;
+public function transform(${mainRecordName} data) returns TargetType => data;
 
-public function process(SourceType sourceType) returns TargetType {
+public function process(${mainRecordName} data) returns ${mainRecordName} {
     // Implement EDI type specific processing code here
 
-    return transform(sourceType);
+    return data;
 }
     `;
 
