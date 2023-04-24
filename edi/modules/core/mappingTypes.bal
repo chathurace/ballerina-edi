@@ -3,6 +3,7 @@ public type EDIUnitMapping EDISegMapping|EDISegGroupMapping;
 
 public type EDIMapping record {|
     string name;
+    string tag = "Root mapping";
 
     record {|
         string segment;

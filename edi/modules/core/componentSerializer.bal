@@ -6,9 +6,9 @@ class ComponentSerializer {
         self.emap = emap;
     }    
 
-    function serializeComponentGroup(anydata componentGroup, EDISegMapping segMap, EDIFieldMapping fmap) returns string|error {
+    function serializeComponentGroup(json componentGroup, EDISegMapping segMap, EDIFieldMapping fmap) returns string|error {
         string cd = self.emap.delimiters.component;
-        if componentGroup is EDIComponentGroup {
+        if componentGroup is map<json> {
             string[] ckeys = componentGroup.keys();
             if ckeys.length() < fmap.components.length() && !fmap.truncatable {
                 return error(string `Field ${fmap.tag} in segment ${segMap.code} must have ${fmap.components.length()} components. 
@@ -30,13 +30,29 @@ class ComponentSerializer {
                     return error(string `Component ${cmap.tag} - cindex: ${cindex} [segment: ${segMap.tag}, field: ${fmap.tag}] in the schema does not match with ${ckey} found in the input EDI.`);
                 }
                 var componentValue = componentGroup.get(ckey);
-                if componentValue is SimpleType && cmap.subcomponents.length() == 0 {
-                    cGroupText += (cGroupText == ""? "" : cd) + componentValue.toString();
-                    cindex += 1;
-                } else if componentValue is EDISubcomponentGroup && cmap.subcomponents.length() > 0 {
-                    string scGroupText = check self.serializeSubcomponentGroup(componentValue, segMap, cmap);
-                    cGroupText += (cGroupText == ""? "" : cd) + scGroupText;
-                    cindex += 1;
+                if componentValue is string && componentValue.trim().length() == 0 {
+                    if cmap.required {
+                        return error(string `Mandatory component ${cmap.tag} in [Segment: ${segMap.code}, Field: ${fmap.tag}] not provided`);
+                    } else {
+                        cGroupText += (cGroupText == ""? "" : cd) + "";
+                        cindex += 1;
+                    }
+                }
+                if cmap.subcomponents.length() == 0 {
+                    if componentValue is SimpleType {
+                        cGroupText += (cGroupText == ""? "" : cd) + componentValue.toString();
+                        cindex += 1;
+                    } else {
+                        return error(string `Component ${cmap.tag} in [Segment: ${segMap.code}, Field: ${fmap.tag}] must contain a primitive value. Found: ${componentValue.toString()}`);
+                    }
+                } else if cmap.subcomponents.length() > 0 {
+                    string|error scGroupText = self.serializeSubcomponentGroup(componentValue, segMap, cmap);
+                    if scGroupText is string {
+                        cGroupText += (cGroupText == ""? "" : cd) + scGroupText;
+                        cindex += 1;
+                    } else {
+                        return error(string `Component ${cmap.tag} in [Segment: ${segMap.code}, Field: ${fmap.tag}] must contain a composite value. Found: ${componentValue.toString()}`);   
+                    }
                 } else {
                     return error(string `Unsupported component value. Found ${componentValue.toString()}`);
                 }
@@ -54,9 +70,9 @@ class ComponentSerializer {
         }
     }
 
-    function serializeSubcomponentGroup(anydata subcomponentGroup, EDISegMapping segMap, EDIComponentMapping compMap) returns string|error {
+    function serializeSubcomponentGroup(json subcomponentGroup, EDISegMapping segMap, EDIComponentMapping compMap) returns string|error {
         string scd = self.emap.delimiters.subcomponent;
-        if subcomponentGroup is EDISubcomponentGroup {
+        if subcomponentGroup is map<json> {
             string[] sckeys = subcomponentGroup.keys();
             if sckeys.length() < compMap.subcomponents.length() && !compMap.truncatable {
                 return error(string `Component ${compMap.tag} in segment ${segMap.code} must have ${compMap.subcomponents.length()} subcomponents. 

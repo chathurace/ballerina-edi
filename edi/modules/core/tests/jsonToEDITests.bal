@@ -39,3 +39,14 @@ function testJ2ESample2_2() returns error? {
     string ediText = check ediWriter.writeEDI(inputMsg);
     io:println(ediText);
 }
+
+@test:Config {}
+function testJ2ESample4() returns error? {
+    json mappingText = check io:fileReadJson("resources/sample5/edi-mapping5.json");
+    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    EDIWriter ediWriter = new(mapping);
+
+    json inputMsg = check io:fileReadJson("resources/sample5/expected-5.json");
+    string ediText = check ediWriter.writeEDI(inputMsg);
+    io:println(ediText);
+}
