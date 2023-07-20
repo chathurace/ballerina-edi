@@ -1,12 +1,12 @@
 class ComponentSerializer {
 
-    EDIMapping emap = {delimiters: {segment: "", 'field: "", component: ""}, name: ""};
+    EDISchema emap = {delimiters: {segment: "", 'field: "", component: ""}, name: ""};
 
-    function init(EDIMapping emap) {
+    function init(EDISchema emap) {
         self.emap = emap;
     }    
 
-    function serializeComponentGroup(json componentGroup, EDISegMapping segMap, EDIFieldMapping fmap) returns string|error {
+    function serializeComponentGroup(json componentGroup, EDISegSchema segMap, EDIFieldSchema fmap) returns string|error {
         string cd = self.emap.delimiters.component;
         if componentGroup is map<json> {
             string[] ckeys = componentGroup.keys();
@@ -17,7 +17,7 @@ class ComponentSerializer {
             int cindex = 0;
             string cGroupText = "";
             while cindex < fmap.components.length() {
-                EDIComponentMapping cmap = fmap.components[cindex];
+                EDIComponentSchema cmap = fmap.components[cindex];
                 if cindex >= ckeys.length() {
                     if cmap.required {
                         return error(string `Mandatory component ${cmap.tag} not found in ${componentGroup.toString()} in segment ${segMap.code}`);
@@ -70,7 +70,7 @@ class ComponentSerializer {
         }
     }
 
-    function serializeSubcomponentGroup(json subcomponentGroup, EDISegMapping segMap, EDIComponentMapping compMap) returns string|error {
+    function serializeSubcomponentGroup(json subcomponentGroup, EDISegSchema segMap, EDIComponentSchema compMap) returns string|error {
         string scd = self.emap.delimiters.subcomponent;
         if subcomponentGroup is map<json> {
             string[] sckeys = subcomponentGroup.keys();
@@ -81,7 +81,7 @@ class ComponentSerializer {
             int scindex = 0;
             string scGroupText = "";
             while scindex < compMap.subcomponents.length() {
-                EDISubcomponentMapping scmap = compMap.subcomponents[scindex];
+                EDISubcomponentSchema scmap = compMap.subcomponents[scindex];
                 if scindex >= sckeys.length() {
                     if scmap.required {
                         return error(string `Mandatory subcomponent ${scmap.tag} not found in ${subcomponentGroup.toString()} in segment ${segMap.code}`);

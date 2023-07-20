@@ -4,12 +4,12 @@ import ballerina/regex;
 type SGParseContext record {|
     int mappingIndex = 0;
     EDISegmentGroup segmentGroup = {};
-    EDIUnitMapping[] unitMappings;
+    EDIUnitSchema[] unitMappings;
 |};
 
-function readEDISegmentGroup(EDIUnitMapping[] currentMapping, ParseConext context, boolean rootGroup) returns EDISegmentGroup|error {
+function readEDISegmentGroup(EDIUnitSchema[] currentMapping, ParseConext context, boolean rootGroup) returns EDISegmentGroup|error {
     SGParseContext sgContext = {unitMappings: currentMapping};
-    EDIMapping ediMapping = context.ediMapping;
+    EDISchema ediMapping = context.ediMapping;
     while context.rawIndex < context.rawSegments.length() {
         string sDesc = context.rawSegments[context.rawIndex];
         string segmentDesc = regex:replaceAll(sDesc, "\n", "");
@@ -21,8 +21,8 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, ParseConext contex
 
         boolean segmentMapped = false;
         while sgContext.mappingIndex < sgContext.unitMappings.length() {
-            EDIUnitMapping? segMapping = currentMapping[sgContext.mappingIndex];
-            if (segMapping is EDISegMapping) {
+            EDIUnitSchema? segMapping = currentMapping[sgContext.mappingIndex];
+            if (segMapping is EDISegSchema) {
                 log:printDebug(string `Trying to match with segment mapping ${printSegMap(segMapping)}`);
                 if segMapping.code != fields[0] {
                     check ignoreMapping(segMapping, sgContext, context);
@@ -34,10 +34,10 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, ParseConext contex
                 segmentMapped = true;
                 break;
 
-            } else if segMapping is EDISegGroupMapping {
+            } else if segMapping is EDISegGroupSchema {
                 log:printDebug(string `Trying to match with segment group mapping ${printSegGroupMap(segMapping)}`);
-                EDIUnitMapping firstSegMapping = segMapping.segments[0];
-                if firstSegMapping is EDISegGroupMapping {
+                EDIUnitSchema firstSegMapping = segMapping.segments[0];
+                if firstSegMapping is EDISegGroupSchema {
                     return error("First item of segment group must be a segment. Found a segment group.\nSegment group: " + printSegGroupMap(segMapping));
                 }
                 if firstSegMapping.code != fields[0] {
@@ -78,7 +78,7 @@ function readEDISegmentGroup(EDIUnitMapping[] currentMapping, ParseConext contex
 # + sgContext - Segment group parsing context  
 # + context - EDI parsing context
 # + return - Return error if the given mapping cannot be ignored.
-function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, ParseConext context) returns error? {
+function ignoreMapping(EDIUnitSchema segMapping, SGParseContext sgContext, ParseConext context) returns error? {
 
     // If the current segment mapping is optional, we can ignore the current mapping and compare the 
     // current segment with the next mapping.
@@ -108,7 +108,7 @@ function ignoreMapping(EDIUnitMapping segMapping, SGParseContext sgContext, Pars
     Current mapping index: ${sgContext.mappingIndex}`);
 }
 
-function placeEDISegment(EDISegment segment, EDISegMapping segMapping, SGParseContext sgContext, ParseConext context) returns error? {
+function placeEDISegment(EDISegment segment, EDISegSchema segMapping, SGParseContext sgContext, ParseConext context) returns error? {
     if (segMapping.maxOccurances == 1) {
         // Current segment has matched with the current mapping AND current segment is not repeatable.
         // So we can move to the next mapping.
@@ -128,15 +128,14 @@ function placeEDISegment(EDISegment segment, EDISegMapping segMapping, SGParseCo
             }
             segments.push(segment);
         } else if segments is null {
-            segments = [segment];
-            sgContext.segmentGroup[segMapping.tag] = segments;
+            sgContext.segmentGroup[segMapping.tag] = [segment];
         } else {
             return error(string `${segMapping.code} must be a segment array.`);
         }
     }  
 }
 
-function placeEDISegmentGroup(EDISegmentGroup segmentGroup, EDISegGroupMapping segMapping, SGParseContext sgContext, ParseConext context) returns error? {
+function placeEDISegmentGroup(EDISegmentGroup segmentGroup, EDISegGroupSchema segMapping, SGParseContext sgContext, ParseConext context) returns error? {
     if segMapping.maxOccurances == 1 {
         // This is a non-repeatable mapping. So we have to compare the next segment with the next mapping.
         log:printDebug(string `Completed reading non-repeating segment group ${printSegGroupMap(segMapping)} | Current segment text: ${context.rawIndex < context.rawSegments.length()? context.rawSegments[context.rawIndex] : "-- EOF --"}`);
@@ -153,8 +152,7 @@ function placeEDISegmentGroup(EDISegmentGroup segmentGroup, EDISegGroupMapping s
             }
             segmentGroups.push(segmentGroup);
         } else if segmentGroups is null {
-            segmentGroups = [segmentGroup];
-            sgContext.segmentGroup[segMapping.tag] = segmentGroups;
+            sgContext.segmentGroup[segMapping.tag] = [segmentGroup];
         } else {
             return error(string `${segMapping.tag} must be a segment group array.`);
         }
@@ -166,9 +164,9 @@ function validateRemainingMappings(SGParseContext sgContext) returns error? {
     if sgContext.mappingIndex < sgContext.unitMappings.length() - 1 {
             int i = sgContext.mappingIndex + 1;
             while i < sgContext.unitMappings.length() {
-                EDIUnitMapping umap = sgContext.unitMappings[i];
+                EDIUnitSchema umap = sgContext.unitMappings[i];
                 int minOccurs = 1;
-                if umap is EDISegMapping {
+                if umap is EDISegSchema {
                     minOccurs = umap.minOccurances;
                 } else {
                     minOccurs = umap.minOccurances;

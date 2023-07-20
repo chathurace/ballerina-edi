@@ -1,8 +1,8 @@
-function readEDIComposite(string compositeText, EDIMapping mapping, EDIFieldMapping emap)
+
+function readEDIComposite(string compositeText, EDISchema mapping, EDIFieldSchema emap)
             returns EDIComponentGroup|error? {
     if compositeText.trim().length() == 0 {
-        // Composite value is not provided. Return null, which will cause this field to be not included.
-        return null;
+        return ();
     }
 
     string[] components = split(compositeText, mapping.delimiters.component);
@@ -19,18 +19,18 @@ function readEDIComposite(string compositeText, EDIMapping mapping, EDIFieldMapp
         return error(errMsg);
     }
 
-    EDIComponentMapping[] subMappings = emap.components;
+    EDIComponentSchema[] subMappings = emap.components;
     EDIComponentGroup composite = {};
     int componentNumber = 0;
     while (componentNumber < components.length()) {
         string component = components[componentNumber];
-        EDIComponentMapping subMapping = subMappings[componentNumber];
+        EDIComponentSchema subMapping = subMappings[componentNumber];
         if component.trim().length() == 0 {
             if subMapping.required {
                 return error(string `Required component ${subMapping.tag} is not provided.`);
             } else {
                 if mapping.preserveEmptyFields {
-                    composite[subMapping.tag] = subMapping.dataType == STRING? component : null;
+                    composite[subMapping.tag] = subMapping.dataType == STRING? component : ();
                 }
                 componentNumber += 1;
                 continue;

@@ -2,16 +2,16 @@ import chathurace/edi.core as edi;
 
 type SegGroupLevel record {|
     int level;
-    edi:EDISegGroupMapping segGroup;
+    edi:EDISegGroupSchema segGroup;
 |};
 
 final int tagSpaces = 2;
 
-public function eslToBal(string[] esl, map<edi:EDISegMapping> segMap) returns edi:EDIMapping|error  {
+public function eslToBal(string[] esl, map<edi:EDISegSchema> segMap) returns edi:EDISchema|error  {
     map<int> segGroupNameCount = {};
     map<int> segNameCount = {};
     SegGroupLevel[] openSegGroups = [];
-    edi:EDIMapping ediMapping = {name: "NOT_ASSIGNED", delimiters: {segment: "~", 'field: "*", component: ""}};
+    edi:EDISchema ediMapping = {name: "NOT_ASSIGNED", delimiters: {segment: "~", 'field: "*", component: ""}};
     int i = 0;
     while i < esl.length() {
         string currentLine = esl[i];
@@ -25,7 +25,7 @@ public function eslToBal(string[] esl, map<edi:EDISegMapping> segMap) returns ed
             string name = getStringValue(line);
             name = getBalCompatibleName(name);
             name = deriveTag(segGroupNameCount, name);
-            edi:EDISegGroupMapping currentSegGroup = {tag: name};
+            edi:EDISegGroupSchema currentSegGroup = {tag: name};
 
             string countLine = esl[i+1].trim();
             if (countLine.startsWith("count:")) {
@@ -64,8 +64,10 @@ public function eslToBal(string[] esl, map<edi:EDISegMapping> segMap) returns ed
             }
 
         } else if line.startsWith("- { idRef:") {
-            edi:EDISegMapping seg = check processSegment(line, segMap);
-            seg.tag = deriveTag(segNameCount, seg.tag);
+            edi:EDISegSchema seg = check processSegment(line, segMap);
+            // In ESL, it is not possible to have the same segment twice in the same group.
+            // So we can just use the segment name as the tag.
+            // seg.tag = deriveTag(segNameCount, seg.tag);
             boolean parentFound = false;
             while !parentFound && openSegGroups.length() > 0 {
                 SegGroupLevel lastOpenSegGroup = openSegGroups.pop();
@@ -88,16 +90,16 @@ public function eslToBal(string[] esl, map<edi:EDISegMapping> segMap) returns ed
     return ediMapping;
 }
 
-function processSegment(string line, map<edi:EDISegMapping> segMap) returns edi:EDISegMapping|error {
+function processSegment(string line, map<edi:EDISegSchema> segMap) returns edi:EDISegSchema|error {
 
     map<string> segdata = processValueLine(line);
     string? segCode = segdata["idRef"];
     if segCode is string {
-        edi:EDISegMapping? ediSeg = segMap[segCode];
+        edi:EDISegSchema? ediSeg = segMap[segCode];
         if (ediSeg is null) {
             return error("Unknown EDI segment: " + segCode);
         } else {
-            edi:EDISegMapping seg = ediSeg.clone();
+            edi:EDISegSchema seg = ediSeg.clone();
             int minOccur = segdata["usage"] == "M" ? 1 : 0;
             seg.minOccurances = minOccur;
             string? sCount = segdata["count"];

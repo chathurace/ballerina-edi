@@ -1,7 +1,7 @@
 
-public type EDIUnitMapping EDISegMapping|EDISegGroupMapping;
+public type EDIUnitSchema EDISegSchema|EDISegGroupSchema;
 
-public type EDIMapping record {|
+public type EDISchema record {|
     string name;
     string tag = "Root mapping";
 
@@ -18,58 +18,58 @@ public type EDIMapping record {|
 
     boolean preserveEmptyFields = false;
 
-    EDIUnitMapping[] segments = [];
+    EDIUnitSchema[] segments = [];
 |};
 
-public type EDISegGroupMapping record {|
+public type EDISegGroupSchema record {|
     string tag;
     int minOccurances = 0;
     int maxOccurances = 1;
-    EDIUnitMapping[] segments = [];
+    EDIUnitSchema[] segments = [];
 |};
 
-public type EDISegMapping record {|
+public type EDISegSchema record {|
     string code;
     string tag;
     boolean truncatable = true;
     int minOccurances = 0;
     int maxOccurances = 1;
-    EDIFieldMapping[] fields = [];
+    EDIFieldSchema[] fields = [];
 |};
 
 public class SegSchema {
-    EDISegMapping segMap = {code: "", tag: ""};
+    EDISegSchema segMap = {code: "", tag: ""};
     
-    function init(EDISegMapping segMap) {
+    function init(EDISegSchema segMap) {
         self.segMap = segMap;
     }
 };
 
-public function createSegmentMaping(string code, string tag) returns EDISegMapping {
+public function createSegmentMaping(string code, string tag) returns EDISegSchema {
     int minOccurs = 0;
     int maxOccurs = 0;
-    EDISegMapping segMapping = {code: code, tag: tag, minOccurances: minOccurs, maxOccurances: maxOccurs};
+    EDISegSchema segMapping = {code: code, tag: tag, minOccurances: minOccurs, maxOccurances: maxOccurs};
     return segMapping;
 }
 
-public type EDIFieldMapping record {|
+public type EDIFieldSchema record {|
     string tag;
     boolean repeat = false;
     boolean required = false;
     boolean truncatable = true;
     EDIDataType dataType = STRING;
-    EDIComponentMapping[] components = [];
+    EDIComponentSchema[] components = [];
 |};
 
-public type EDIComponentMapping record {|
+public type EDIComponentSchema record {|
     string tag;
     boolean required = false;
     boolean truncatable = true;
     EDIDataType dataType = STRING;
-    EDISubcomponentMapping[] subcomponents = [];
+    EDISubcomponentSchema[] subcomponents = [];
 |};
 
-public type EDISubcomponentMapping record {|
+public type EDISubcomponentSchema record {|
     string tag;
     boolean required = false;
     EDIDataType dataType = STRING;

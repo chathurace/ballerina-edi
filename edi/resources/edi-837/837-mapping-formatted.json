@@ -11,6 +11,79 @@
     "preserveEmptyFields": false,
     "segments": [
       {
+        "code": "GS",
+        "tag": "FunctionalGroupHeader",
+        "truncatable": true,
+        "minOccurances": 0,
+        "maxOccurances": 1,
+        "fields": [
+          {
+            "tag": "GS01__FunctionalIdentifierCode",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS02__ApplicationSendersCode",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS03__ApplicationReceiversCode",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS04__Date",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS05__Time",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS06__GroupControlNumber",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS07__ResponsibleAgencyCode",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          },
+          {
+            "tag": "GS08__VersionReleaseIndustryIdentifierCode",
+            "repeat": false,
+            "required": false,
+            "truncatable": true,
+            "dataType": "string",
+            "components": []
+          }
+        ]
+      },
+      {
         "code": "ISA",
         "tag": "InterchangeControlHeader",
         "truncatable": true,
@@ -1006,7 +1079,7 @@
       },
       {
         "code": "CLM",
-        "tag": "CLM_CreditDebitCardAccountHolderName",
+        "tag": "CreditDebitCardAccountHolderName",
         "truncatable": true,
         "minOccurances": 0,
         "maxOccurances": 1,

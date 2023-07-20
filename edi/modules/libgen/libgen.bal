@@ -79,7 +79,7 @@ public class LibGen {
 
     function generateEDIFileSpecificCode(string ediName, json mappingJson) returns error? {
         self.ediNames.push(ediName);
-        edi:EDIMapping ediMapping = check mappingJson.cloneWithType(edi:EDIMapping);
+        edi:EDISchema ediMapping = check mappingJson.cloneWithType(edi:EDISchema);
 
         string modulePath = check file:joinPath(self.libPath, "modules", "m" + ediName);
         check file:createDir(modulePath, file:RECURSIVE);

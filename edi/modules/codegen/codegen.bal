@@ -12,7 +12,7 @@ type GenContext record {|
     map<int> typeNumber = {};
 |};
 
-public function generateCodeToFile(edi:EDIMapping mapping, string outpath) returns error? {
+public function generateCodeToFile(edi:EDISchema mapping, string outpath) returns error? {
     BalRecord[] records = generateCode(mapping);
     string sRecords = "";
     foreach BalRecord rec in records {
@@ -21,21 +21,21 @@ public function generateCodeToFile(edi:EDIMapping mapping, string outpath) retur
     _ = check io:fileWriteString(outpath, sRecords);
 }
 
-public function generateCode(edi:EDIMapping mapping) returns BalRecord[] {
+public function generateCode(edi:EDISchema mapping) returns BalRecord[] {
     GenContext context = {};
     _ = generateRecordForUnits(mapping.segments, mapping.name, context);    
     return context.typeRecords.toArray();
 }
 
-function generateRecordForSegmentGroup(edi:EDISegGroupMapping groupmap, GenContext context) returns BalRecord {
+function generateRecordForSegmentGroup(edi:EDISegGroupSchema groupmap, GenContext context) returns BalRecord {
     string sgTypeName = generateTypeName(groupmap.tag, context);
     return generateRecordForUnits(groupmap.segments, sgTypeName, context);
 }
 
-function generateRecordForUnits(edi:EDIUnitMapping[] umaps, string typeName, GenContext context) returns BalRecord {
+function generateRecordForUnits(edi:EDIUnitSchema[] umaps, string typeName, GenContext context) returns BalRecord {
     BalRecord sgrec = new(typeName);
-    foreach edi:EDIUnitMapping umap in umaps {
-        if umap is edi:EDISegMapping {
+    foreach edi:EDIUnitSchema umap in umaps {
+        if umap is edi:EDISegSchema {
             BalRecord srec = generateRecordForSegment(umap, context);
             sgrec.addField(srec, umap.tag, umap.maxOccurances != 1, umap.minOccurances == 0);
         } else {
@@ -47,7 +47,7 @@ function generateRecordForUnits(edi:EDIUnitMapping[] umaps, string typeName, Gen
     return sgrec;
 }
 
-function generateRecordForSegment(edi:EDISegMapping segmap, GenContext context) returns BalRecord {
+function generateRecordForSegment(edi:EDISegSchema segmap, GenContext context) returns BalRecord {
     string sTypeName = startWithUppercase(segmap.tag + "_Type");
     BalRecord? erec = context.typeRecords[sTypeName];
     if erec is BalRecord {
@@ -55,7 +55,7 @@ function generateRecordForSegment(edi:EDISegMapping segmap, GenContext context) 
     }
 
     BalRecord srec = new(sTypeName);
-    foreach edi:EDIFieldMapping emap in segmap.fields {
+    foreach edi:EDIFieldSchema emap in segmap.fields {
         BalType? balType = ediToBalTypes[emap.dataType]; 
         if emap.dataType == edi:COMPOSITE {
             balType = generateRecordForComposite(emap, context);
@@ -69,10 +69,10 @@ function generateRecordForSegment(edi:EDISegMapping segmap, GenContext context) 
     return srec;
 }
 
-function generateRecordForComposite(edi:EDIFieldMapping emap, GenContext context) returns BalRecord {
+function generateRecordForComposite(edi:EDIFieldSchema emap, GenContext context) returns BalRecord {
     string cTypeName = generateTypeName(emap.tag, context);
     BalRecord crec = new(cTypeName);
-    foreach edi:EDIComponentMapping submap in emap.components {
+    foreach edi:EDIComponentSchema submap in emap.components {
         BalType? balType = ediToBalTypes[submap.dataType];
         if balType is BalType {
             crec.addField(balType, submap.tag, false, !submap.required);

@@ -1,14 +1,14 @@
 class SegmentSerializer {
 
-    EDIMapping emap;
+    EDISchema emap;
     ComponentSerializer componentSerializer;
 
-    function init(EDIMapping emap) {
+    function init(EDISchema emap) {
         self.emap = emap;
         self.componentSerializer = new(emap);
     }
 
-    function serialize(map<json> seg, EDISegMapping segMap, string[] ediText) returns error? {
+    function serialize(map<json> seg, EDISegSchema segMap, string[] ediText) returns error? {
         string fd = self.emap.delimiters.'field;
         // string cd = self.emap.delimiters.component;
         string segLine = segMap.code;
@@ -18,7 +18,7 @@ class SegmentSerializer {
         }
         int fIndex = 0;
         while fIndex < segMap.fields.length() {
-            EDIFieldMapping fmap = segMap.fields[fIndex];
+            EDIFieldSchema fmap = segMap.fields[fIndex];
             if fIndex >= fTags.length() {
                 // Input segment is truncated. So all remaining feilds must be optional
                 if fmap.required {

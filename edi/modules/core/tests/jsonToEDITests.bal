@@ -4,7 +4,7 @@ import ballerina/io;
 @test:Config {}
 function testJ2ESample1() returns error? {
     json mappingText = check io:fileReadJson("resources/sample1/edi-mapping1.json");
-    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    EDISchema mapping = check mappingText.cloneWithType(EDISchema);
     EDIWriter ediWriter = new(mapping);
 
     json inputMsg = check io:fileReadJson("resources/sample1/expected-1.json");
@@ -21,7 +21,7 @@ function testJ2ESample1() returns error? {
 @test:Config {}
 function testJ2ESample2_1() returns error? {
     json mappingText = check io:fileReadJson("resources/sample2_1/edi-mapping2.json");
-    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    EDISchema mapping = check mappingText.cloneWithType(EDISchema);
     EDIWriter ediWriter = new(mapping);
 
     json inputMsg = check io:fileReadJson("resources/sample2_1/expected-2.json");
@@ -32,7 +32,7 @@ function testJ2ESample2_1() returns error? {
 @test:Config {}
 function testJ2ESample2_2() returns error? {
     json mappingText = check io:fileReadJson("resources/sample2/edi-mapping2.json");
-    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    EDISchema mapping = check mappingText.cloneWithType(EDISchema);
     EDIWriter ediWriter = new(mapping);
 
     json inputMsg = check io:fileReadJson("resources/sample2/expected-2.json");
@@ -42,11 +42,11 @@ function testJ2ESample2_2() returns error? {
 
 @test:Config {}
 function testJ2ESample4() returns error? {
-    json mappingText = check io:fileReadJson("resources/sample5/edi-mapping5.json");
-    EDIMapping mapping = check mappingText.cloneWithType(EDIMapping);
+    json mappingText = check io:fileReadJson("resources/edi-837/837-mapping.json");
+    EDISchema mapping = check mappingText.cloneWithType(EDISchema);
     EDIWriter ediWriter = new(mapping);
 
-    json inputMsg = check io:fileReadJson("resources/sample5/expected-5.json");
+    json inputMsg = check io:fileReadJson("resources/edi-837/837-message2.json");
     string ediText = check ediWriter.writeEDI(inputMsg);
     io:println(ediText);
 }

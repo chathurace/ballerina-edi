@@ -57,42 +57,42 @@ function testComplexRecordGeneration() {
 @test:Config {}
 function testCodeGenForMapping1() returns error? {
     json mappingText = check io:fileReadJson("resources/sample1/edi-mapping1.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);  
     check generateCodeToFile(mapping, "resources/codegen/edi-mapping1-records.bal");
 }
 
 @test:Config {}
 function testCodeGenForMapping2() returns error? {
     json mappingText = check io:fileReadJson("resources/sample2/edi-mapping2.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);  
     check generateCodeToFile(mapping, "resources/codegen/edi-mapping2-records.bal");
 }
 
 @test:Config {}
 function testCodeGenForMapping5() returns error? {
     json mappingText = check io:fileReadJson("resources/sample5/edi-mapping5.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);  
     check generateCodeToFile(mapping, "tests/edi-mapping5-records.bal");
 }
 
 @test:Config {}
 function testCodeGenForD3A_Invoic_Mapping() returns error? {
     json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);  
     check generateCodeToFile(mapping, "tests/d3a-invoic-1-mapping-records.bal");
 }
 
 @test:Config {}
 function testCodeGenFor_X12_834() returns error? {
     json mappingText = check io:fileReadJson("modules/codegen/resources/834.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);  
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);  
     check generateCodeToFile(mapping, "modules/codegen/tests/x12_834.bal");
 }
 
 @test:Config {}
 function testSample5_Codegen() returns error? {
     json mappingText = check io:fileReadJson("resources/sample5/edi-mapping5.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);
     
     string ediText = check io:fileReadString("resources/codegen/sample5/edi-sample5.edi");
     json output = check edi:readEDIAsJson(ediText, mapping);
@@ -104,7 +104,7 @@ function testSample5_Codegen() returns error? {
 @test:Config {}
 function testINVOIC_D93a_Codegen() returns error? {
     json mappingText = check io:fileReadJson("resources/d3a-invoic-1/mapping.json");
-    edi:EDIMapping mapping = check mappingText.cloneWithType(edi:EDIMapping);
+    edi:EDISchema mapping = check mappingText.cloneWithType(edi:EDISchema);
     mapping.delimiters.decimalSeparator = ",";
     
     string ediText = check io:fileReadString("resources/d3a-invoic-1/input.edi");
